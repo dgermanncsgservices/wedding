@@ -1,0 +1,85 @@
+<title>Lavinia & Daniel — Seating (Switzerland)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon-900: #4A161E;
+    --maroon-800: #5C1F26;
+    --cream-050: #FBF7EE;
+    --cream-100: #F1E7D6;
+    --gold-500: #C9A877;
+    --ink-900: #2A1418;
+    --ink-500: #7A6266;
+    --line: #DACBAE;
+    --surface: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream-050);
+    color: var(--ink-900);
+    font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 300;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+    background: color-mix(in srgb, var(--cream-050) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: baseline; gap: 0.5rem; }
+  .script { font-family: 'Herr Von Muellerhoff', cursive; font-size: 1.6rem; color: var(--maroon-900); line-height: 1; }
+  .amp { color: var(--gold-500); }
+  .navlinks { display: flex; gap: 0.35rem; }
+  .navlinks a {
+    white-space: nowrap; text-decoration: none; font-size: 0.78rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ink-500);
+  }
+  .navlinks a:hover { border-color: var(--gold-500); color: var(--ink-900); }
+  main { max-width: 900px; margin: 0 auto; padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem); }
+  .section-head { text-align: center; margin-bottom: 2rem; }
+  .eyebrow { font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.72rem; font-weight: 500; color: var(--gold-500); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0.4rem 0 0.3rem; }
+  .section-head p { color: var(--ink-500); font-size: 0.95rem; margin: 0; }
+  .chart-frame {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 20px 50px -30px rgba(42,20,24,0.35);
+  }
+  .chart-frame img { width: 100%; height: auto; display: block; border-radius: 8px; }
+  footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
+  footer .script { font-size: 1.3rem; color: var(--maroon-800); display: block; margin-bottom: 0.3rem; }
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
+  <nav class="navlinks">
+    <a href="index.html">All Events</a>
+    <a href="switzerland.html">Switzerland</a>
+  </nav>
+</div>
+
+<main>
+  <div class="section-head">
+    <span class="eyebrow">Switzerland · Reception</span>
+    <h1>Seating Plan</h1>
+    <p>Find your table below.</p>
+  </div>
+  <div class="chart-frame">
+    <img src="assets/seating-switzerland.jpg" alt="Switzerland reception seating chart" />
+  </div>
+</main>
+
+<footer>
+  <span class="script">Lavinia &amp; Daniel</span>
+  See you there!
+</footer>
