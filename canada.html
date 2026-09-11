@@ -1,0 +1,416 @@
+<title>Lavinia & Daniel — Celebration Canada</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --maroon-950: #2C0D12;
+    --maroon-900: #4A161E;
+    --maroon-800: #5C1F26;
+    --maroon-700: #712833;
+    --cream-050: #FBF7EE;
+    --cream-100: #F1E7D6;
+    --cream-200: #E4D5BC;
+    --gold-500: #C9A877;
+    --gold-600: #AD8A5C;
+    --ink-900: #2A1418;
+    --ink-700: #4A3236;
+    --ink-500: #7A6266;
+    --line: #DACBAE;
+    --bg: var(--cream-050);
+    --surface: #FFFFFF;
+    --panel: var(--maroon-900);
+    --panel-2: var(--maroon-800);
+    --text: var(--ink-900);
+    --text-soft: var(--ink-500);
+    --on-panel: var(--cream-100);
+    --on-panel-soft: #D9C3B0;
+    --accent: var(--gold-500);
+    --brand-ink: var(--maroon-900);
+    --shadow: 0 20px 50px -25px rgba(42, 20, 24, 0.35);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1B0F11;
+      --surface: #26161A;
+      --panel: #170A0C;
+      --panel-2: #241417;
+      --text: #F1E7D6;
+      --text-soft: #B7A199;
+      --on-panel: #F1E7D6;
+      --on-panel-soft: #C9AC9B;
+      --line: #3E2A2C;
+      --accent: #D9B98A;
+      --brand-ink: #D9B98A;
+      --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1B0F11;
+    --surface: #26161A;
+    --panel: #170A0C;
+    --panel-2: #241417;
+    --text: #F1E7D6;
+    --text-soft: #B7A199;
+    --on-panel: #F1E7D6;
+    --on-panel-soft: #C9AC9B;
+    --line: #3E2A2C;
+    --accent: #D9B98A;
+    --brand-ink: #D9B98A;
+    --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .script {
+    font-family: 'Herr Von Muellerhoff', cursive;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .mono, .num {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ---------- Top pill nav ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: baseline; gap: 0.5rem; }
+  .brand .script { font-size: 1.6rem; color: var(--brand-ink); }
+  .brand .amp { color: var(--accent); }
+  .navlinks { display: flex; gap: 0.35rem; overflow-x: auto; scrollbar-width: none; }
+  .navlinks::-webkit-scrollbar { display: none; }
+  .navlinks a {
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--text-soft);
+    transition: border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .navlinks a:hover { border-color: var(--accent); color: var(--text); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    min-height: min(80vh, 680px);
+  }
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+  }
+  .hero-art {
+    position: relative;
+    background:
+      radial-gradient(120% 90% at 20% 15%, rgba(255,255,255,0.14), transparent 55%),
+      linear-gradient(200deg, #7A5A44 0%, #4C3A2E 38%, #2E241D 100%);
+    overflow: hidden;
+    display: flex; align-items: flex-end;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    min-height: 420px;
+  }
+  .hero-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-names { position: relative; z-index: 2; color: var(--cream-050); }
+  .hero-names .script { font-size: clamp(3rem, 8vw, 5.5rem); }
+  .hero-names .loc { margin-top: 0.6rem; font-size: 0.95rem; letter-spacing: 0.08em; opacity: 0.9; }
+
+  .hero-panel {
+    background: var(--panel);
+    color: var(--on-panel);
+    padding: clamp(1.75rem, 4vw, 3.5rem);
+    display: flex; flex-direction: column; justify-content: center; gap: 1.6rem;
+  }
+  .events { display: flex; flex-direction: column; gap: 1.6rem; }
+  .event-block { border-top: 1px solid color-mix(in srgb, var(--on-panel) 25%, transparent); padding-top: 1.4rem; }
+  .event-block:first-child { border-top: none; padding-top: 0; }
+  .event-date { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+  .event-time { color: var(--on-panel-soft); margin-top: 0.3rem; font-size: 0.92rem; }
+  .event-title { margin-top: 0.7rem; font-size: 1.5rem; }
+  .event-desc { color: var(--on-panel-soft); margin-top: 0.6rem; font-size: 0.95rem; max-width: 46ch; }
+  .event-desc p { margin: 0 0 0.9rem; }
+  .event-desc p:last-child { margin-bottom: 0; }
+  .event-meta { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; font-size: 0.9rem; color: var(--on-panel-soft); }
+  .event-meta span { display: flex; gap: 0.55rem; align-items: flex-start; }
+
+  /* ---------- Sections ---------- */
+  main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+  section { padding: clamp(3rem, 6vw, 5rem) 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .section-head { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.2rem; max-width: 60ch; }
+  .section-head .eyebrow { color: var(--accent); }
+  .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+  .section-head p { color: var(--text-soft); font-size: 0.98rem; margin: 0.3rem 0 0; }
+
+  .timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+  .timeline::before { content: ""; position: absolute; left: 5.6rem; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+  @media (max-width: 640px) { .timeline::before { left: 3.7rem; } }
+  .t-row { display: grid; grid-template-columns: 5.6rem 1.4rem 1fr; gap: 0; padding: 0.85rem 0; }
+  @media (max-width: 640px) { .t-row { grid-template-columns: 3.7rem 1.2rem 1fr; } }
+  .t-time { font-size: 0.85rem; color: var(--panel-2); padding-top: 0.15rem; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .t-time { color: var(--accent); } }
+  :root[data-theme="dark"] .t-time { color: var(--accent); }
+  .t-dot-wrap { display: flex; justify-content: center; }
+  .t-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); margin-top: 0.35rem; box-shadow: 0 0 0 3px var(--bg); }
+  .t-body { padding-bottom: 0.2rem; }
+  .t-activity { font-size: 1.02rem; }
+  .t-sub { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
+
+  .team-group { margin-bottom: 2rem; }
+  .team-group:last-child { margin-bottom: 0; }
+  .team-group h3 { font-size: 1.1rem; margin-bottom: 0.9rem; color: var(--panel-2); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .team-group h3 { color: var(--accent); } }
+  :root[data-theme="dark"] .team-group h3 { color: var(--accent); }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.9rem; }
+  .team-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.2rem; }
+  .team-role { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .team-name { margin-top: 0.35rem; font-size: 1.05rem; }
+  .team-phone { margin-top: 0.3rem; font-size: 0.85rem; color: var(--text-soft); display: inline-block; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, var(--accent) 70%, transparent); }
+  .team-phone:hover { color: var(--text); }
+
+  footer {
+    padding: 2.5rem clamp(1rem, 4vw, 2.5rem) 3rem;
+    text-align: center; color: var(--text-soft); font-size: 0.82rem;
+  }
+  footer .script { font-size: 1.5rem; color: var(--panel-2); display: block; margin-bottom: 0.4rem; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) footer .script { color: var(--accent); } }
+  :root[data-theme="dark"] footer .script { color: var(--accent); }
+  footer a { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+
+  [hidden] { display: none !important; }
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
+  <nav class="navlinks">
+    <a href="index.html">All Events</a>
+    <a href="switzerland.html">Switzerland</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#team">Day-of Team</a>
+  </nav>
+</div>
+
+<header class="hero" id="overview">
+  <div class="hero-art">
+    <svg viewbox="0 0 800 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8A6C52"/>
+          <stop offset="1" stop-color="#3B2E24" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="600" fill="url(#sky)" opacity="0.5"/>
+      <polygon points="0,420 120,270 230,380 340,230 460,400 560,300 680,420 800,340 800,600 0,600" fill="#2E2119" opacity="0.55"/>
+      <polygon points="0,470 150,360 260,440 400,320 540,450 680,370 800,460 800,600 0,600" fill="#241A14" opacity="0.75"/>
+    </svg>
+    <div class="hero-names">
+      <div class="script">Lavinia &amp; Daniel</div>
+      <div class="loc mono">CANADA</div>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <div class="events">
+      <div class="event-block">
+        <div class="event-date display">Sunday, October 11, 2026</div>
+        <div class="event-time mono">1:00 PM – 5:00 PM</div>
+        <div class="event-title display">Celebration Canada</div>
+        <div class="event-desc">
+          <p>We're eloping! The exciting news is that after our elopement, we can't wait to celebrate our marriage with all of you.</p>
+          <p>We would love for you to join us for a special celebration at the Columbia Valley Community Center on October 11th at 1:00 p.m. We're looking forward to a relaxed afternoon surrounded by friends and family.</p>
+          <p>While we won't be serving a full meal, there will be plenty of delicious appetizers to enjoy. If the weather cooperates, the celebration will take place outdoors.</p>
+        </div>
+        <div class="event-meta">
+          <span>👔 Farm Formal</span>
+          <span>📍 Columbia Valley Community Centre, Kosikar Rd, Lindell Beach, BC, Canada</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="schedule">
+    <div class="section-head">
+      <span class="eyebrow">Program · Schedule</span>
+      <h2>Day-of Timeline</h2>
+    </div>
+    <div class="timeline" id="tl-ca"></div>
+  </section>
+
+  <section id="team">
+    <div class="section-head">
+      <span class="eyebrow">Canada</span>
+      <h2>Day-of Team</h2>
+      <p>Who's running what for setup, the program, and the reception.</p>
+    </div>
+    <div id="team-groups"></div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="script">Lavinia &amp; Daniel</span>
+  Synced from the "Celebration Canada" tab of the Wedding Planning Spreadsheet · <span id="sync-time"></span><br>
+  See the full site at <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------------- DATA ----------------
+  // Synced from "Wedding Planning Spreadsheet" — "Celebration Canada" tab only.
+  var SYNCED_AT = "2026-09-09T20:09:27.000000-07:00";
+
+  var scheduleCA = [
+    ["09:00","Start set up","Setup crew · arrive by 9:00 am at Columbia Valley Community Center; Jordie and Andrew brief everyone on their tasks"],
+    ["12:30","Guests arriving",""],
+    ["13:00","Welcome everyone","Janine"],
+    ["13:05","Grand entry","Lavinia & Daniel · music"],
+    ["—","Announce program & quiz","Janine"],
+    ["—","Pray for food & open Apéro","Daniel"],
+    ["14:00","Bingo with story","Harvey"],
+    ["—","Open mic","Janine"],
+    ["15:00","Shoe game (without shoes)","Janine"],
+    ["—","Open mic","Janine"],
+    ["—","Speech","Constantin"],
+    ["—","Open dessert","Lavinia & Daniel"],
+    ["16:00","Reveal quiz","Bronwyn · asks Lavinia & Daniel the quiz questions"],
+    ["16:30","Thank-you speech","Lavinia & Daniel"],
+    ["17:00","Grand exit",""]
+  ];
+
+  // Grouped by function: Setup & Cleanup, Program & Activities, Reception.
+  var team = [
+    ["Setup & Cleanup", [
+      ["Setup & Clean-up Lead","Jordie and Andrew Lubben","604-703-2792"],
+      ["Setup & Detail Cleaning","Claudia / Angel / Emma","604-378-4370"],
+      ["Setup Support","Bonnie Robertson","604-845-6651"],
+      ["Setup & Clean-up Support","Melanie Brooker",""],
+      ["Setup & Clean-up Support","David and Marrissa Bardy",""],
+      ["Clean-up Support","Sorin Mihai",""],
+      ["Clean-up Support","Josiah Mihai",""],
+      ["Clean-up Support","Joseph Mihai",""],
+      ["Clean-up Support","Louisa and Sean",""]
+    ]],
+    ["Program & Activities", [
+      ["MC","Janine Teakema",""],
+      ["Quiz Game + Prize","Bronwyn Paul",""],
+      ["Coloring Station","Ann Ng",""],
+      ["Shoe Game","Janine Teakema",""],
+      ["Story Bingo","Harvey Mattson","604 626 2630"],
+      ["Connect Four Game","Andria Popovici",""],
+      ["Corn Hole Game","Liz Hoock",""],
+      ["Bocce Ball Game","Jordie Lubben",""],
+      ["Croquet Game","Sandi Berube",""]
+    ]],
+    ["Reception", [
+      ["Photography","Ligia Tanasa",""],
+      ["Flowers","Roxi Zemora",""],
+      ["Reception Food & Drinks","Andrada and Bogdan","780-882-7053"],
+      ["Reception Dessert","Claudia",""]
+    ]]
+  ];
+
+  // ---------------- HELPERS ----------------
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  // ---------------- SCHEDULE ----------------
+  function renderTimeline(containerId, rows) {
+    var c = document.getElementById(containerId);
+    rows.forEach(function (r) {
+      var row = el("div", "t-row");
+      row.appendChild(el("div", "t-time mono", r[0]));
+      var dotWrap = el("div", "t-dot-wrap");
+      dotWrap.appendChild(el("div", "t-dot"));
+      row.appendChild(dotWrap);
+      var body = el("div", "t-body");
+      body.appendChild(el("div", "t-activity", r[1]));
+      if (r[2]) body.appendChild(el("div", "t-sub", r[2]));
+      row.appendChild(body);
+      c.appendChild(row);
+    });
+  }
+  renderTimeline("tl-ca", scheduleCA);
+
+  // ---------------- TEAM ----------------
+  var teamRoot = document.getElementById('team-groups');
+  team.forEach(function (group) {
+    var wrap = el("div", "team-group");
+    wrap.appendChild(el("h3", "", group[0]));
+    var grid = el("div", "team-grid");
+    group[1].forEach(function (t) {
+      var card = el("div", "team-card");
+      card.appendChild(el("div", "team-role", t[0]));
+      card.appendChild(el("div", "team-name", t[1]));
+      if (t[2]) {
+        var telHref = "tel:+1" + t[2].replace(/\D/g, "");
+        var phone = el("a", "team-phone mono", t[2]);
+        phone.href = telHref;
+        card.appendChild(phone);
+      }
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    teamRoot.appendChild(wrap);
+  });
+
+  // sync time
+  try {
+    var d = new Date(SYNCED_AT);
+    document.getElementById('sync-time').textContent = d.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+  } catch (e) {
+    document.getElementById('sync-time').textContent = SYNCED_AT;
+  }
+})();
+</script>

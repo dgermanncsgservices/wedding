@@ -1,0 +1,448 @@
+<title>Lavinia & Daniel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --maroon-950: #2C0D12;
+    --maroon-900: #4A161E;
+    --maroon-800: #5C1F26;
+    --maroon-700: #712833;
+    --cream-050: #FBF7EE;
+    --cream-100: #F1E7D6;
+    --cream-200: #E4D5BC;
+    --gold-500: #C9A877;
+    --gold-600: #AD8A5C;
+    --ink-900: #2A1418;
+    --ink-700: #4A3236;
+    --ink-500: #7A6266;
+    --line: #DACBAE;
+    --bg: var(--cream-050);
+    --surface: #FFFFFF;
+    --panel: var(--maroon-900);
+    --panel-2: var(--maroon-800);
+    --text: var(--ink-900);
+    --text-soft: var(--ink-500);
+    --on-panel: var(--cream-100);
+    --on-panel-soft: #D9C3B0;
+    --accent: var(--gold-500);
+    --brand-ink: var(--maroon-900);
+    --shadow: 0 20px 50px -25px rgba(42, 20, 24, 0.35);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1B0F11;
+      --surface: #26161A;
+      --panel: #170A0C;
+      --panel-2: #241417;
+      --text: #F1E7D6;
+      --text-soft: #B7A199;
+      --on-panel: #F1E7D6;
+      --on-panel-soft: #C9AC9B;
+      --line: #3E2A2C;
+      --accent: #D9B98A;
+      --brand-ink: #D9B98A;
+      --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1B0F11;
+    --surface: #26161A;
+    --panel: #170A0C;
+    --panel-2: #241417;
+    --text: #F1E7D6;
+    --text-soft: #B7A199;
+    --on-panel: #F1E7D6;
+    --on-panel-soft: #C9AC9B;
+    --line: #3E2A2C;
+    --accent: #D9B98A;
+    --brand-ink: #D9B98A;
+    --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .script {
+    font-family: 'Herr Von Muellerhoff', cursive;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .mono, .num {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ---------- Top pill nav ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: baseline; gap: 0.5rem; }
+  .brand .script { font-size: 1.6rem; color: var(--brand-ink); }
+  .brand .amp { color: var(--accent); }
+  .navlinks { display: flex; gap: 0.35rem; overflow-x: auto; scrollbar-width: none; }
+  .navlinks::-webkit-scrollbar { display: none; }
+  .navlinks a {
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--text-soft);
+    transition: border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .navlinks a:hover { border-color: var(--accent); color: var(--text); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    min-height: min(80vh, 680px);
+  }
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+  }
+  .hero-art {
+    position: relative;
+    background:
+      radial-gradient(120% 90% at 20% 15%, rgba(255,255,255,0.14), transparent 55%),
+      linear-gradient(200deg, #7A5A44 0%, #4C3A2E 38%, #2E241D 100%);
+    overflow: hidden;
+    display: flex; align-items: flex-end;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    min-height: 420px;
+  }
+  .hero-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-names { position: relative; z-index: 2; color: var(--cream-050); }
+  .hero-names .script { font-size: clamp(3rem, 8vw, 5.5rem); }
+  .hero-names .loc { margin-top: 0.6rem; font-size: 0.95rem; letter-spacing: 0.08em; opacity: 0.9; }
+
+  .hero-panel {
+    background: var(--panel);
+    color: var(--on-panel);
+    padding: clamp(1.75rem, 4vw, 3.5rem);
+    display: flex; flex-direction: column; justify-content: center; gap: 1.6rem;
+  }
+  .events { display: flex; flex-direction: column; gap: 1.6rem; }
+  .event-block { border-top: 1px solid color-mix(in srgb, var(--on-panel) 25%, transparent); padding-top: 1.4rem; }
+  .event-block:first-child { border-top: none; padding-top: 0; }
+  .event-date { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+  .event-time { color: var(--on-panel-soft); margin-top: 0.3rem; font-size: 0.92rem; }
+  .event-title { margin-top: 0.7rem; font-size: 1.5rem; }
+  .event-desc { color: var(--on-panel-soft); margin-top: 0.6rem; font-size: 0.95rem; max-width: 46ch; }
+  .event-meta { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; font-size: 0.9rem; color: var(--on-panel-soft); }
+  .event-meta span { display: flex; gap: 0.55rem; align-items: flex-start; }
+
+  /* ---------- Sections ---------- */
+  main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+  section { padding: clamp(3rem, 6vw, 5rem) 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .section-head { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.2rem; max-width: 60ch; }
+  .section-head .eyebrow { color: var(--accent); }
+  .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+  .section-head p { color: var(--text-soft); font-size: 0.98rem; margin: 0.3rem 0 0; }
+
+  .timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+  .timeline::before { content: ""; position: absolute; left: 5.6rem; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+  @media (max-width: 640px) { .timeline::before { left: 3.7rem; } }
+  .t-row { display: grid; grid-template-columns: 5.6rem 1.4rem 1fr; gap: 0; padding: 0.85rem 0; }
+  @media (max-width: 640px) { .t-row { grid-template-columns: 3.7rem 1.2rem 1fr; } }
+  .t-time { font-size: 0.85rem; color: var(--panel-2); padding-top: 0.15rem; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .t-time { color: var(--accent); } }
+  :root[data-theme="dark"] .t-time { color: var(--accent); }
+  .t-dot-wrap { display: flex; justify-content: center; }
+  .t-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); margin-top: 0.35rem; box-shadow: 0 0 0 3px var(--bg); }
+  .t-body { padding-bottom: 0.2rem; }
+  .t-activity { font-size: 1.02rem; }
+  .t-sub { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
+
+  .team-group { margin-bottom: 2rem; }
+  .team-group:last-child { margin-bottom: 0; }
+  .team-group h3 { font-size: 1.1rem; margin-bottom: 0.9rem; color: var(--panel-2); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .team-group h3 { color: var(--accent); } }
+  :root[data-theme="dark"] .team-group h3 { color: var(--accent); }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.9rem; }
+  .team-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.2rem; }
+  .team-role { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .team-name { margin-top: 0.35rem; font-size: 1.05rem; }
+  .team-phone { margin-top: 0.3rem; font-size: 0.85rem; color: var(--text-soft); display: inline-block; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, var(--accent) 70%, transparent); }
+  .team-phone:hover { color: var(--text); }
+
+  .equip-card { margin-top: 2rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.4rem 1.6rem; }
+  .equip-card h3 { font-size: 1.1rem; margin-bottom: 0.8rem; color: var(--panel-2); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .equip-card h3 { color: var(--accent); } }
+  :root[data-theme="dark"] .equip-card h3 { color: var(--accent); }
+  .equip-card ul { margin: 0; padding-left: 1.1rem; columns: 2; column-gap: 2rem; }
+  @media (max-width: 500px) { .equip-card ul { columns: 1; } }
+  .equip-card li { font-size: 0.92rem; color: var(--text-soft); margin-bottom: 0.5rem; break-inside: avoid; }
+
+  footer {
+    padding: 2.5rem clamp(1rem, 4vw, 2.5rem) 3rem;
+    text-align: center; color: var(--text-soft); font-size: 0.82rem;
+  }
+  footer .script { font-size: 1.5rem; color: var(--panel-2); display: block; margin-bottom: 0.4rem; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) footer .script { color: var(--accent); } }
+  :root[data-theme="dark"] footer .script { color: var(--accent); }
+  footer a { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+
+  [hidden] { display: none !important; }
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
+  <nav class="navlinks">
+    <a href="index.html">All Events</a>
+    <a href="canada.html">Canada</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#team">Day-of Team</a>
+  </nav>
+</div>
+
+<header class="hero" id="overview">
+  <div class="hero-art">
+    <svg viewbox="0 0 800 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8A6C52"/>
+          <stop offset="1" stop-color="#3B2E24" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="600" fill="url(#sky)" opacity="0.5"/>
+      <polygon points="0,420 120,270 230,380 340,230 460,400 560,300 680,420 800,340 800,600 0,600" fill="#2E2119" opacity="0.55"/>
+      <polygon points="0,470 150,360 260,440 400,320 540,450 680,370 800,460 800,600 0,600" fill="#241A14" opacity="0.75"/>
+    </svg>
+    <div class="hero-names">
+      <div class="script">Lavinia &amp; Daniel</div>
+      <div class="loc mono">SWITZERLAND</div>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <div class="events">
+      <div class="event-block">
+        <div class="event-date display">Saturday, October 17, 2026</div>
+        <div class="event-time mono">1:00 PM</div>
+        <div class="event-title display">Trauung Schweiz</div>
+        <div class="event-desc">Unsere Trauung wird am 17. Oktober um 13:00 in der Kirche Wichtrach stattfinden. Im Anschluss werden wir gemeinsam ein kleines Apéro geniessen. Bei gutem Wetter wird das Apéro draussen stattfinden.</div>
+        <div class="event-meta">
+          <span>👔 Festlich</span>
+          <span>📍 Kirche Wichtrach, Kirchstrasse, Wichtrach, Switzerland</span>
+        </div>
+      </div>
+      <div class="event-block">
+        <div class="event-time mono">6:00 PM</div>
+        <div class="event-title display">Feier Schweiz</div>
+        <div class="event-desc">Unser Fest wird im Anschluss an das Apéro in der Alti Sagi in Leissigen stattfinden. Falls du einen Beitrag planen möchtest, ist dies auf jeden Fall willkommen! Für die Koordination der Beiträge bitten wir dich, diesen bis Ende Juli bei Michelle anzumelden — <a href="tel:+41794427627" style="color: inherit; border-bottom: 1px dotted var(--accent);">079 442 76 27</a>.</div>
+        <div class="event-meta">
+          <span>📍 Alti Sagi Leissigen, Läntiweg, Leissigen, Switzerland</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="schedule">
+    <div class="section-head">
+      <span class="eyebrow">Programm · Schedule</span>
+      <h2>Day-of Timeline</h2>
+    </div>
+    <div class="timeline" id="tl-ch"></div>
+  </section>
+
+  <section id="team">
+    <div class="section-head">
+      <span class="eyebrow">Switzerland</span>
+      <h2>Day-of Team</h2>
+      <p>Who's running what during the ceremony and reception.</p>
+    </div>
+    <div id="team-groups"></div>
+    <div class="equip-card">
+      <h3>To Bring — Alti Sagi Leissigen</h3>
+      <ul id="equipment-list"></ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="script">Lavinia &amp; Daniel</span>
+  Synced from the "Switzerland" tab of the Wedding Planning Spreadsheet · <span id="sync-time"></span><br>
+  See the full site at <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------------- DATA ----------------
+  // Synced from "Wedding Planning Spreadsheet" — "Switzerland" tab only.
+  var SYNCED_AT = "2026-08-24T07:14:15.514337-07:00";
+
+  var scheduleCH = [
+    ["12:30","Wedding photos (15-min shoot at the church)","Mathias Josi"],
+    ["13:00","Ceremony start, everyone seated",""],
+    ["13:01","Lavinia walks down the aisle — violin song","Tobi"],
+    ["13:03","Welcome guests & opening prayer","Tom · please, no phones"],
+    ["13:05","Worship","Tobi"],
+    ["13:20","Sermon (German)","Tom"],
+    ["13:40","One song (solo/duet, band only)","Tobi"],
+    ["13:45","Personal vows","Lavinia & Daniel"],
+    ["—","Declaration of marriage & short prayer","Tom"],
+    ["13:55","Rings","Eli, Marie, Lenet, Johan"],
+    ["—","Kiss",""],
+    ["14:00","Prayer of blessing","Parents"],
+    ["14:03","Presentation of the wedding Bible","Tom"],
+    ["14:05","Information","Michelle & Mike · introduction, Apéro location in the booklet, ride check, group photo"],
+    ["14:08","Group photo in church","Mathias Josi"],
+    ["14:10","Closing prayer","Tom"],
+    ["14:12","Exit with pan flute song","Andreas · Lavinia & Daniel first, then guests"],
+    ["14:20","Drive to Thalgut","Everyone"],
+    ["14:40","Apéro opens","Lavinia & Daniel · guest book, gift table/vehicle"],
+    ["15:15","Alphorn",""],
+    ["15:30","Group photos","Mathias Josi"],
+    ["17:00","Apéro ends",""],
+    ["17:30","Photoshoot at Aschiried","Mathias Josi"],
+    ["18:00","Reception begins",""],
+    ["18:15","Food arrives","Metzgerei Nussbaum / Ladina"],
+    ["18:20","Announce dinner & pray for food","Michelle & Mike · bridal table goes first, then down the table"],
+    ["19:20","Inputs as per signups","Michelle & Mike · possible breaks in between"],
+    ["20:30","Dessert buffet announcement","Michelle & Mike · same order as main course"],
+    ["21:00","Possible additional inputs","Michelle & Mike"],
+    ["21:30","Good night — Daniel and Lavinia leave",""],
+    ["21:45","Cleanup","Everyone available"]
+  ];
+
+  // Grouped by when/where each role is needed: Ceremony first, then Apéro & Reception.
+  var team = [
+    ["Ceremony", [
+      ["Pastor","Tom Lehmann","079 592 11 97"],
+      ["Worship","Tobias Baumann","079 236 72 93"],
+      ["Program & Info","Michelle and Mike Baumgartner","079 442 76 27"],
+      ["Technical Support","Silvan Knechtenhofer","077 417 99 90"],
+      ["Decorations — Church","Sannie Germann","079 719 34 92"],
+      ["Photographer","Mathias Josi","079 419 18 08"]
+    ]],
+    ["Apéro", [
+      ["Apéro","Matthias Waltert","076 457 14 78"],
+      ["Decorations — Apéro","Helen Bürki","079 744 48 12"]
+    ]],
+    ["Reception", [
+      ["Setup & Decorations — Reception","Gabriel and Jael Leutenegger","079 915 50 71"],
+      ["Reception Buffet","Ladina Antoinetti","079 708 94 55"],
+      ["Reception Food","Metzgerei Nussbaum","031 721 11 38"],
+      ["Reception Dessert (Wedding Cake)","Andreas Germann","079 653 88 38"]
+    ]]
+  ];
+
+  // ---------------- HELPERS ----------------
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  // ---------------- SCHEDULE ----------------
+  function renderTimeline(containerId, rows) {
+    var c = document.getElementById(containerId);
+    rows.forEach(function (r) {
+      var row = el("div", "t-row");
+      row.appendChild(el("div", "t-time mono", r[0]));
+      var dotWrap = el("div", "t-dot-wrap");
+      dotWrap.appendChild(el("div", "t-dot"));
+      row.appendChild(dotWrap);
+      var body = el("div", "t-body");
+      body.appendChild(el("div", "t-activity", r[1]));
+      if (r[2]) body.appendChild(el("div", "t-sub", r[2]));
+      row.appendChild(body);
+      c.appendChild(row);
+    });
+  }
+  renderTimeline("tl-ch", scheduleCH);
+
+  // ---------------- TEAM ----------------
+  var teamRoot = document.getElementById('team-groups');
+  team.forEach(function (group) {
+    var wrap = el("div", "team-group");
+    wrap.appendChild(el("h3", "", group[0]));
+    var grid = el("div", "team-grid");
+    group[1].forEach(function (t) {
+      var card = el("div", "team-card");
+      card.appendChild(el("div", "team-role", t[0]));
+      card.appendChild(el("div", "team-name", t[1]));
+      if (t[2]) {
+        var telHref = "tel:+41" + t[2].replace(/\D/g, "").replace(/^0/, "");
+        var phone = el("a", "team-phone mono", t[2]);
+        phone.href = telHref;
+        card.appendChild(phone);
+      }
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    teamRoot.appendChild(wrap);
+  });
+
+  // ---------------- EQUIPMENT ----------------
+  var equipment = [
+    "Kettle", "Coffee maker", "Coffee cream", "Decorations, table cloths and napkins",
+    "Drink trailer", "Cakes", "Big candles for entrance", "110L garbage bags"
+  ];
+  var equipRoot = document.getElementById('equipment-list');
+  if (equipRoot) {
+    equipment.forEach(function (item) {
+      equipRoot.appendChild(el("li", "", item));
+    });
+  }
+
+  // sync time
+  try {
+    var d = new Date(SYNCED_AT);
+    document.getElementById('sync-time').textContent = d.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+  } catch (e) {
+    document.getElementById('sync-time').textContent = SYNCED_AT;
+  }
+})();
+</script>
