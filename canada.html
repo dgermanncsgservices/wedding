@@ -289,9 +289,9 @@
 <div class="topbar">
   <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
   <nav class="navlinks">
-    <a href="index.html">All Events</a>
-    <a href="#schedule">Schedule</a>
-    <a href="#team">Day-of Team</a>
+    <a href="index.html" data-i18n="nav.events">All Events</a>
+    <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
+    <a href="#team" data-i18n="nav.team">Day-of Team</a>
   </nav>
 </div>
 
@@ -310,23 +310,23 @@
     </svg>
     <div class="hero-names">
       <div class="script">Lavinia &amp; Daniel</div>
-      <div class="loc mono">CANADA</div>
+      <div class="loc mono" data-i18n="hero.loc">CANADA</div>
     </div>
   </div>
 
   <div class="hero-panel">
     <div class="events">
       <div class="event-block">
-        <div class="event-date display">Sunday, October 11, 2026</div>
-        <div class="event-time mono">1:00 PM – 5:00 PM</div>
-        <div class="event-title display">Celebration Canada</div>
+        <div class="event-date display" data-i18n="hero.date">Sunday, October 11, 2026</div>
+        <div class="event-time mono" data-i18n="hero.time">1:00 PM – 5:00 PM</div>
+        <div class="event-title display" data-i18n="hero.title">Celebration Canada</div>
         <div class="event-desc">
-          <p>We're eloping! The exciting news is that after our elopement, we can't wait to celebrate our marriage with all of you.</p>
-          <p>We would love for you to join us for a special celebration at the Columbia Valley Community Center on October 11th at 1:00 p.m. We're looking forward to a relaxed afternoon surrounded by friends and family.</p>
-          <p>While we won't be serving a full meal, there will be plenty of delicious appetizers to enjoy. If the weather cooperates, the celebration will take place outdoors.</p>
+          <p data-i18n="hero.p1">We're eloping! The exciting news is that after our elopement, we can't wait to celebrate our marriage with all of you.</p>
+          <p data-i18n="hero.p2">We would love for you to join us for a special celebration at the Columbia Valley Community Center on October 11th at 1:00 p.m. We're looking forward to a relaxed afternoon surrounded by friends and family.</p>
+          <p data-i18n="hero.p3">While we won't be serving a full meal, there will be plenty of delicious appetizers to enjoy. If the weather cooperates, the celebration will take place outdoors.</p>
         </div>
         <div class="event-meta">
-          <span>👔 Farm Formal</span>
+          <span data-i18n="hero.dress">👔 Farm Formal</span>
           <span>📍 Columbia Valley Community Centre, Kosikar Rd, Lindell Beach, BC, Canada</span>
         </div>
       </div>
@@ -339,8 +339,8 @@
   <section id="schedule">
     <details class="sec" open>
       <summary class="section-head">
-        <span class="eyebrow">Program · Schedule</span>
-        <h2>Day-of Timeline</h2>
+        <span class="eyebrow" data-i18n="sec.schedule.eyebrow">Program · Schedule</span>
+        <h2 data-i18n="sec.schedule.h2">Day-of Timeline</h2>
       </summary>
         <div id="tl-ca"></div>
     </details>
@@ -349,9 +349,9 @@
   <section id="team">
     <details class="sec" open>
       <summary class="section-head">
-        <span class="eyebrow">Canada</span>
-        <h2>Day-of Team</h2>
-        <span class="sec-desc">Who's running what for setup, the program, and the reception.</span>
+        <span class="eyebrow" data-i18n="sec.team.eyebrow">Canada</span>
+        <h2 data-i18n="sec.team.h2">Day-of Team</h2>
+        <span class="sec-desc" data-i18n="sec.team.desc">Who's running what for setup, the program, and the reception.</span>
       </summary>
         <div id="team-groups"></div>
     </details>
@@ -361,10 +361,79 @@
 
 <footer>
   <span class="script">Lavinia &amp; Daniel</span>
-  Synced from the "Celebration Canada" tab of the Wedding Planning Spreadsheet · <span id="sync-time"></span><br>
-  See the full site at <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
+  <span data-i18n="footer.synced">Synced from the "Celebration Canada" tab of the Wedding Planning Spreadsheet ·</span> <span id="sync-time"></span><br>
+  <span data-i18n="footer.full">See the full site at</span> <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
 </footer>
 
+<script>
+window.I18N_PAGE = { de: {
+  "nav.events": "Alle Anlässe",
+  "nav.schedule": "Programm",
+  "nav.team": "Team vor Ort",
+
+  "hero.loc": "KANADA",
+  "hero.date": "Sonntag, 11. Oktober 2026",
+  "hero.time": "13:00 – 17:00",
+  "hero.title": "Feier Kanada",
+  "hero.p1": "Wir heiraten im kleinen Kreis! Die schöne Nachricht: Nach unserer Trauung können wir es kaum erwarten, unsere Ehe mit euch allen zu feiern.",
+  "hero.p2": "Wir würden uns sehr freuen, wenn du am 11. Oktober um 13:00 Uhr zu unserer Feier im Columbia Valley Community Center dazukommst. Wir freuen uns auf einen entspannten Nachmittag mit Freunden und Familie.",
+  "hero.p3": "Ein volles Menü gibt es nicht, dafür jede Menge feine Apphäppchen. Wenn das Wetter mitspielt, findet die Feier draussén statt.",
+  "hero.dress": "👔 Farm Formal",
+
+  "sec.schedule.eyebrow": "Programm",
+  "sec.schedule.h2": "Tagesablauf",
+  "sec.team.eyebrow": "Kanada",
+  "sec.team.h2": "Team vor Ort",
+  "sec.team.desc": "Wer für Aufbau, Programm und Fest zuständig ist.",
+  "footer.synced": "Synchronisiert aus dem Tab «Celebration Canada» der Hochzeitsplanung ·",
+  "footer.full": "Die ganze Website findest du auf",
+
+  "Details": "Details",
+
+  "Start set up": "Aufbau beginnt",
+  "Guests arriving": "Gäste treffen ein",
+  "Welcome everyone": "Begrüssung",
+  "Grand entry": "Grosser Einzug",
+  "Announce program & quiz": "Programm & Quiz ankündigen",
+  "Pray for food & open Apéro": "Tischgebet & Apéro eröffnen",
+  "Bingo with story": "Bingo mit Geschichte",
+  "Open mic": "Offenes Mikrofon",
+  "Shoe game (without shoes)": "Schuhspiel (ohne Schuhe)",
+  "Parents speech": "Rede der Eltern",
+  "Open dessert": "Dessert eröffnen",
+  "Reveal quiz": "Quiz auflösen",
+  "Thank-you speech": "Dankesrede",
+  "Grand exit": "Grosser Auszug",
+
+  "Setup crew; Be ready at 9:00 am at Columbia Valley Community Center, Jordie and Andrew brief everyone on their tasks": "Aufbauteam; Um 9:00 Uhr im Columbia Valley Community Center bereit sein, Jordie und Andrew instruieren alle über ihre Aufgaben",
+  "Music": "Musik",
+  "Bronwyn asks Lavinia & Daniel the quiz questions": "Bronwyn stellt Lavinia & Daniel die Quizfragen",
+
+  "Setup & Cleanup": "Aufbau & Aufräumen",
+  "Program & Activities": "Programm & Aktivitäten",
+  "Reception": "Fest",
+
+  "Setup & Clean-up Lead": "Leitung Aufbau & Aufräumen",
+  "Setup & Detail Cleaning": "Aufbau & Feinreinigung",
+  "Setup Support": "Unterstützung Aufbau",
+  "Setup & Clean-up Support": "Unterstützung Aufbau & Aufräumen",
+  "Clean-up Support": "Unterstützung Aufräumen",
+  "MC": "Moderation",
+  "Quiz Game + Prize": "Quiz + Preis",
+  "Coloring Station": "Malstation",
+  "Shoe Game": "Schuhspiel",
+  "Story Bingo": "Geschichten-Bingo",
+  "Connect Four Game": "Vier gewinnt",
+  "Corn Hole Game": "Cornhole",
+  "Bocce Ball Game": "Boccia",
+  "Croquet Game": "Krocket",
+  "Photography": "Fotografie",
+  "Flowers": "Blumen",
+  "Reception Food & Drinks": "Essen & Getränke Fest",
+  "Reception Dessert": "Dessert Fest"
+} };
+</script>
+<script src="assets/i18n.js"></script>
 <script>
 (function () {
   "use strict";
@@ -431,6 +500,13 @@
     return e;
   }
 
+  // Translate a data string; falls back to the English original.
+  function t(s) {
+    return (window.WD_I18N && s) ? window.WD_I18N.t(s, s) : s;
+  }
+
+  function clear(node) { while (node && node.firstChild) node.removeChild(node.firstChild); }
+
   // ---------------- SCHEDULE ----------------
   // A row is ["group", "time", "activity", "responsible", "notes"].
   function timelineRow(r) {
@@ -440,13 +516,13 @@
     dotWrap.appendChild(el("div", "t-dot"));
     row.appendChild(dotWrap);
     var body = el("div", "t-body");
-    body.appendChild(el("div", "t-activity", r[2]));
-    if (r[3]) body.appendChild(el("div", "t-who", r[3]));
+    body.appendChild(el("div", "t-activity", t(r[2])));
+    if (r[3]) body.appendChild(el("div", "t-who", t(r[3])));
     if (r[4]) {
       var det = el("details", "t-details");
-      det.appendChild(el("summary", "", "Details"));
+      det.appendChild(el("summary", "", t("Details")));
       // A ";" in the sheet's Notes cell means "start a new line here".
-      r[4].split(";").forEach(function (part) {
+      t(r[4]).split(";").forEach(function (part) {
         part = part.trim();
         if (part) det.appendChild(el("div", "t-sub", part));
       });
@@ -459,13 +535,15 @@
   // Span of clock times in a group, so a collapsed group still says when it is.
   function timeSpan(rows) {
     var times = rows.map(function (r) { return r[1]; })
-                    .filter(function (t) { return /^\d/.test(t); });
+                    .filter(function (x) { return /^\d/.test(x); });
     if (!times.length) return "";
     return times.length > 1 ? times[0] + " – " + times[times.length - 1] : times[0];
   }
 
   function renderTimeline(containerId, rows) {
     var c = document.getElementById(containerId);
+    if (!c) return;
+    clear(c);
     // Consecutive rows sharing a group name form one collapsible section.
     var groups = [];
     rows.forEach(function (r) {
@@ -481,7 +559,7 @@
       var det = el("details", "t-group");
       det.open = true;
       var sum = el("summary", "");
-      sum.appendChild(el("span", "t-group-name", g.name));
+      sum.appendChild(el("span", "t-group-name", t(g.name)));
       var span = timeSpan(g.rows);
       if (span) sum.appendChild(el("span", "t-group-span mono", span));
       det.appendChild(sum);
@@ -489,36 +567,55 @@
       c.appendChild(det);
     });
   }
-  renderTimeline("tl-ca", scheduleCA);
 
   // ---------------- TEAM ----------------
-  var teamRoot = document.getElementById('team-groups');
-  team.forEach(function (group) {
-    var wrap = el("div", "team-group");
-    wrap.appendChild(el("h3", "", group[0]));
-    var grid = el("div", "team-grid");
-    group[1].forEach(function (t) {
-      var card = el("div", "team-card");
-      card.appendChild(el("div", "team-role", t[0]));
-      card.appendChild(el("div", "team-name", t[1]));
-      if (t[2]) {
-        var telHref = "tel:+1" + t[2].replace(/\D/g, "");
-        var phone = el("a", "team-phone mono", t[2]);
-        phone.href = telHref;
-        card.appendChild(phone);
-      }
-      grid.appendChild(card);
+  function renderTeam() {
+    var teamRoot = document.getElementById('team-groups');
+    if (!teamRoot) return;
+    clear(teamRoot);
+    team.forEach(function (group) {
+      var wrap = el("div", "team-group");
+      wrap.appendChild(el("h3", "", t(group[0])));
+      var grid = el("div", "team-grid");
+      group[1].forEach(function (member) {
+        var card = el("div", "team-card");
+        card.appendChild(el("div", "team-role", t(member[0])));
+        card.appendChild(el("div", "team-name", member[1]));
+        if (member[2]) {
+          var telHref = "tel:+1" + member[2].replace(/\D/g, "");
+          var phone = el("a", "team-phone mono", member[2]);
+          phone.href = telHref;
+          card.appendChild(phone);
+        }
+        grid.appendChild(card);
+      });
+      wrap.appendChild(grid);
+      teamRoot.appendChild(wrap);
     });
-    wrap.appendChild(grid);
-    teamRoot.appendChild(wrap);
-  });
-
-  // sync time
-  try {
-    var d = new Date(SYNCED_AT);
-    document.getElementById('sync-time').textContent = d.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
-  } catch (e) {
-    document.getElementById('sync-time').textContent = SYNCED_AT;
   }
+
+  // ---------------- SYNC TIME ----------------
+  function renderSyncTime(lang) {
+    var node = document.getElementById('sync-time');
+    if (!node) return;
+    try {
+      var d = new Date(SYNCED_AT);
+      node.textContent = d.toLocaleString(lang === "de" ? 'de-CH' : 'en-US',
+        { dateStyle: 'medium', timeStyle: 'short' });
+    } catch (e) {
+      node.textContent = SYNCED_AT;
+    }
+  }
+
+  // ---------------- RENDER ----------------
+  function renderAll(lang) {
+    renderTimeline("tl-ca", scheduleCA);
+    renderTeam();
+    renderSyncTime(lang);
+  }
+
+  // Re-render whenever the language changes; runs once immediately.
+  if (window.WD_I18N) window.WD_I18N.onChange(renderAll);
+  else renderAll("en");
 })();
 </script>

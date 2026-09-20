@@ -63,23 +63,37 @@
 <div class="topbar">
   <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
   <nav class="navlinks">
-    <a href="index.html">All Events</a>
-    <a href="switzerland.html">Switzerland</a>
+    <a href="index.html" data-i18n="nav.events">All Events</a>
+    <a href="switzerland.html" data-i18n="nav.ch">Switzerland</a>
   </nav>
 </div>
 
 <main>
   <div class="section-head">
-    <span class="eyebrow">Switzerland · Reception</span>
-    <h1>Seating Plan</h1>
-    <p>Find your table below.</p>
+    <span class="eyebrow" data-i18n="seating.eyebrow">Switzerland · Reception</span>
+    <h1 data-i18n="seating.h1">Seating Plan</h1>
+    <p data-i18n="seating.desc">Find your table below.</p>
   </div>
   <div class="chart-frame">
-    <img src="assets/seating-switzerland.jpg" alt="Switzerland reception seating chart" />
+    <img src="assets/seating-switzerland.jpg" alt="Switzerland reception seating chart" data-i18n-attr="alt:seating.alt" />
   </div>
 </main>
 
 <footer>
   <span class="script">Lavinia &amp; Daniel</span>
-  See you there!
+  <span data-i18n="seating.footer">See you there!</span>
 </footer>
+
+<script>
+window.I18N_PAGE = { de: {
+  "page.title": "Lavinia & Daniel — Sitzplan (Schweiz)",
+  "nav.events": "Alle Anlässe",
+  "nav.ch": "Schweiz",
+  "seating.eyebrow": "Schweiz · Fest",
+  "seating.h1": "Sitzplan",
+  "seating.desc": "Hier findest du deinen Tisch.",
+  "seating.alt": "Sitzplan für das Fest in der Schweiz",
+  "seating.footer": "Wir freuen uns auf dich!"
+} };
+</script>
+<script src="assets/i18n.js"></script>

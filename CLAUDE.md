@@ -55,3 +55,27 @@ Shared template across both event pages: deep maroon (`#4A161E`) hero, cream
 text, "Herr Von Muellerhoff" for the names, Cormorant Garamond headings, Jost
 body, IBM Plex Mono for times and phone numbers. Light and dark themes are both
 defined — keep any new color as a token on `:root` with a dark counterpart.
+
+## Languages (EN / DE)
+
+`assets/i18n.js` is shared by all four pages. It picks a language from a saved
+choice (`localStorage` key `wd-lang`), else from the device language — anything
+starting with `de` gets German — and renders an EN/DE toggle into `.topbar`, or
+floating in the corner on pages without one.
+
+Each page declares `window.I18N_PAGE = { de: { ... } }` *before* loading
+`i18n.js`. Keys are either:
+
+- a dotted key (`hero.title`, `nav.team`) matched by a `data-i18n` attribute in
+  the markup, or `data-i18n-attr="alt:some.key"` to translate an attribute; or
+- the **English source string itself**, for anything rendered from the sheet
+  (activities, notes, group names, team roles, equipment).
+
+The English text stays in the HTML and in the schedule arrays; German lives only
+in the dictionary. Anything without a translation falls back to English, so a
+sheet sync that adds a row never blanks the page — it just shows that row in
+English until a German string is added. After syncing new rows, add the matching
+`de` entries.
+
+Page scripts re-render through `WD_I18N.onChange(fn)`, which fires immediately
+and again on every switch.

@@ -295,10 +295,10 @@
 <div class="topbar">
   <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
   <nav class="navlinks">
-    <a href="index.html">All Events</a>
-    <a href="seating-switzerland.html">Seating</a>
-    <a href="#schedule">Schedule</a>
-    <a href="#team">Day-of Team</a>
+    <a href="index.html" data-i18n="nav.events">All Events</a>
+    <a href="seating-switzerland.html" data-i18n="nav.seating">Seating</a>
+    <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
+    <a href="#team" data-i18n="nav.team">Day-of Team</a>
   </nav>
 </div>
 
@@ -317,26 +317,26 @@
     </svg>
     <div class="hero-names">
       <div class="script">Lavinia &amp; Daniel</div>
-      <div class="loc mono">SWITZERLAND</div>
+      <div class="loc mono" data-i18n="hero.loc">SWITZERLAND</div>
     </div>
   </div>
 
   <div class="hero-panel">
     <div class="events">
       <div class="event-block">
-        <div class="event-date display">Saturday, October 17, 2026</div>
-        <div class="event-time mono">1:00 PM</div>
-        <div class="event-title display">Trauung Schweiz</div>
-        <div class="event-desc">Unsere Trauung wird am 17. Oktober um 13:00 in der Kirche Wichtrach stattfinden. Im Anschluss werden wir gemeinsam ein kleines Apéro geniessen. Bei gutem Wetter wird das Apéro draussen stattfinden.</div>
+        <div class="event-date display" data-i18n="hero.date1">Saturday, October 17, 2026</div>
+        <div class="event-time mono" data-i18n="hero.time1">1:00 PM</div>
+        <div class="event-title display" data-i18n="hero.title1">Wedding Ceremony, Switzerland</div>
+        <div class="event-desc" data-i18n="hero.desc1">Our ceremony will take place on 17 October at 1:00 PM at the church in Wichtrach. Afterwards we’ll enjoy a small Apéro together. If the weather is good, the Apéro will be held outdoors.</div>
         <div class="event-meta">
-          <span>👔 Festlich</span>
+          <span data-i18n="hero.dress1">👔 Formal</span>
           <span>📍 Kirche Wichtrach, Kirchstrasse, Wichtrach, Switzerland</span>
         </div>
       </div>
       <div class="event-block">
-        <div class="event-time mono">6:00 PM</div>
-        <div class="event-title display">Feier Schweiz</div>
-        <div class="event-desc">Unser Fest wird im Anschluss an das Apéro in der Alti Sagi in Leissigen stattfinden. Falls du einen Beitrag planen möchtest, ist dies auf jeden Fall willkommen! Für die Koordination der Beiträge bitten wir dich, diesen bis 30. September bei Michelle anzumelden — <a href="tel:+41794427627" style="color: inherit; border-bottom: 1px dotted var(--accent);">079 442 76 27</a>.</div>
+        <div class="event-time mono" data-i18n="hero.time2">6:00 PM</div>
+        <div class="event-title display" data-i18n="hero.title2">Celebration, Switzerland</div>
+        <div class="event-desc" data-i18n="hero.desc2">Our celebration follows the Apéro at the Alti Sagi in Leissigen. If you’d like to plan a contribution, it is very welcome! So we can coordinate them, please sign up with Michelle by 30 September — <a href="tel:+41794427627" style="color: inherit; border-bottom: 1px dotted var(--accent);">079 442 76 27</a>.</div>
         <div class="event-meta">
           <span>📍 Alti Sagi Leissigen, Läntiweg, Leissigen, Switzerland</span>
         </div>
@@ -350,8 +350,8 @@
   <section id="schedule">
     <details class="sec" open>
       <summary class="section-head">
-        <span class="eyebrow">Programm · Schedule</span>
-        <h2>Day-of Timeline</h2>
+        <span class="eyebrow" data-i18n="sec.schedule.eyebrow">Programm · Schedule</span>
+        <h2 data-i18n="sec.schedule.h2">Day-of Timeline</h2>
       </summary>
         <div id="tl-ch"></div>
     </details>
@@ -360,13 +360,13 @@
   <section id="team">
     <details class="sec" open>
       <summary class="section-head">
-        <span class="eyebrow">Switzerland</span>
-        <h2>Day-of Team</h2>
-        <span class="sec-desc">Who's running what during the ceremony and reception.</span>
+        <span class="eyebrow" data-i18n="sec.team.eyebrow">Switzerland</span>
+        <h2 data-i18n="sec.team.h2">Day-of Team</h2>
+        <span class="sec-desc" data-i18n="sec.team.desc">Who's running what during the ceremony and reception.</span>
       </summary>
         <div id="team-groups"></div>
         <div class="equip-card">
-          <h3>To Bring — Alti Sagi Leissigen</h3>
+          <h3 data-i18n="equip.h3">To Bring — Alti Sagi Leissigen</h3>
           <ul id="equipment-list"></ul>
         </div>
     </details>
@@ -376,10 +376,110 @@
 
 <footer>
   <span class="script">Lavinia &amp; Daniel</span>
-  Synced from the "Switzerland" tab of the Wedding Planning Spreadsheet · <span id="sync-time"></span><br>
-  See the full site at <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
+  <span data-i18n="footer.synced">Synced from the "Switzerland" tab of the Wedding Planning Spreadsheet ·</span> <span id="sync-time"></span><br>
+  <span data-i18n="footer.full">See the full site at</span> <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
 </footer>
 
+<script>
+window.I18N_PAGE = { de: {
+  "nav.events": "Alle Anlässe",
+  "nav.seating": "Sitzplan",
+  "nav.schedule": "Programm",
+  "nav.team": "Team vor Ort",
+
+  "hero.loc": "SCHWEIZ",
+  "hero.date1": "Samstag, 17. Oktober 2026",
+  "hero.time1": "13:00",
+  "hero.title1": "Trauung Schweiz",
+  "hero.desc1": "Unsere Trauung wird am 17. Oktober um 13:00 in der Kirche Wichtrach stattfinden. Im Anschluss werden wir gemeinsam ein kleines Apéro geniessen. Bei gutem Wetter wird das Apéro draussen stattfinden.",
+  "hero.dress1": "👔 Festlich",
+  "hero.time2": "18:00",
+  "hero.title2": "Feier Schweiz",
+  "hero.desc2": "Unser Fest wird im Anschluss an das Apéro in der Alti Sagi in Leissigen stattfinden. Falls du einen Beitrag planen möchtest, ist dies auf jeden Fall willkommen! Für die Koordination der Beiträge bitten wir dich, diesen bis 30. September bei Michelle anzumelden — <a href=\"tel:+41794427627\" style=\"color: inherit; border-bottom: 1px dotted var(--accent);\">079 442 76 27</a>.",
+
+  "sec.schedule.eyebrow": "Programm",
+  "sec.schedule.h2": "Tagesablauf",
+  "sec.team.eyebrow": "Schweiz",
+  "sec.team.h2": "Team vor Ort",
+  "sec.team.desc": "Wer während Trauung und Fest wofür zuständig ist.",
+  "equip.h3": "Mitbringen — Alti Sagi Leissigen",
+  "footer.synced": "Synchronisiert aus dem Tab «Switzerland» der Hochzeitsplanung ·",
+  "footer.full": "Die ganze Website findest du auf",
+
+  "Details": "Details",
+
+  "Setup": "Aufbau",
+  "Ceremony": "Trauung",
+  "Apéro": "Apéro",
+  "Reception": "Fest",
+
+  "Set up tables for the Apéro": "Tische für das Apéro aufstellen",
+  "Wedding photos (15-min shoot at the church)": "Hochzeitsfotos (15-Minuten-Shooting bei der Kirche)",
+  "Ceremony start, everyone seated": "Beginn der Trauung, alle sitzen",
+  "Lavinia walks down the aisle — violin song": "Lavinia schreitet ein — Violinstück",
+  "Welcome guests & opening prayer": "Begrüssung der Gäste & Eröffnungsgebet",
+  "Worship": "Lobpreis",
+  "Sermon (German)": "Predigt (Deutsch)",
+  "One song (solo/duet, band only)": "Ein Lied (Solo/Duett, nur Band)",
+  "Personal vows": "Persönliche Eheversprechen",
+  "Declaration of marriage & short prayer": "Trauung & kurzes Gebet",
+  "Rings": "Ringe",
+  "Kiss": "Kuss",
+  "Prayer of blessing": "Segensgebet",
+  "Presentation of the wedding Bible": "Übergabe der Hochzeitsbibel",
+  "Information": "Informationen",
+  "Group photo in church": "Gruppenfoto in der Kirche",
+  "Closing prayer": "Schlussgebet",
+  "Exit with pan flute song": "Auszug mit Panflötenstück",
+  "Drive to Thalgut": "Fahrt nach Thalgut",
+  "Apéro opens": "Apéro beginnt",
+  "Group photos": "Gruppenfotos",
+  "Apéro ends": "Apéro endet",
+  "Photoshoot at Aschiried": "Fotoshooting in Aschiried",
+  "Reception begins": "Fest beginnt",
+  "Food arrives": "Essen trifft ein",
+  "Announce dinner & pray for food": "Essen ankündigen & Tischgebet",
+  "Inputs as per signups": "Beiträge gemäss Anmeldung",
+  "Dessert buffet announcement": "Ankündigung Dessertbuffet",
+  "Possible additional inputs": "Allenfalls weitere Beiträge",
+  "Good night — Daniel and Lavinia leave": "Gute Nacht — Daniel und Lavinia gehen",
+  "Cleanup": "Aufräumen",
+
+  "Everyone": "Alle",
+  "Parents": "Eltern",
+  "Everyone available": "Alle Verfügbaren",
+
+  "Tische aufstellen, Tischtücher": "Tische aufstellen, Tischtücher",
+  "Please, no phones": "Bitte keine Handys",
+  "Introduction Michelle & Mike; Location of Apéro in the booklet; Does anyone need a ride?; Group photo": "Vorstellung Michelle & Mike; Ort des Apéros im Büchlein; Braucht jemand eine Mitfahrgelegenheit?; Gruppenfoto",
+  "Lavinia & Daniel first, then guests": "Zuerst Lavinia & Daniel, dann die Gäste",
+  "Guest book; Gift table/vehicle": "Gästebuch; Geschenktisch/-fahrzeug",
+  "Bridal table goes first, then down the table": "Der Brauttisch beginnt, dann der Reihe nach",
+  "Possible breaks in between": "Allenfalls Pausen dazwischen",
+  "Same order as main course": "Gleiche Reihenfolge wie beim Hauptgang",
+
+  "Pastor": "Pfarrer",
+  "Program & Info": "Programm & Info",
+  "Technical Support": "Technik",
+  "Decorations — Church": "Dekoration — Kirche",
+  "Photographer": "Fotograf",
+  "Decorations — Apéro": "Dekoration — Apéro",
+  "Setup & Decorations — Reception": "Aufbau & Dekoration — Fest",
+  "Reception Buffet": "Buffet Fest",
+  "Reception Food": "Essen Fest",
+  "Reception Dessert (Wedding Cake)": "Dessert Fest (Hochzeitstorte)",
+
+  "Kettle": "Wasserkocher",
+  "Coffee maker": "Kaffeemaschine",
+  "Coffee cream": "Kaffeerahm",
+  "Decorations, table cloths and napkins": "Dekoration, Tischtücher und Servietten",
+  "Drink trailer": "Getränkeanhänger",
+  "Cakes": "Kuchen",
+  "Big candles for entrance": "Grosse Kerzen für den Eingang",
+  "110L garbage bags": "110L-Abfallsäcke"
+} };
+</script>
+<script src="assets/i18n.js"></script>
 <script>
 (function () {
   "use strict";
@@ -452,6 +552,13 @@
     return e;
   }
 
+  // Translate a data string; falls back to the English original.
+  function t(s) {
+    return (window.WD_I18N && s) ? window.WD_I18N.t(s, s) : s;
+  }
+
+  function clear(node) { while (node && node.firstChild) node.removeChild(node.firstChild); }
+
   // ---------------- SCHEDULE ----------------
   // A row is ["group", "time", "activity", "responsible", "notes"].
   function timelineRow(r) {
@@ -461,13 +568,13 @@
     dotWrap.appendChild(el("div", "t-dot"));
     row.appendChild(dotWrap);
     var body = el("div", "t-body");
-    body.appendChild(el("div", "t-activity", r[2]));
-    if (r[3]) body.appendChild(el("div", "t-who", r[3]));
+    body.appendChild(el("div", "t-activity", t(r[2])));
+    if (r[3]) body.appendChild(el("div", "t-who", t(r[3])));
     if (r[4]) {
       var det = el("details", "t-details");
-      det.appendChild(el("summary", "", "Details"));
+      det.appendChild(el("summary", "", t("Details")));
       // A ";" in the sheet's Notes cell means "start a new line here".
-      r[4].split(";").forEach(function (part) {
+      t(r[4]).split(";").forEach(function (part) {
         part = part.trim();
         if (part) det.appendChild(el("div", "t-sub", part));
       });
@@ -480,13 +587,15 @@
   // Span of clock times in a group, so a collapsed group still says when it is.
   function timeSpan(rows) {
     var times = rows.map(function (r) { return r[1]; })
-                    .filter(function (t) { return /^\d/.test(t); });
+                    .filter(function (x) { return /^\d/.test(x); });
     if (!times.length) return "";
     return times.length > 1 ? times[0] + " – " + times[times.length - 1] : times[0];
   }
 
   function renderTimeline(containerId, rows) {
     var c = document.getElementById(containerId);
+    if (!c) return;
+    clear(c);
     // Consecutive rows sharing a group name form one collapsible section.
     var groups = [];
     rows.forEach(function (r) {
@@ -502,7 +611,7 @@
       var det = el("details", "t-group");
       det.open = true;
       var sum = el("summary", "");
-      sum.appendChild(el("span", "t-group-name", g.name));
+      sum.appendChild(el("span", "t-group-name", t(g.name)));
       var span = timeSpan(g.rows);
       if (span) sum.appendChild(el("span", "t-group-span mono", span));
       det.appendChild(sum);
@@ -510,48 +619,70 @@
       c.appendChild(det);
     });
   }
-  renderTimeline("tl-ch", scheduleCH);
 
   // ---------------- TEAM ----------------
-  var teamRoot = document.getElementById('team-groups');
-  team.forEach(function (group) {
-    var wrap = el("div", "team-group");
-    wrap.appendChild(el("h3", "", group[0]));
-    var grid = el("div", "team-grid");
-    group[1].forEach(function (t) {
-      var card = el("div", "team-card");
-      card.appendChild(el("div", "team-role", t[0]));
-      card.appendChild(el("div", "team-name", t[1]));
-      if (t[2]) {
-        var telHref = "tel:+41" + t[2].replace(/\D/g, "").replace(/^0/, "");
-        var phone = el("a", "team-phone mono", t[2]);
-        phone.href = telHref;
-        card.appendChild(phone);
-      }
-      grid.appendChild(card);
+  function renderTeam() {
+    var teamRoot = document.getElementById('team-groups');
+    if (!teamRoot) return;
+    clear(teamRoot);
+    team.forEach(function (group) {
+      var wrap = el("div", "team-group");
+      wrap.appendChild(el("h3", "", t(group[0])));
+      var grid = el("div", "team-grid");
+      group[1].forEach(function (member) {
+        var card = el("div", "team-card");
+        card.appendChild(el("div", "team-role", t(member[0])));
+        card.appendChild(el("div", "team-name", member[1]));
+        if (member[2]) {
+          var telHref = "tel:+41" + member[2].replace(/\D/g, "").replace(/^0/, "");
+          var phone = el("a", "team-phone mono", member[2]);
+          phone.href = telHref;
+          card.appendChild(phone);
+        }
+        grid.appendChild(card);
+      });
+      wrap.appendChild(grid);
+      teamRoot.appendChild(wrap);
     });
-    wrap.appendChild(grid);
-    teamRoot.appendChild(wrap);
-  });
+  }
 
   // ---------------- EQUIPMENT ----------------
   var equipment = [
     "Kettle", "Coffee maker", "Coffee cream", "Decorations, table cloths and napkins",
     "Drink trailer", "Cakes", "Big candles for entrance", "110L garbage bags"
   ];
-  var equipRoot = document.getElementById('equipment-list');
-  if (equipRoot) {
+  function renderEquipment() {
+    var equipRoot = document.getElementById('equipment-list');
+    if (!equipRoot) return;
+    clear(equipRoot);
     equipment.forEach(function (item) {
-      equipRoot.appendChild(el("li", "", item));
+      equipRoot.appendChild(el("li", "", t(item)));
     });
   }
 
-  // sync time
-  try {
-    var d = new Date(SYNCED_AT);
-    document.getElementById('sync-time').textContent = d.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
-  } catch (e) {
-    document.getElementById('sync-time').textContent = SYNCED_AT;
+  // ---------------- SYNC TIME ----------------
+  function renderSyncTime(lang) {
+    var node = document.getElementById('sync-time');
+    if (!node) return;
+    try {
+      var d = new Date(SYNCED_AT);
+      node.textContent = d.toLocaleString(lang === "de" ? 'de-CH' : 'en-US',
+        { dateStyle: 'medium', timeStyle: 'short' });
+    } catch (e) {
+      node.textContent = SYNCED_AT;
+    }
   }
+
+  // ---------------- RENDER ----------------
+  function renderAll(lang) {
+    renderTimeline("tl-ch", scheduleCH);
+    renderTeam();
+    renderEquipment();
+    renderSyncTime(lang);
+  }
+
+  // Re-render whenever the language changes; runs once immediately.
+  if (window.WD_I18N) window.WD_I18N.onChange(renderAll);
+  else renderAll("en");
 })();
 </script>

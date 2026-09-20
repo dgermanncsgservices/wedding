@@ -59,23 +59,37 @@
 </head>
 <body>
   <div class="script">Lavinia <span class="amp">&amp;</span> Daniel</div>
-  <div class="sub">Join us as we celebrate — pick an event below</div>
+  <div class="sub" data-i18n="index.sub">Join us as we celebrate — pick an event below</div>
 
   <div class="cards">
     <a class="card" href="canada.html">
-      <div class="eyebrow">Canada</div>
-      <h2>Celebration Canada</h2>
-      <div class="date">Sunday, October 11, 2026 · 1:00 – 5:00 PM</div>
-      <div class="go">Schedule &amp; day-of team →</div>
+      <div class="eyebrow" data-i18n="index.ca.eyebrow">Canada</div>
+      <h2 data-i18n="index.ca.title">Celebration Canada</h2>
+      <div class="date" data-i18n="index.ca.date">Sunday, October 11, 2026 · 1:00 – 5:00 PM</div>
+      <div class="go" data-i18n="index.go">Schedule &amp; day-of team →</div>
     </a>
     <a class="card" href="switzerland.html">
-      <div class="eyebrow">Switzerland</div>
-      <h2>Trauung &amp; Feier</h2>
-      <div class="date">Saturday, October 17, 2026 · 1:00 PM</div>
-      <div class="go">Schedule &amp; day-of team →</div>
+      <div class="eyebrow" data-i18n="index.ch.eyebrow">Switzerland</div>
+      <h2 data-i18n="index.ch.title">Trauung &amp; Feier</h2>
+      <div class="date" data-i18n="index.ch.date">Saturday, October 17, 2026 · 1:00 PM</div>
+      <div class="go" data-i18n="index.go">Schedule &amp; day-of team →</div>
     </a>
   </div>
 
   <footer>Lavinia &amp; Daniel · 2026</footer>
+
+<script>
+window.I18N_PAGE = { de: {
+  "index.sub": "Feiere mit uns — wähle unten einen Anlass",
+  "index.ca.eyebrow": "Kanada",
+  "index.ca.title": "Feier Kanada",
+  "index.ca.date": "Sonntag, 11. Oktober 2026 · 13:00 – 17:00",
+  "index.ch.eyebrow": "Schweiz",
+  "index.ch.title": "Trauung &amp; Feier",
+  "index.ch.date": "Samstag, 17. Oktober 2026 · 13:00",
+  "index.go": "Programm &amp; Team vor Ort →"
+} };
+</script>
+<script src="assets/i18n.js"></script>
 </body>
 </html>
