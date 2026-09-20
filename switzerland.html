@@ -467,7 +467,7 @@ window.I18N_PAGE = { de: {
   "Parents": "Eltern",
   "Everyone available": "Alle Verfügbaren",
 
-  "Tische aufstellen, Tischtücher": "Tische aufstellen, Tischtücher",
+  "Set up according to the setup plan; Tables; Garbage cans; Benches/Chairs; Table cloths (tape to table)": "Aufbau gemäss Aufstellplan; Tische; Abfalleimer; Bänke/Stühle; Tischtücher (am Tisch festkleben)",
   "Please, no phones": "Bitte keine Handys",
   "Introduction Michelle & Mike; Location of Apéro in the booklet; Does anyone need a ride?; Group photo": "Vorstellung Michelle & Mike; Ort des Apéros im Büchlein; Braucht jemand eine Mitfahrgelegenheit?; Gruppenfoto",
   "Lavinia & Daniel first, then guests": "Zuerst Lavinia & Daniel, dann die Gäste",
@@ -504,10 +504,10 @@ window.I18N_PAGE = { de: {
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Switzerland" tab only.
-  var SYNCED_AT = "2026-09-20T18:00:00.000000-07:00";
+  var SYNCED_AT = "2026-09-20T20:30:00.000000-07:00";
 
   var scheduleCH = [
-    ["Setup","10:00","Set up tables for the Apéro","Gabriel Niederhauser","Tische aufstellen, Tischtücher"],
+    ["Setup","10:00","Set up tables for the Apéro","Gabriel Niederhauser","Set up according to the setup plan; Tables; Garbage cans; Benches/Chairs; Table cloths (tape to table)"],
     ["Ceremony","12:30","Wedding photos (15-min shoot at the church)","Mathias Josi",""],
     ["Ceremony","13:00","Ceremony start, everyone seated","",""],
     ["Ceremony","13:01","Lavinia walks down the aisle — violin song","Tobi",""],
@@ -586,7 +586,7 @@ window.I18N_PAGE = { de: {
     dotWrap.appendChild(el("div", "t-dot"));
     row.appendChild(dotWrap);
     // A ";" in the sheet's Notes cell means "start a new line here".
-    var notes = r[4] ? t(r[4]).split(";").map(function (x) { return x.trim(); })
+    var notes = r[4] ? t(r[4]).split(";").map(function (x) { return x.trim().replace(/^[-\u2013\u2022]\s*/, ""); })
                               .filter(function (x) { return x; })
                      : [];
 

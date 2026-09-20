@@ -458,7 +458,7 @@ window.I18N_PAGE = { de: {
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Celebration Canada" tab only.
-  var SYNCED_AT = "2026-09-20T18:00:00.000000-07:00";
+  var SYNCED_AT = "2026-09-20T20:30:00.000000-07:00";
 
   var scheduleCA = [
     ["","09:00","Start set up","","Setup crew; Be ready at 9:00 am at Columbia Valley Community Center, Jordie and Andrew brief everyone on their tasks"],
@@ -534,7 +534,7 @@ window.I18N_PAGE = { de: {
     dotWrap.appendChild(el("div", "t-dot"));
     row.appendChild(dotWrap);
     // A ";" in the sheet's Notes cell means "start a new line here".
-    var notes = r[4] ? t(r[4]).split(";").map(function (x) { return x.trim(); })
+    var notes = r[4] ? t(r[4]).split(";").map(function (x) { return x.trim().replace(/^[-\u2013\u2022]\s*/, ""); })
                               .filter(function (x) { return x; })
                      : [];
 
