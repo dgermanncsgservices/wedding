@@ -79,3 +79,11 @@ English until a German string is added. After syncing new rows, add the matching
 
 Page scripts re-render through `WD_I18N.onChange(fn)`, which fires immediately
 and again on every switch.
+
+## Timeline row layout
+
+The "Details" disclosure rides on the activity line as a small pill, not on a
+line of its own — a collapsed row is exactly as tall as a row with no notes.
+Below 640px the pill's label is visually hidden (still read by screen readers)
+so it cannot push the activity text onto a second line. Keep it that way: a
+full-width toggle costs roughly 180px over the Switzerland timeline on a phone.

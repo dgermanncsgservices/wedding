@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8" />
 <title>Lavinia & Daniel — Celebration Canada</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,29 +199,44 @@
   .t-dot-wrap { display: flex; justify-content: center; }
   .t-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); margin-top: 0.35rem; box-shadow: 0 0 0 3px var(--bg); }
   .t-body { padding-bottom: 0.2rem; }
-  .t-activity { font-size: 1.02rem; }
-  .t-who { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
+  .t-activity { font-size: 1.02rem; display: block; }
+  .t-who { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; display: block; }
   .t-sub { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
-  .t-details { margin-top: 0.3rem; }
-  .t-details > summary {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    width: fit-content; cursor: pointer; list-style: none;
-    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text-soft);
-    transition: color .2s ease;
-  }
+  .t-details > summary { display: block; cursor: pointer; list-style: none; }
   .t-details > summary::-webkit-details-marker { display: none; }
-  .t-details > summary::before {
+  .t-details > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  /* The toggle rides on the activity line, so a collapsed row costs no height. */
+  .t-chip {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    margin-left: 0.5rem; vertical-align: middle; line-height: 1; white-space: nowrap;
+    font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-soft);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 0.16rem 0.5rem 0.16rem 0.45rem;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .t-chip::before {
     content: "";
-    border-left: 5px solid currentColor;
-    border-top: 3.5px solid transparent;
-    border-bottom: 3.5px solid transparent;
+    border-left: 4px solid currentColor;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
     transition: transform .2s ease;
   }
-  .t-details[open] > summary::before { transform: rotate(90deg); }
-  .t-details > summary:hover { color: var(--accent); }
-  .t-details > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .t-details[open] .t-chip::before { transform: rotate(90deg); }
+  .t-details > summary:hover .t-chip {
+    color: var(--text); border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
   .t-details .t-sub { margin-top: 0.35rem; }
+  /* On a phone the label collapses to just the caret so it cannot push the
+     activity text onto a second line; it stays readable to screen readers. */
+  @media (max-width: 640px) {
+    .t-chip { gap: 0; padding: 0.16rem 0.34rem; }
+    .t-chip-label {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+    }
+  }
 
   /* ---------- Collapsible day-groups ---------- */
   .t-group { border-top: 1px solid var(--line); }
@@ -515,19 +533,27 @@ window.I18N_PAGE = { de: {
     var dotWrap = el("div", "t-dot-wrap");
     dotWrap.appendChild(el("div", "t-dot"));
     row.appendChild(dotWrap);
-    var body = el("div", "t-body");
-    body.appendChild(el("div", "t-activity", t(r[2])));
-    if (r[3]) body.appendChild(el("div", "t-who", t(r[3])));
-    if (r[4]) {
-      var det = el("details", "t-details");
-      det.appendChild(el("summary", "", t("Details")));
-      // A ";" in the sheet's Notes cell means "start a new line here".
-      t(r[4]).split(";").forEach(function (part) {
-        part = part.trim();
-        if (part) det.appendChild(el("div", "t-sub", part));
-      });
-      body.appendChild(det);
+    // A ";" in the sheet's Notes cell means "start a new line here".
+    var notes = r[4] ? t(r[4]).split(";").map(function (x) { return x.trim(); })
+                              .filter(function (x) { return x; })
+                     : [];
+
+    // With notes the body is itself the disclosure, so the collapsed row is
+    // exactly as tall as a row without notes.
+    var body = notes.length ? el("details", "t-body t-details") : el("div", "t-body");
+    var head = notes.length ? el("summary", "") : body;
+    if (notes.length) body.appendChild(head);
+
+    var act = el("span", "t-activity", t(r[2]));
+    if (notes.length) {
+      var chip = el("span", "t-chip");
+      chip.appendChild(el("span", "t-chip-label", t("Details")));
+      act.appendChild(chip);
     }
+    head.appendChild(act);
+    if (r[3]) head.appendChild(el("span", "t-who", t(r[3])));
+    notes.forEach(function (n) { body.appendChild(el("div", "t-sub", n)); });
+
     row.appendChild(body);
     return row;
   }
@@ -619,3 +645,4 @@ window.I18N_PAGE = { de: {
   else renderAll("en");
 })();
 </script>
+</html>
