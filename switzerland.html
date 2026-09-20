@@ -218,6 +218,48 @@
   .t-details > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
   .t-details .t-sub { margin-top: 0.35rem; }
 
+  /* ---------- Collapsible day-groups ---------- */
+  .t-group { border-top: 1px solid var(--line); }
+  .t-group:first-of-type { border-top: none; }
+  .t-group > summary {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    list-style: none; cursor: pointer; padding: 1.1rem 0 0.7rem;
+  }
+  .t-group > summary::-webkit-details-marker { display: none; }
+  .t-group > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .t-group-name {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem); color: var(--brand-ink);
+    display: flex; align-items: center; gap: 0.6rem;
+    transition: color .2s ease;
+  }
+  .t-group-name::before {
+    content: ""; flex: none;
+    border-left: 6px solid var(--accent);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transition: transform .2s ease;
+  }
+  .t-group[open] > summary .t-group-name::before { transform: rotate(90deg); }
+  .t-group > summary:hover .t-group-name { color: var(--accent); }
+  .t-group-span { font-size: 0.78rem; color: var(--text-soft); white-space: nowrap; }
+  .t-group > .timeline { padding-bottom: 1rem; }
+
+  /* ---------- Collapsible page sections ---------- */
+  details.sec > summary.section-head { cursor: pointer; list-style: none; }
+  details.sec > summary::-webkit-details-marker { display: none; }
+  details.sec > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+  .section-head h2 { display: flex; align-items: center; gap: 0.7rem; }
+  details.sec > summary h2::before {
+    content: ""; flex: none;
+    border-left: 9px solid var(--accent);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    transition: transform .2s ease;
+  }
+  details.sec[open] > summary h2::before { transform: rotate(90deg); }
+  .section-head .sec-desc { color: var(--text-soft); font-size: 0.98rem; }
+
   .team-group { margin-bottom: 2rem; }
   .team-group:last-child { margin-bottom: 0; }
   .team-group h3 { font-size: 1.1rem; margin-bottom: 0.9rem; color: var(--panel-2); }
@@ -306,24 +348,28 @@
 <main>
 
   <section id="schedule">
-    <div class="section-head">
-      <span class="eyebrow">Programm · Schedule</span>
-      <h2>Day-of Timeline</h2>
-    </div>
-    <div class="timeline" id="tl-ch"></div>
+    <details class="sec" open>
+      <summary class="section-head">
+        <span class="eyebrow">Programm · Schedule</span>
+        <h2>Day-of Timeline</h2>
+      </summary>
+        <div id="tl-ch"></div>
+    </details>
   </section>
 
   <section id="team">
-    <div class="section-head">
-      <span class="eyebrow">Switzerland</span>
-      <h2>Day-of Team</h2>
-      <p>Who's running what during the ceremony and reception.</p>
-    </div>
-    <div id="team-groups"></div>
-    <div class="equip-card">
-      <h3>To Bring — Alti Sagi Leissigen</h3>
-      <ul id="equipment-list"></ul>
-    </div>
+    <details class="sec" open>
+      <summary class="section-head">
+        <span class="eyebrow">Switzerland</span>
+        <h2>Day-of Team</h2>
+        <span class="sec-desc">Who's running what during the ceremony and reception.</span>
+      </summary>
+        <div id="team-groups"></div>
+        <div class="equip-card">
+          <h3>To Bring — Alti Sagi Leissigen</h3>
+          <ul id="equipment-list"></ul>
+        </div>
+    </details>
   </section>
 
 </main>
@@ -340,40 +386,40 @@
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Switzerland" tab only.
-  var SYNCED_AT = "2026-09-20T16:30:00.000000-07:00";
+  var SYNCED_AT = "2026-09-20T18:00:00.000000-07:00";
 
   var scheduleCH = [
-    ["10:00","Set up tables for the Apéro","Gabriel Niederhauser","Tische aufstellen, Tischtücher"],
-    ["12:30","Wedding photos (15-min shoot at the church)","Mathias Josi",""],
-    ["13:00","Ceremony start, everyone seated","",""],
-    ["13:01","Lavinia walks down the aisle — violin song","Tobi",""],
-    ["13:03","Welcome guests & opening prayer","Tom","Please, no phones"],
-    ["13:05","Worship","Tobi",""],
-    ["13:20","Sermon (German)","Tom",""],
-    ["13:40","One song (solo/duet, band only)","Tobi",""],
-    ["13:45","Personal vows","Lavinia & Daniel",""],
-    ["—","Declaration of marriage & short prayer","Tom",""],
-    ["13:55","Rings","Eli, Marie, Lenet, Johan",""],
-    ["—","Kiss","",""],
-    ["14:00","Prayer of blessing","Parents",""],
-    ["14:03","Presentation of the wedding Bible","Tom",""],
-    ["14:05","Information","Michelle & Mike","Introduction Michelle & Mike; Location of Apéro in the booklet; Does anyone need a ride?; Group photo"],
-    ["14:08","Group photo in church","Mathias Josi",""],
-    ["14:10","Closing prayer","Tom",""],
-    ["14:12","Exit with pan flute song","Andreas","Lavinia & Daniel first, then guests"],
-    ["14:20","Drive to Thalgut","Everyone",""],
-    ["14:40","Apéro opens","Lavinia & Daniel","Guest book; Gift table/vehicle"],
-    ["15:30","Group photos","Mathias Josi",""],
-    ["17:00","Apéro ends","",""],
-    ["17:30","Photoshoot at Aschiried","Mathias Josi",""],
-    ["18:00","Reception begins","",""],
-    ["18:15","Food arrives","Metzgerei Nussbaum / Ladina",""],
-    ["18:20","Announce dinner & pray for food","Michelle & Mike","Bridal table goes first, then down the table"],
-    ["19:20","Inputs as per signups","Michelle & Mike","Possible breaks in between"],
-    ["20:30","Dessert buffet announcement","Michelle & Mike","Same order as main course"],
-    ["21:00","Possible additional inputs","Michelle & Mike",""],
-    ["21:30","Good night — Daniel and Lavinia leave","",""],
-    ["21:45","Cleanup","Everyone available",""]
+    ["Setup","10:00","Set up tables for the Apéro","Gabriel Niederhauser","Tische aufstellen, Tischtücher"],
+    ["Ceremony","12:30","Wedding photos (15-min shoot at the church)","Mathias Josi",""],
+    ["Ceremony","13:00","Ceremony start, everyone seated","",""],
+    ["Ceremony","13:01","Lavinia walks down the aisle — violin song","Tobi",""],
+    ["Ceremony","13:03","Welcome guests & opening prayer","Tom","Please, no phones"],
+    ["Ceremony","13:05","Worship","Tobi",""],
+    ["Ceremony","13:20","Sermon (German)","Tom",""],
+    ["Ceremony","13:40","One song (solo/duet, band only)","Tobi",""],
+    ["Ceremony","13:45","Personal vows","Lavinia & Daniel",""],
+    ["Ceremony","—","Declaration of marriage & short prayer","Tom",""],
+    ["Ceremony","13:55","Rings","Eli, Marie, Lenet, Johan",""],
+    ["Ceremony","—","Kiss","",""],
+    ["Ceremony","14:00","Prayer of blessing","Parents",""],
+    ["Ceremony","14:03","Presentation of the wedding Bible","Tom",""],
+    ["Ceremony","14:05","Information","Michelle & Mike","Introduction Michelle & Mike; Location of Apéro in the booklet; Does anyone need a ride?; Group photo"],
+    ["Ceremony","14:08","Group photo in church","Mathias Josi",""],
+    ["Ceremony","14:10","Closing prayer","Tom",""],
+    ["Ceremony","14:12","Exit with pan flute song","Andreas","Lavinia & Daniel first, then guests"],
+    ["Apéro","14:20","Drive to Thalgut","Everyone",""],
+    ["Apéro","14:40","Apéro opens","Lavinia & Daniel","Guest book; Gift table/vehicle"],
+    ["Apéro","15:30","Group photos","Mathias Josi",""],
+    ["Apéro","17:00","Apéro ends","",""],
+    ["Apéro","17:30","Photoshoot at Aschiried","Mathias Josi",""],
+    ["Reception","18:00","Reception begins","",""],
+    ["Reception","18:15","Food arrives","Metzgerei Nussbaum / Ladina",""],
+    ["Reception","18:20","Announce dinner & pray for food","Michelle & Mike","Bridal table goes first, then down the table"],
+    ["Reception","19:20","Inputs as per signups","Michelle & Mike","Possible breaks in between"],
+    ["Reception","20:30","Dessert buffet announcement","Michelle & Mike","Same order as main course"],
+    ["Reception","21:00","Possible additional inputs","Michelle & Mike",""],
+    ["Reception","21:30","Good night — Daniel and Lavinia leave","",""],
+    ["Reception","21:45","Cleanup","Everyone available",""]
   ];
 
   // Grouped by when/where each role is needed: Ceremony first, then Apéro & Reception.
@@ -407,29 +453,61 @@
   }
 
   // ---------------- SCHEDULE ----------------
+  // A row is ["group", "time", "activity", "responsible", "notes"].
+  function timelineRow(r) {
+    var row = el("div", "t-row");
+    row.appendChild(el("div", "t-time mono", r[1]));
+    var dotWrap = el("div", "t-dot-wrap");
+    dotWrap.appendChild(el("div", "t-dot"));
+    row.appendChild(dotWrap);
+    var body = el("div", "t-body");
+    body.appendChild(el("div", "t-activity", r[2]));
+    if (r[3]) body.appendChild(el("div", "t-who", r[3]));
+    if (r[4]) {
+      var det = el("details", "t-details");
+      det.appendChild(el("summary", "", "Details"));
+      // A ";" in the sheet's Notes cell means "start a new line here".
+      r[4].split(";").forEach(function (part) {
+        part = part.trim();
+        if (part) det.appendChild(el("div", "t-sub", part));
+      });
+      body.appendChild(det);
+    }
+    row.appendChild(body);
+    return row;
+  }
+
+  // Span of clock times in a group, so a collapsed group still says when it is.
+  function timeSpan(rows) {
+    var times = rows.map(function (r) { return r[1]; })
+                    .filter(function (t) { return /^\d/.test(t); });
+    if (!times.length) return "";
+    return times.length > 1 ? times[0] + " – " + times[times.length - 1] : times[0];
+  }
+
   function renderTimeline(containerId, rows) {
     var c = document.getElementById(containerId);
+    // Consecutive rows sharing a group name form one collapsible section.
+    var groups = [];
     rows.forEach(function (r) {
-      var row = el("div", "t-row");
-      row.appendChild(el("div", "t-time mono", r[0]));
-      var dotWrap = el("div", "t-dot-wrap");
-      dotWrap.appendChild(el("div", "t-dot"));
-      row.appendChild(dotWrap);
-      var body = el("div", "t-body");
-      body.appendChild(el("div", "t-activity", r[1]));
-      if (r[2]) body.appendChild(el("div", "t-who", r[2]));
-      if (r[3]) {
-        var det = el("details", "t-details");
-        det.appendChild(el("summary", "", "Details"));
-        // A ";" in the sheet's Notes cell means "start a new line here".
-        r[3].split(";").forEach(function (part) {
-          part = part.trim();
-          if (part) det.appendChild(el("div", "t-sub", part));
-        });
-        body.appendChild(det);
-      }
-      row.appendChild(body);
-      c.appendChild(row);
+      var last = groups[groups.length - 1];
+      if (!last || last.name !== r[0]) { last = { name: r[0], rows: [] }; groups.push(last); }
+      last.rows.push(r);
+    });
+    groups.forEach(function (g) {
+      var tl = el("div", "timeline");
+      g.rows.forEach(function (r) { tl.appendChild(timelineRow(r)); });
+      // No group name (the sheet has no Group column for this tab) - render flat.
+      if (!g.name) { c.appendChild(tl); return; }
+      var det = el("details", "t-group");
+      det.open = true;
+      var sum = el("summary", "");
+      sum.appendChild(el("span", "t-group-name", g.name));
+      var span = timeSpan(g.rows);
+      if (span) sum.appendChild(el("span", "t-group-span mono", span));
+      det.appendChild(sum);
+      det.appendChild(tl);
+      c.appendChild(det);
     });
   }
   renderTimeline("tl-ch", scheduleCH);

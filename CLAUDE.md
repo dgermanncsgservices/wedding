@@ -25,8 +25,12 @@ Rules when syncing:
 
 - A row that is in the page but no longer in the sheet has been **cancelled** —
   delete it. Do not keep it because it looks intentional.
-- Each schedule row is `["time", "activity", "responsible", "notes"]`, one field
-  per sheet column. The responsible name always shows on the timeline; only the
+- Each schedule row is `["group", "time", "activity", "responsible", "notes"]`,
+  one field per sheet column. The sheet names a Group only on the first row of
+  each block and leaves the rest blank — carry it forward so every row in the
+  page data names its group explicitly. Consecutive rows sharing a group become
+  one collapsible section. A tab with no Group column (currently Canada) uses
+  `""` throughout and renders as one flat timeline. The responsible name always shows on the timeline; only the
   notes go behind the expandable "Details" toggle. A trailing continuation row
   (a note with no time or activity) folds into the row above it. Leave a field
   as `""` when the sheet cell is blank — do not invent a responsible.
