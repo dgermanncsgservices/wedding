@@ -340,10 +340,10 @@
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Switzerland" tab only.
-  var SYNCED_AT = "2026-09-20T12:00:00.000000-07:00";
+  var SYNCED_AT = "2026-09-20T16:30:00.000000-07:00";
 
   var scheduleCH = [
-    ["10:00","Set up tables for the Apéro","Gabriel Niederhauser",""],
+    ["10:00","Set up tables for the Apéro","Gabriel Niederhauser","Tische aufstellen, Tischtücher"],
     ["12:30","Wedding photos (15-min shoot at the church)","Mathias Josi",""],
     ["13:00","Ceremony start, everyone seated","",""],
     ["13:01","Lavinia walks down the aisle — violin song","Tobi",""],
@@ -357,12 +357,12 @@
     ["—","Kiss","",""],
     ["14:00","Prayer of blessing","Parents",""],
     ["14:03","Presentation of the wedding Bible","Tom",""],
-    ["14:05","Information","Michelle & Mike","Introduction, Apéro location in the booklet, ride check, group photo"],
+    ["14:05","Information","Michelle & Mike","Introduction Michelle & Mike; Location of Apéro in the booklet; Does anyone need a ride?; Group photo"],
     ["14:08","Group photo in church","Mathias Josi",""],
     ["14:10","Closing prayer","Tom",""],
     ["14:12","Exit with pan flute song","Andreas","Lavinia & Daniel first, then guests"],
     ["14:20","Drive to Thalgut","Everyone",""],
-    ["14:40","Apéro opens","Lavinia & Daniel","Guest book, gift table/vehicle"],
+    ["14:40","Apéro opens","Lavinia & Daniel","Guest book; Gift table/vehicle"],
     ["15:30","Group photos","Mathias Josi",""],
     ["17:00","Apéro ends","",""],
     ["17:30","Photoshoot at Aschiried","Mathias Josi",""],
@@ -421,7 +421,11 @@
       if (r[3]) {
         var det = el("details", "t-details");
         det.appendChild(el("summary", "", "Details"));
-        det.appendChild(el("div", "t-sub", r[3]));
+        // A ";" in the sheet's Notes cell means "start a new line here".
+        r[3].split(";").forEach(function (part) {
+          part = part.trim();
+          if (part) det.appendChild(el("div", "t-sub", part));
+        });
         body.appendChild(det);
       }
       row.appendChild(body);

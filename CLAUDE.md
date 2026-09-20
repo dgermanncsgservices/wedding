@@ -30,6 +30,10 @@ Rules when syncing:
   notes go behind the expandable "Details" toggle. A trailing continuation row
   (a note with no time or activity) folds into the row above it. Leave a field
   as `""` when the sheet cell is blank — do not invent a responsible.
+- A `;` in the sheet's Notes cell is a **line break**. Keep the semicolons in
+  the data verbatim; the renderer splits on them, trims, and drops the symbol,
+  so each fragment becomes its own line inside the Details toggle. Never
+  hand-flatten a semicolon list into one comma-joined sentence.
 - Times go `HHMM` → `HH:MM`; a blank time renders as `—`.
 - Normalize prose to the page's house style: `and`/`&` between two people
   becomes `&` (`Lavinia & Daniel`, `Michelle & Mike`), sentence case for

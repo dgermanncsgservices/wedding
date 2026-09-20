@@ -325,10 +325,10 @@
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Celebration Canada" tab only.
-  var SYNCED_AT = "2026-09-20T12:00:00.000000-07:00";
+  var SYNCED_AT = "2026-09-20T16:30:00.000000-07:00";
 
   var scheduleCA = [
-    ["09:00","Start set up","","Setup crew — arrive by 9:00 am at Columbia Valley Community Center; Jordie and Andrew brief everyone on their tasks"],
+    ["09:00","Start set up","","Setup crew; Be ready at 9:00 am at Columbia Valley Community Center, Jordie and Andrew brief everyone on their tasks"],
     ["12:30","Guests arriving","",""],
     ["13:00","Welcome everyone","Janine",""],
     ["13:05","Grand entry","Lavinia & Daniel","Music"],
@@ -400,7 +400,11 @@
       if (r[3]) {
         var det = el("details", "t-details");
         det.appendChild(el("summary", "", "Details"));
-        det.appendChild(el("div", "t-sub", r[3]));
+        // A ";" in the sheet's Notes cell means "start a new line here".
+        r[3].split(";").forEach(function (part) {
+          part = part.trim();
+          if (part) det.appendChild(el("div", "t-sub", part));
+        });
         body.appendChild(det);
       }
       row.appendChild(body);
