@@ -196,6 +196,26 @@
   .t-body { padding-bottom: 0.2rem; }
   .t-activity { font-size: 1.02rem; }
   .t-sub { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
+  .t-details { margin-top: 0.3rem; }
+  .t-details > summary {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    width: fit-content; cursor: pointer; list-style: none;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-soft);
+    transition: color .2s ease;
+  }
+  .t-details > summary::-webkit-details-marker { display: none; }
+  .t-details > summary::before {
+    content: "";
+    border-left: 5px solid currentColor;
+    border-top: 3.5px solid transparent;
+    border-bottom: 3.5px solid transparent;
+    transition: transform .2s ease;
+  }
+  .t-details[open] > summary::before { transform: rotate(90deg); }
+  .t-details > summary:hover { color: var(--accent); }
+  .t-details > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .t-details .t-sub { margin-top: 0.35rem; }
 
   .team-group { margin-bottom: 2rem; }
   .team-group:last-child { margin-bottom: 0; }
@@ -319,9 +339,10 @@
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Switzerland" tab only.
-  var SYNCED_AT = "2026-08-24T07:14:15.514337-07:00";
+  var SYNCED_AT = "2026-09-20T12:00:00.000000-07:00";
 
   var scheduleCH = [
+    ["10:00","Set up tables for the Apéro","Gabriel Niederhauser"],
     ["12:30","Wedding photos (15-min shoot at the church)","Mathias Josi"],
     ["13:00","Ceremony start, everyone seated",""],
     ["13:01","Lavinia walks down the aisle — violin song","Tobi"],
@@ -396,7 +417,12 @@
       row.appendChild(dotWrap);
       var body = el("div", "t-body");
       body.appendChild(el("div", "t-activity", r[1]));
-      if (r[2]) body.appendChild(el("div", "t-sub", r[2]));
+      if (r[2]) {
+        var det = el("details", "t-details");
+        det.appendChild(el("summary", "", "Details"));
+        det.appendChild(el("div", "t-sub", r[2]));
+        body.appendChild(det);
+      }
       row.appendChild(body);
       c.appendChild(row);
     });
