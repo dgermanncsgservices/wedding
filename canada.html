@@ -197,6 +197,7 @@
   .t-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); margin-top: 0.35rem; box-shadow: 0 0 0 3px var(--bg); }
   .t-body { padding-bottom: 0.2rem; }
   .t-activity { font-size: 1.02rem; }
+  .t-who { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
   .t-sub { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
   .t-details { margin-top: 0.3rem; }
   .t-details > summary {
@@ -327,21 +328,21 @@
   var SYNCED_AT = "2026-09-20T12:00:00.000000-07:00";
 
   var scheduleCA = [
-    ["09:00","Start set up","Setup crew · arrive by 9:00 am at Columbia Valley Community Center; Jordie and Andrew brief everyone on their tasks"],
-    ["12:30","Guests arriving",""],
-    ["13:00","Welcome everyone","Janine"],
-    ["13:05","Grand entry","Lavinia & Daniel · music"],
-    ["—","Announce program & quiz","Janine"],
-    ["—","Pray for food & open Apéro","Daniel"],
-    ["14:00","Bingo with story","Harvey"],
-    ["—","Open mic","Janine"],
-    ["15:00","Shoe game (without shoes)","Janine"],
-    ["—","Open mic","Janine"],
-    ["—","Parents speech","Constantin & Emma"],
-    ["—","Open dessert","Lavinia & Daniel"],
-    ["16:00","Reveal quiz","Bronwyn · asks Lavinia & Daniel the quiz questions"],
-    ["16:30","Thank-you speech","Lavinia & Daniel"],
-    ["17:00","Grand exit",""]
+    ["09:00","Start set up","","Setup crew — arrive by 9:00 am at Columbia Valley Community Center; Jordie and Andrew brief everyone on their tasks"],
+    ["12:30","Guests arriving","",""],
+    ["13:00","Welcome everyone","Janine",""],
+    ["13:05","Grand entry","Lavinia & Daniel","Music"],
+    ["—","Announce program & quiz","Janine",""],
+    ["—","Pray for food & open Apéro","Daniel",""],
+    ["14:00","Bingo with story","Harvey",""],
+    ["—","Open mic","Janine",""],
+    ["15:00","Shoe game (without shoes)","Janine",""],
+    ["—","Open mic","Janine",""],
+    ["—","Parents speech","Constantin & Emma",""],
+    ["—","Open dessert","Lavinia & Daniel",""],
+    ["16:00","Reveal quiz","Bronwyn","Bronwyn asks Lavinia & Daniel the quiz questions"],
+    ["16:30","Thank-you speech","Lavinia & Daniel",""],
+    ["17:00","Grand exit","",""]
   ];
 
   // Grouped by function: Setup & Cleanup, Program & Activities, Reception.
@@ -395,10 +396,11 @@
       row.appendChild(dotWrap);
       var body = el("div", "t-body");
       body.appendChild(el("div", "t-activity", r[1]));
-      if (r[2]) {
+      if (r[2]) body.appendChild(el("div", "t-who", r[2]));
+      if (r[3]) {
         var det = el("details", "t-details");
         det.appendChild(el("summary", "", "Details"));
-        det.appendChild(el("div", "t-sub", r[2]));
+        det.appendChild(el("div", "t-sub", r[3]));
         body.appendChild(det);
       }
       row.appendChild(body);

@@ -195,6 +195,7 @@
   .t-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); margin-top: 0.35rem; box-shadow: 0 0 0 3px var(--bg); }
   .t-body { padding-bottom: 0.2rem; }
   .t-activity { font-size: 1.02rem; }
+  .t-who { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
   .t-sub { color: var(--text-soft); font-size: 0.86rem; margin-top: 0.15rem; }
   .t-details { margin-top: 0.3rem; }
   .t-details > summary {
@@ -342,37 +343,37 @@
   var SYNCED_AT = "2026-09-20T12:00:00.000000-07:00";
 
   var scheduleCH = [
-    ["10:00","Set up tables for the Apéro","Gabriel Niederhauser"],
-    ["12:30","Wedding photos (15-min shoot at the church)","Mathias Josi"],
-    ["13:00","Ceremony start, everyone seated",""],
-    ["13:01","Lavinia walks down the aisle — violin song","Tobi"],
-    ["13:03","Welcome guests & opening prayer","Tom · please, no phones"],
-    ["13:05","Worship","Tobi"],
-    ["13:20","Sermon (German)","Tom"],
-    ["13:40","One song (solo/duet, band only)","Tobi"],
-    ["13:45","Personal vows","Lavinia & Daniel"],
-    ["—","Declaration of marriage & short prayer","Tom"],
-    ["13:55","Rings","Eli, Marie, Lenet, Johan"],
-    ["—","Kiss",""],
-    ["14:00","Prayer of blessing","Parents"],
-    ["14:03","Presentation of the wedding Bible","Tom"],
-    ["14:05","Information","Michelle & Mike · introduction, Apéro location in the booklet, ride check, group photo"],
-    ["14:08","Group photo in church","Mathias Josi"],
-    ["14:10","Closing prayer","Tom"],
-    ["14:12","Exit with pan flute song","Andreas · Lavinia & Daniel first, then guests"],
-    ["14:20","Drive to Thalgut","Everyone"],
-    ["14:40","Apéro opens","Lavinia & Daniel · guest book, gift table/vehicle"],
-    ["15:30","Group photos","Mathias Josi"],
-    ["17:00","Apéro ends",""],
-    ["17:30","Photoshoot at Aschiried","Mathias Josi"],
-    ["18:00","Reception begins",""],
-    ["18:15","Food arrives","Metzgerei Nussbaum / Ladina"],
-    ["18:20","Announce dinner & pray for food","Michelle & Mike · bridal table goes first, then down the table"],
-    ["19:20","Inputs as per signups","Michelle & Mike · possible breaks in between"],
-    ["20:30","Dessert buffet announcement","Michelle & Mike · same order as main course"],
-    ["21:00","Possible additional inputs","Michelle & Mike"],
-    ["21:30","Good night — Daniel and Lavinia leave",""],
-    ["21:45","Cleanup","Everyone available"]
+    ["10:00","Set up tables for the Apéro","Gabriel Niederhauser",""],
+    ["12:30","Wedding photos (15-min shoot at the church)","Mathias Josi",""],
+    ["13:00","Ceremony start, everyone seated","",""],
+    ["13:01","Lavinia walks down the aisle — violin song","Tobi",""],
+    ["13:03","Welcome guests & opening prayer","Tom","Please, no phones"],
+    ["13:05","Worship","Tobi",""],
+    ["13:20","Sermon (German)","Tom",""],
+    ["13:40","One song (solo/duet, band only)","Tobi",""],
+    ["13:45","Personal vows","Lavinia & Daniel",""],
+    ["—","Declaration of marriage & short prayer","Tom",""],
+    ["13:55","Rings","Eli, Marie, Lenet, Johan",""],
+    ["—","Kiss","",""],
+    ["14:00","Prayer of blessing","Parents",""],
+    ["14:03","Presentation of the wedding Bible","Tom",""],
+    ["14:05","Information","Michelle & Mike","Introduction, Apéro location in the booklet, ride check, group photo"],
+    ["14:08","Group photo in church","Mathias Josi",""],
+    ["14:10","Closing prayer","Tom",""],
+    ["14:12","Exit with pan flute song","Andreas","Lavinia & Daniel first, then guests"],
+    ["14:20","Drive to Thalgut","Everyone",""],
+    ["14:40","Apéro opens","Lavinia & Daniel","Guest book, gift table/vehicle"],
+    ["15:30","Group photos","Mathias Josi",""],
+    ["17:00","Apéro ends","",""],
+    ["17:30","Photoshoot at Aschiried","Mathias Josi",""],
+    ["18:00","Reception begins","",""],
+    ["18:15","Food arrives","Metzgerei Nussbaum / Ladina",""],
+    ["18:20","Announce dinner & pray for food","Michelle & Mike","Bridal table goes first, then down the table"],
+    ["19:20","Inputs as per signups","Michelle & Mike","Possible breaks in between"],
+    ["20:30","Dessert buffet announcement","Michelle & Mike","Same order as main course"],
+    ["21:00","Possible additional inputs","Michelle & Mike",""],
+    ["21:30","Good night — Daniel and Lavinia leave","",""],
+    ["21:45","Cleanup","Everyone available",""]
   ];
 
   // Grouped by when/where each role is needed: Ceremony first, then Apéro & Reception.
@@ -416,10 +417,11 @@
       row.appendChild(dotWrap);
       var body = el("div", "t-body");
       body.appendChild(el("div", "t-activity", r[1]));
-      if (r[2]) {
+      if (r[2]) body.appendChild(el("div", "t-who", r[2]));
+      if (r[3]) {
         var det = el("details", "t-details");
         det.appendChild(el("summary", "", "Details"));
-        det.appendChild(el("div", "t-sub", r[2]));
+        det.appendChild(el("div", "t-sub", r[3]));
         body.appendChild(det);
       }
       row.appendChild(body);

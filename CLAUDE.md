@@ -25,10 +25,11 @@ Rules when syncing:
 
 - A row that is in the page but no longer in the sheet has been **cancelled** —
   delete it. Do not keep it because it looks intentional.
-- Each schedule row is `["time", "activity", "responsible · notes"]`. The sheet's
-  Responsible and Notes columns are joined with ` · ` into that third field, and
-  a trailing continuation row (a note with no time or activity) folds into the
-  row above it.
+- Each schedule row is `["time", "activity", "responsible", "notes"]`, one field
+  per sheet column. The responsible name always shows on the timeline; only the
+  notes go behind the expandable "Details" toggle. A trailing continuation row
+  (a note with no time or activity) folds into the row above it. Leave a field
+  as `""` when the sheet cell is blank — do not invent a responsible.
 - Times go `HHMM` → `HH:MM`; a blank time renders as `—`.
 - Normalize prose to the page's house style: `and`/`&` between two people
   becomes `&` (`Lavinia & Daniel`, `Michelle & Mike`), sentence case for
