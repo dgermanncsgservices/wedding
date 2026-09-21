@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8" />
-<title>Lavinia & Daniel — Table Layout (Canada)</title>
+<title>Lavinia & Daniel — Indoors (Canada)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,6 +62,27 @@
   .chart-frame a { display: block; border-radius: 8px; }
   .chart-frame a:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
   .chart-hint { text-align: center; margin: 0.8rem 0 0; font-size: 0.78rem; color: var(--ink-500); }
+  .panel { margin-bottom: clamp(2rem, 5vw, 3rem); }
+  .panel:last-of-type { margin-bottom: 0; }
+  .panel h2 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: clamp(1.4rem, 3vw, 1.8rem); margin: 0 0 0.2rem;
+  }
+  .panel .lead { color: var(--ink-500); font-size: 0.92rem; margin: 0 0 1rem; }
+  .panel-head { text-align: center; }
+  .stage-frame {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; padding: 0.5rem;
+    box-shadow: 0 20px 50px -30px rgba(42,20,24,0.35);
+  }
+  .stage-frame iframe {
+    display: block; width: 100%; border: 0; border-radius: 12px;
+    height: min(70vh, 620px); min-height: 400px; background: #f2f2f3;
+  }
+  .pending {
+    background: var(--surface); border: 1px dashed var(--line); border-radius: 16px;
+    padding: 2rem 1.5rem; text-align: center; color: var(--ink-500); font-size: 0.92rem;
+  }
   .chart-hint a { color: inherit; border-bottom: 1px dotted var(--gold-500); text-decoration: none; }
   footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
   footer .script { font-size: 1.3rem; color: var(--maroon-800); display: block; margin-bottom: 0.3rem; }
@@ -74,39 +95,65 @@
 
 <main>
   <div class="section-head">
-    <span class="eyebrow" data-i18n="tables.eyebrow">Canada · Outdoors</span>
-    <h1 data-i18n="tables.h1">Table Layout</h1>
-    <p data-i18n="tables.desc">Where the tables and everything else go outside.</p>
+    <span class="eyebrow" data-i18n="in.eyebrow">Canada · Indoors</span>
+    <h1 data-i18n="in.h1">Indoors</h1>
+    <p data-i18n="in.desc">The hall: how it is laid out, and where you are sitting.</p>
   </div>
-  <div class="chart-frame">
-    <a href="assets/tables-canada.jpg" target="_blank" rel="noopener">
-      <img src="assets/tables-canada.jpg" alt="Outdoor layout showing tables 1 to 9, the Lavinia and Daniel head table, the buffet, drinks, guest book, the gift table, lawn games and the picnic table for the kids" data-i18n-attr="alt:tables.alt" />
-    </a>
-  </div>
-  <p class="chart-hint"><a href="assets/tables-canada.jpg" target="_blank" rel="noopener" data-i18n="chart.hint">Tap the plan to open it full size</a></p>
+
+  <section class="panel" id="floorplan">
+    <div class="panel-head">
+      <h2 data-i18n="in.plan.h2">Floor plan</h2>
+      <p class="lead" data-i18n="in.plan.lead">The string light rigging in 3D. Drag to orbit, scroll to zoom.</p>
+    </div>
+    <div class="stage-frame">
+      <iframe src="assets/string-lights-canada.html" title="3D string light rigging plan"
+              data-i18n-attr="title:in.plan.frame" loading="lazy"></iframe>
+    </div>
+    <p class="chart-hint"><a href="assets/string-lights-canada.html" target="_blank" rel="noopener"
+       data-i18n="in.plan.hint">Open the 3D plan full screen</a></p>
+  </section>
+
+  <section class="panel" id="seating">
+    <div class="panel-head">
+      <h2 data-i18n="in.seat.h2">Seating</h2>
+      <p class="lead" data-i18n="in.seat.lead">Find your table below.</p>
+    </div>
+    <div class="chart-frame">
+      <a href="assets/seating-canada.jpg" target="_blank" rel="noopener">
+        <img src="assets/seating-canada.jpg" alt="Indoor seating chart: the bridal table with tables 1 to 4 in a row in front of it, round tables 5 to 10 around the hall, the colouring table, three food buffets and the drinks table" data-i18n-attr="alt:in.seat.alt" />
+      </a>
+    </div>
+    <p class="chart-hint"><a href="assets/seating-canada.jpg" target="_blank" rel="noopener"
+       data-i18n="chart.hint">Tap the chart to open it full size</a></p>
+  </section>
 </main>
 
 <footer>
   <span class="script">Lavinia &amp; Daniel</span>
-  <span data-i18n="tables.footer">See you there!</span>
+  <span data-i18n="seating.footer">See you there!</span>
 </footer>
 
 <script>
 window.I18N_PAGE = { de: {
-  "page.title": "Lavinia & Daniel — Tischplan (Kanada)",
+  "page.title": "Lavinia & Daniel — Drinnen (Kanada)",
   "Menu": "Menü",
   "Day-of Timeline": "Tagesablauf",
   "Day-of Team": "Team vor Ort",
-  "Indoor Seating": "Sitzplan drinnen",
-  "Outdoor Layout": "Plan draußen",
-  "String Lights": "Lichterketten",
+  "Indoors": "Drinnen",
+  "Outdoors": "Draußen",
   "Setup Plan": "Aufbauplan",
-  "tables.eyebrow": "Kanada · Draußen",
-  "tables.h1": "Tischplan",
-  "tables.desc": "Wo draußen die Tische und alles andere stehen.",
-  "tables.alt": "Plan für draußen mit den Tischen 1 bis 9, dem Brauttisch von Lavinia und Daniel, Buffet, Getränken, Gästebuch, Geschenktisch, Rasenspielen und dem Picknicktisch für die Kinder",
+  "in.eyebrow": "Kanada · Drinnen",
+  "in.h1": "Drinnen",
+  "in.desc": "Der Saal: wie er eingerichtet ist und wo du sitzt.",
+  "in.plan.h2": "Raumplan",
+  "in.plan.lead": "Die Lichterketten in 3D. Ziehen zum Drehen, scrollen zum Zoomen.",
+  "in.plan.frame": "3D-Plan für die Lichterketten",
+  "in.plan.hint": "Den 3D-Plan im Vollbild öffnen",
+  "in.seat.h2": "Sitzplan",
+  "in.seat.lead": "Hier findest du deinen Tisch.",
+  "in.seat.alt": "Sitzplan drinnen: der Brauttisch mit den Tischen 1 bis 4 in einer Reihe davor, die runden Tische 5 bis 10 im Saal, der Maltisch, drei Buffets und der Getränketisch",
   "chart.hint": "Tippe auf den Plan, um ihn gross zu öffnen",
-  "tables.footer": "Wir freuen uns auf dich!"
+  "seating.footer": "Wir freuen uns auf dich!"
 } };
 </script>
 <script src="assets/i18n.js"></script>

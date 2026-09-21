@@ -8,10 +8,8 @@ Static site, no build step. GitHub Pages deploys from `main`; custom domain
 - `switzerland.html` — Switzerland (ceremony, Apéro, reception)
 - `seating-switzerland.html` + `assets/seating-switzerland.jpg` — static seating chart
 - `apero-switzerland.html` + `assets/apero-switzerland.jpg` — static Apéro site plan
-- `seating-canada.html` + `assets/seating-canada.jpg` — Canada indoor seating chart
-- `tables-canada.html` + `assets/tables-canada.jpg` — Canada outdoor table layout
-- `lights-canada.html` + `assets/string-lights-canada.html` — the indoor string-light
-  rigging plan in 3D
+- `indoor-canada.html` — Canada indoors: the 3D floor plan and the seating chart
+- `outdoor-canada.html` — Canada outdoors: the floor plan and the seating chart
 - `setup-canada.html` — the Canada setup plan for the crew
 
 The static plan pages share one template: top bar, centred
@@ -191,7 +189,11 @@ the 3D view needs a working connection; the spec plate renders regardless. To
 replace it, drop in a new export under the same filename — the wrapper does
 not care what the artifact contains.
 
-Canada has two table plans, so the menu names them apart: **Indoor Seating**
-(`seating-canada.html`, the chart with guest names) and **Outdoor Layout**
-(`tables-canada.html`). Calling both "Seating" or both "Table Layout" makes
-them indistinguishable in the menu, which is the only place a guest meets them.
+Canada's plans are grouped by **where you are**, not by what kind of drawing
+they are: the menu has **Indoors** and **Outdoors**, and each page stacks two
+`.panel` sections — `#floorplan` then `#seating`. Indoors the floor plan is the
+3D string-light artifact in a `.stage-frame` iframe; outdoors it is the aerial
+photo. The outdoor seating chart does not exist yet, so that panel carries a
+`.pending` placeholder — replace it with the same `.chart-frame` markup the
+other charts use. Assets keep their own names (`seating-canada.jpg`,
+`tables-canada.jpg`, `string-lights-canada.html`) and are not tied to a page.

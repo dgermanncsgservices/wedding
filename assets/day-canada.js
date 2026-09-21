@@ -14,9 +14,8 @@
 
   var GROUPS = [];
   var DAY_PAGE = "canada.html";
-  var SEATING_PAGE = "seating-canada.html";
-  var TABLES_PAGE = "tables-canada.html";
-  var LIGHTS_PAGE = "lights-canada.html";
+  var INDOOR_PAGE = "indoor-canada.html";
+  var OUTDOOR_PAGE = "outdoor-canada.html";
   var SETUP_PAGE = "setup-canada.html";
 
   // Must match groupId() in canada.html: slug the English name so the anchors
@@ -39,9 +38,8 @@
     });
     if (!items.length) items.push({ href: base + "#schedule", label: t("Day-of Timeline") });
     items.push({ href: base + "#team", label: t("Day-of Team") });
-    items.push({ href: SEATING_PAGE, label: t("Indoor Seating") });
-    items.push({ href: TABLES_PAGE, label: t("Outdoor Layout") });
-    items.push({ href: LIGHTS_PAGE, label: t("String Lights") });
+    items.push({ href: INDOOR_PAGE, label: t("Indoors") });
+    items.push({ href: OUTDOOR_PAGE, label: t("Outdoors") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
     return items;
   };
