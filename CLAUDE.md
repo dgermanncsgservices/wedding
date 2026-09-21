@@ -8,12 +8,13 @@ Static site, no build step. GitHub Pages deploys from `main`; custom domain
 - `switzerland.html` — Switzerland (ceremony, Apéro, reception)
 - `seating-switzerland.html` + `assets/seating-switzerland.jpg` — static seating chart
 - `apero-switzerland.html` + `assets/apero-switzerland.jpg` — static Apéro site plan
+- `seating-canada.html` + `assets/seating-canada.jpg` — Canada indoor seating chart
 - `tables-canada.html` + `assets/tables-canada.jpg` — Canada outdoor table layout
 - `lights-canada.html` + `assets/string-lights-canada.html` — the indoor string-light
   rigging plan in 3D
 - `setup-canada.html` — the Canada setup plan for the crew
 
-The three static plan pages share one template: top bar, centred
+The static plan pages share one template: top bar, centred
 `.section-head`, a `.chart-frame` holding the image, a `.chart-hint` line,
 footer. The image is wrapped in a link to its own file — labels on an aerial
 plan are unreadable at phone width, so tapping opens it full size. To add
@@ -189,3 +190,8 @@ It pulls three.js from unpkg at runtime via an importmap inside the bundle, so
 the 3D view needs a working connection; the spec plate renders regardless. To
 replace it, drop in a new export under the same filename — the wrapper does
 not care what the artifact contains.
+
+Canada has two table plans, so the menu names them apart: **Indoor Seating**
+(`seating-canada.html`, the chart with guest names) and **Outdoor Layout**
+(`tables-canada.html`). Calling both "Seating" or both "Table Layout" makes
+them indistinguishable in the menu, which is the only place a guest meets them.

@@ -14,6 +14,7 @@
 
   var GROUPS = [];
   var DAY_PAGE = "canada.html";
+  var SEATING_PAGE = "seating-canada.html";
   var TABLES_PAGE = "tables-canada.html";
   var LIGHTS_PAGE = "lights-canada.html";
   var SETUP_PAGE = "setup-canada.html";
@@ -38,7 +39,8 @@
     });
     if (!items.length) items.push({ href: base + "#schedule", label: t("Day-of Timeline") });
     items.push({ href: base + "#team", label: t("Day-of Team") });
-    items.push({ href: TABLES_PAGE, label: t("Table Layout") });
+    items.push({ href: SEATING_PAGE, label: t("Indoor Seating") });
+    items.push({ href: TABLES_PAGE, label: t("Outdoor Layout") });
     items.push({ href: LIGHTS_PAGE, label: t("String Lights") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
     return items;
