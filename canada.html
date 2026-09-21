@@ -227,7 +227,12 @@
     color: var(--text); border-color: var(--accent);
     background: color-mix(in srgb, var(--accent) 12%, transparent);
   }
-  .t-details .t-sub { margin-top: 0.35rem; }
+  .t-notes { list-style: none; margin: 0.35rem 0 0; padding: 0; }
+  .t-notes .t-sub { position: relative; padding-left: 0.95rem; margin-top: 0.3rem; }
+  .t-notes .t-sub::before {
+    content: "\2022"; position: absolute; left: 0.15rem; top: -0.05rem;
+    color: var(--accent); font-size: 0.95rem; line-height: 1.5;
+  }
   /* On a phone the label collapses to just the caret so it cannot push the
      activity text onto a second line; it stays readable to screen readers. */
   @media (max-width: 640px) {
@@ -386,6 +391,7 @@
 <script>
 window.I18N_PAGE = { de: {
   "nav.events": "Alle Anlässe",
+  "Menu": "Menü",
   "nav.schedule": "Programm",
   "nav.team": "Team vor Ort",
 
@@ -452,6 +458,7 @@ window.I18N_PAGE = { de: {
 } };
 </script>
 <script src="assets/i18n.js"></script>
+<script src="assets/nav.js"></script>
 <script>
 (function () {
   "use strict";
@@ -552,7 +559,11 @@ window.I18N_PAGE = { de: {
     }
     head.appendChild(act);
     if (r[3]) head.appendChild(el("span", "t-who", t(r[3])));
-    notes.forEach(function (n) { body.appendChild(el("div", "t-sub", n)); });
+    if (notes.length) {
+      var list = el("ul", "t-notes");
+      notes.forEach(function (n) { list.appendChild(el("li", "t-sub", n)); });
+      body.appendChild(list);
+    }
 
     row.appendChild(body);
     return row;

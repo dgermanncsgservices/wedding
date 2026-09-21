@@ -83,6 +83,17 @@ English until a German string is added. After syncing new rows, add the matching
 Page scripts re-render through `WD_I18N.onChange(fn)`, which fires immediately
 and again on every switch.
 
+## Navigation
+
+`assets/nav.js` loads after `i18n.js` on the three pages with a `.topbar`. It
+moves `.navlinks` and the language switcher into one `.nav-panel`: inline above
+640px, behind a hamburger below it. The panel closes on a link, a language
+pick, Escape, an outside click, or on resize back to desktop. `index.html` has
+no top bar, so it keeps the floating switcher and loads no `nav.js`.
+
+Each page's `de` dictionary needs a `"Menu"` entry — it is the toggle's
+`aria-label`.
+
 ## Timeline row layout
 
 The "Details" disclosure rides on the activity line as a small pill, not on a
@@ -90,3 +101,6 @@ line of its own — a collapsed row is exactly as tall as a row with no notes.
 Below 640px the pill's label is visually hidden (still read by screen readers)
 so it cannot push the activity text onto a second line. Keep it that way: a
 full-width toggle costs roughly 180px over the Switzerland timeline on a phone.
+
+Note lines render as a bulleted `<ul class="t-notes">`, one `<li>` per
+semicolon-separated fragment, with a gold `•` marker.
