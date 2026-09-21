@@ -383,10 +383,7 @@
         <span class="sec-desc" data-i18n="sec.team.desc">Who's running what during the ceremony and reception.</span>
       </summary>
         <div id="team-groups"></div>
-        <div class="equip-card">
-          <h3 data-i18n="equip.h3">To Bring — Alti Sagi Leissigen</h3>
-          <ul id="equipment-list"></ul>
-        </div>
+        <div id="equipment"></div>
     </details>
   </section>
 
@@ -420,7 +417,6 @@ window.I18N_PAGE = { de: {
   "sec.team.eyebrow": "Schweiz",
   "sec.team.h2": "Team vor Ort",
   "sec.team.desc": "Wer während Trauung und Fest wofür zuständig ist.",
-  "equip.h3": "Mitbringen — Alti Sagi Leissigen",
   "footer.synced": "Synchronisiert aus dem Tab «Switzerland» der Hochzeitsplanung ·",
   "footer.full": "Die ganze Website findest du auf",
 
@@ -487,6 +483,21 @@ window.I18N_PAGE = { de: {
   "Reception Food": "Essen Fest",
   "Reception Dessert (Wedding Cake)": "Dessert Fest (Hochzeitstorte)",
 
+  "Apéro setup": "Aufbau Apéro",
+  "Apéro food team arrives": "Food-Team Apéro trifft ein",
+  "Lunch will be provided for the food team": "Für das Food-Team gibt es Mittagessen",
+  "Apéro decorations setup": "Dekoration Apéro aufbauen",
+  "Decor/flowers as per instructions from Sannie and Lavinia; Signs for gift table and guest book; Guest book with camera": "Deko/Blumen nach Anweisung von Sannie und Lavinia; Schilder für Geschenktisch und Gästebuch; Gästebuch mit Kamera",
+  "Apéro cleanup (food)": "Abbau Apéro (Essen)",
+  "Apéro cleanup (tables etc.)": "Abbau Apéro (Tische usw.)",
+  "Tell guests invited to the reception to be there at 18:00.; Parking is not available directly at the location, directions on the website; Lavinia & Daniel might leave a little earlier": "Den zum Fest eingeladenen Gästen sagen, dass sie um 18:00 dort sein sollen.; Direkt beim Ort gibt es keine Parkplätze, Wegbeschreibung auf der Website; Lavinia & Daniel gehen allenfalls etwas früher",
+  "Apéro Setup": "Aufbau Apéro",
+  "Apéro Teardown": "Abbau Apéro",
+  "To Bring — Apéro": "Mitbringen — Apéro",
+  "To Bring — Reception": "Mitbringen — Fest",
+  "Table cloths": "Tischtücher",
+  "Tape for table cloths": "Klebeband für Tischtücher",
+  "Speaker (CZT)": "Lautsprecher (CZT)",
   "Kettle": "Wasserkocher",
   "Coffee maker": "Kaffeemaschine",
   "Coffee cream": "Kaffeerahm",
@@ -504,10 +515,12 @@ window.I18N_PAGE = { de: {
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Switzerland" tab only.
-  var SYNCED_AT = "2026-09-20T20:30:00.000000-07:00";
+  var SYNCED_AT = "2026-09-21T09:00:00.000000-07:00";
 
   var scheduleCH = [
-    ["Setup","10:00","Set up tables for the Apéro","Gabriel Niederhauser","Set up according to the setup plan; Tables; Garbage cans; Benches/Chairs; Table cloths (tape to table)"],
+    ["Setup","10:00","Apéro setup","Gabriel Niederhauser","Set up according to the setup plan; Tables; Garbage cans; Benches/Chairs; Table cloths (tape to table)"],
+    ["Setup","10:00","Apéro food team arrives","Matthias Waltert","Lunch will be provided for the food team"],
+    ["Setup","11:30","Apéro decorations setup","Helen Bürki","Decor/flowers as per instructions from Sannie and Lavinia; Signs for gift table and guest book; Guest book with camera"],
     ["Ceremony","12:30","Wedding photos (15-min shoot at the church)","Mathias Josi",""],
     ["Ceremony","13:00","Ceremony start, everyone seated","",""],
     ["Ceremony","13:01","Lavinia walks down the aisle — violin song","Tobi",""],
@@ -526,9 +539,11 @@ window.I18N_PAGE = { de: {
     ["Ceremony","14:10","Closing prayer","Tom",""],
     ["Ceremony","14:12","Exit with pan flute song","Andreas","Lavinia & Daniel first, then guests"],
     ["Apéro","14:20","Drive to Thalgut","Everyone",""],
-    ["Apéro","14:40","Apéro opens","Lavinia & Daniel","Guest book; Gift table/vehicle"],
+    ["Apéro","14:40","Apéro opens","Lavinia & Daniel",""],
     ["Apéro","15:30","Group photos","Mathias Josi",""],
-    ["Apéro","17:00","Apéro ends","",""],
+    ["Apéro","17:00","Apéro ends","Michelle & Mike","Tell guests invited to the reception to be there at 18:00.; Parking is not available directly at the location, directions on the website; Lavinia & Daniel might leave a little earlier"],
+    ["Apéro","17:15","Apéro cleanup (food)","Mathias Josi",""],
+    ["Apéro","17:30","Apéro cleanup (tables etc.)","Benjamin Saltzmann",""],
     ["Apéro","17:30","Photoshoot at Aschiried","Mathias Josi",""],
     ["Reception","18:00","Reception begins","",""],
     ["Reception","18:15","Food arrives","Metzgerei Nussbaum / Ladina",""],
@@ -552,7 +567,9 @@ window.I18N_PAGE = { de: {
     ]],
     ["Apéro", [
       ["Apéro","Matthias Waltert","076 457 14 78"],
-      ["Decorations — Apéro","Helen Bürki","079 744 48 12"]
+      ["Decorations — Apéro","Helen Bürki","079 744 48 12"],
+      ["Apéro Setup","Gabriel Niederhauser","079 523 63 62"],
+      ["Apéro Teardown","Benjamin Saltzmann","079 783 97 85"]
     ]],
     ["Reception", [
       ["Setup & Decorations — Reception","Gabriel and Jael Leutenegger","079 915 50 71"],
@@ -674,15 +691,25 @@ window.I18N_PAGE = { de: {
 
   // ---------------- EQUIPMENT ----------------
   var equipment = [
-    "Kettle", "Coffee maker", "Coffee cream", "Decorations, table cloths and napkins",
-    "Drink trailer", "Cakes", "Big candles for entrance", "110L garbage bags"
+    ["To Bring — Apéro", [
+      "Table cloths", "Tape for table cloths", "Speaker (CZT)"
+    ]],
+    ["To Bring — Reception", [
+      "Kettle", "Coffee maker", "Coffee cream", "Decorations, table cloths and napkins",
+      "Drink trailer", "Cakes", "Big candles for entrance", "110L garbage bags"
+    ]]
   ];
   function renderEquipment() {
-    var equipRoot = document.getElementById('equipment-list');
-    if (!equipRoot) return;
-    clear(equipRoot);
-    equipment.forEach(function (item) {
-      equipRoot.appendChild(el("li", "", t(item)));
+    var root = document.getElementById('equipment');
+    if (!root) return;
+    clear(root);
+    equipment.forEach(function (group) {
+      var card = el("div", "equip-card");
+      card.appendChild(el("h3", "", t(group[0])));
+      var ul = el("ul");
+      group[1].forEach(function (item) { ul.appendChild(el("li", "", t(item))); });
+      card.appendChild(ul);
+      root.appendChild(card);
     });
   }
 

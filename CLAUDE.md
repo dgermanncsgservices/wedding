@@ -45,6 +45,9 @@ Rules when syncing:
 - The sheet's "Phone Nr" column sometimes holds status text (`?`, `Confirmed`)
   instead of a number — leave those blank rather than rendering them as phones.
 - Bump `SYNCED_AT` in the page you touched; the footer shows it.
+- `equipment` is a list of `[heading, [items]]`, one entry per "Equipment ..."
+  block in the sheet, each rendered as its own card. The sheet currently has
+  two, Apéro and Reception.
 
 Hero event details (date, venue, dress code) are **not** from the sheet — they
 are static and sourced from withjoy.com/laviniadaniel.
