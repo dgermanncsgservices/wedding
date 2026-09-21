@@ -93,12 +93,23 @@ no top bar, so it keeps the floating switcher and loads no `nav.js`.
 
 **The menu lists only the day the reader is already in.** Once an event is
 picked there is no link back to the hub — `index.html` is reached by entering
-the domain. The event pages set `window.WD_NAV_ITEMS`, a function returning
+the domain. Pages set `window.WD_NAV_ITEMS`, a function returning
 `[{href, label}]`, and `nav.js` renders it into `.navlinks` and re-renders it
 on every language switch; a page without that global keeps its markup links.
-Switzerland lists its four day-groups, then Day-of Team, then Seating; Canada
-has no groups, so it lists Day-of Timeline and Day-of Team; the seating page
-points back into the Switzerland day.
+
+**Every page in a section shows the same menu.** The Switzerland section's menu
+lives in `assets/day-switzerland.js`, loaded by both `switzerland.html` and
+`seating-switzerland.html`, so the two are identical; only the hrefs differ,
+picked by whether `#tl-ch` is on the current page. Its `GROUPS` array mirrors
+the sheet's Group column — **update it when a sync adds or renames a group**;
+`switzerland.html` logs a console warning when the two drift apart. Every page
+in the section also needs the group labels in its own `de` dictionary. Canada
+is a one-page section and builds its menu from `scheduleCA` directly.
+
+`nav.js` must not set `position` on `.topbar`. The bar is `position: sticky`,
+which is both the containing block `.nav-panel` anchors to and the reason the
+menu button stays reachable while scrolling; overriding it with `relative`
+silently unsticks the whole bar.
 
 Group anchors come from `groupId()`, which slugs the **English** group name, so
 `#g-apero` survives a switch to German. Keep it that way — slugging the

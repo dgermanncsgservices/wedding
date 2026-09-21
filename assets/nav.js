@@ -13,7 +13,8 @@
     ".nav-panel{display:flex;align-items:center;gap:0.6rem;min-width:0}",
     ".nav-toggle{display:none}",
     "@media " + BP + "{",
-      ".topbar{position:relative}",
+      // No position here: the bar is already position:sticky, which is both the
+      // containing block the panel needs and the reason the menu stays reachable.
       ".nav-toggle{",
         "display:inline-flex;flex-direction:column;justify-content:center;gap:4px;",
         "flex:none;width:42px;height:38px;padding:0 10px;cursor:pointer;",
