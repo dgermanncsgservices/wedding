@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8" />
-<title>Lavinia & Daniel — Table Layout (Canada)</title>
+<title>Lavinia & Daniel — String Lights (Canada)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,16 +51,17 @@
   .eyebrow { font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.72rem; font-weight: 500; color: var(--gold-500); }
   h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0.4rem 0 0.3rem; }
   .section-head p { color: var(--ink-500); font-size: 0.95rem; margin: 0; }
-  .chart-frame {
+  .stage-frame {
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 1rem;
+    padding: 0.5rem;
     box-shadow: 0 20px 50px -30px rgba(42,20,24,0.35);
   }
-  .chart-frame img { width: 100%; height: auto; display: block; border-radius: 8px; }
-  .chart-frame a { display: block; border-radius: 8px; }
-  .chart-frame a:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
+  .stage-frame iframe {
+    display: block; width: 100%; border: 0; border-radius: 12px;
+    height: min(76vh, 680px); min-height: 420px; background: #f2f2f3;
+  }
   .chart-hint { text-align: center; margin: 0.8rem 0 0; font-size: 0.78rem; color: var(--ink-500); }
   .chart-hint a { color: inherit; border-bottom: 1px dotted var(--gold-500); text-decoration: none; }
   footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
@@ -74,38 +75,38 @@
 
 <main>
   <div class="section-head">
-    <span class="eyebrow" data-i18n="tables.eyebrow">Canada · Outdoors</span>
-    <h1 data-i18n="tables.h1">Table Layout</h1>
-    <p data-i18n="tables.desc">Where the tables and everything else go outside.</p>
+    <span class="eyebrow" data-i18n="lights.eyebrow">Canada · Indoors</span>
+    <h1 data-i18n="lights.h1">String Lights</h1>
+    <p data-i18n="lights.desc">The rigging plan for the hall, in 3D. Drag to orbit, scroll to zoom.</p>
   </div>
-  <div class="chart-frame">
-    <a href="assets/tables-canada.jpg" target="_blank" rel="noopener">
-      <img src="assets/tables-canada.jpg" alt="Outdoor layout showing tables 1 to 9, the Lavinia and Daniel head table, the buffet, drinks, guest book, the gift table, lawn games and the picnic table for the kids" data-i18n-attr="alt:tables.alt" />
-    </a>
+  <div class="stage-frame">
+    <iframe src="assets/string-lights-canada.html" title="3D string light rigging plan"
+            data-i18n-attr="title:lights.frame" loading="lazy"></iframe>
   </div>
-  <p class="chart-hint"><a href="assets/tables-canada.jpg" target="_blank" rel="noopener" data-i18n="chart.hint">Tap the plan to open it full size</a></p>
+  <p class="chart-hint"><a href="assets/string-lights-canada.html" target="_blank" rel="noopener"
+     data-i18n="lights.hint">Open the 3D plan full screen</a></p>
 </main>
 
 <footer>
   <span class="script">Lavinia &amp; Daniel</span>
-  <span data-i18n="tables.footer">See you there!</span>
+  <span data-i18n="lights.footer">See you there!</span>
 </footer>
 
 <script>
 window.I18N_PAGE = { de: {
-  "page.title": "Lavinia & Daniel — Tischplan (Kanada)",
+  "page.title": "Lavinia & Daniel — Lichterketten (Kanada)",
   "Menu": "Menü",
   "Day-of Timeline": "Tagesablauf",
   "Day-of Team": "Team vor Ort",
   "Table Layout": "Tischplan",
   "String Lights": "Lichterketten",
   "Setup Plan": "Aufbauplan",
-  "tables.eyebrow": "Kanada · Draußen",
-  "tables.h1": "Tischplan",
-  "tables.desc": "Wo draußen die Tische und alles andere stehen.",
-  "tables.alt": "Plan für draußen mit den Tischen 1 bis 9, dem Brauttisch von Lavinia und Daniel, Buffet, Getränken, Gästebuch, Geschenktisch, Rasenspielen und dem Picknicktisch für die Kinder",
-  "chart.hint": "Tippe auf den Plan, um ihn gross zu öffnen",
-  "tables.footer": "Wir freuen uns auf dich!"
+  "lights.eyebrow": "Kanada · Drinnen",
+  "lights.h1": "Lichterketten",
+  "lights.desc": "Der Aufhängeplan für den Saal, in 3D. Ziehen zum Drehen, scrollen zum Zoomen.",
+  "lights.frame": "3D-Plan für die Lichterketten",
+  "lights.hint": "Den 3D-Plan im Vollbild öffnen",
+  "lights.footer": "Wir freuen uns auf dich!"
 } };
 </script>
 <script src="assets/i18n.js"></script>
