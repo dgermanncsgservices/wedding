@@ -7,6 +7,12 @@ Static site, no build step. GitHub Pages deploys from `main`; custom domain
 - `canada.html` — Celebration Canada
 - `switzerland.html` — Switzerland (ceremony, Apéro, reception)
 - `seating-switzerland.html` + `assets/seating-switzerland.jpg` — static seating chart
+- `apero-switzerland.html` + `assets/apero-switzerland.jpg` — static Apéro site plan
+
+The two static plan pages share one template: top bar, centred `.section-head`,
+a `.chart-frame` holding the image, footer. To add another, copy one of them,
+swap the image, the `data-i18n` keys and the `de` entries, then add it to
+`assets/day-switzerland.js` so the whole section's menu picks it up.
 
 ## The spreadsheet is the master
 

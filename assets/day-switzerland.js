@@ -13,6 +13,7 @@
 
   var GROUPS = ["Setup", "Ceremony", "Apéro", "Reception"];
   var DAY_PAGE = "switzerland.html";
+  var APERO_PAGE = "apero-switzerland.html";
   var SEATING_PAGE = "seating-switzerland.html";
 
   // Must match groupId() in switzerland.html: slug the English name so the
@@ -35,6 +36,7 @@
       return { href: base + "#" + slug(g), label: t(g) };
     });
     items.push({ href: base + "#team", label: t("Day-of Team") });
+    items.push({ href: APERO_PAGE, label: t("Ap\u00e9ro Plan") });
     items.push({ href: SEATING_PAGE, label: t("Seating") });
     return items;
   };
