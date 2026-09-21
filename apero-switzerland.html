@@ -59,6 +59,10 @@
     box-shadow: 0 20px 50px -30px rgba(42,20,24,0.35);
   }
   .chart-frame img { width: 100%; height: auto; display: block; border-radius: 8px; }
+  .chart-frame a { display: block; border-radius: 8px; }
+  .chart-frame a:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
+  .chart-hint { text-align: center; margin: 0.8rem 0 0; font-size: 0.78rem; color: var(--ink-500); }
+  .chart-hint a { color: inherit; border-bottom: 1px dotted var(--gold-500); text-decoration: none; }
   footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
   footer .script { font-size: 1.3rem; color: var(--maroon-800); display: block; margin-bottom: 0.3rem; }
 </style>
@@ -75,8 +79,11 @@
     <p data-i18n="apero.desc">How the Apéro area is set up.</p>
   </div>
   <div class="chart-frame">
-    <img src="assets/apero-switzerland.jpg" alt="Site plan of the Apéro area, showing the buffet, drinks, standing tables, bins, guest book, gift car and garden games" data-i18n-attr="alt:apero.alt" />
+    <a href="assets/apero-switzerland.jpg" target="_blank" rel="noopener">
+      <img src="assets/apero-switzerland.jpg" alt="Site plan of the Apéro area, showing the buffet, drinks, standing tables, bins, guest book, gift car and garden games" data-i18n-attr="alt:apero.alt" />
+    </a>
   </div>
+  <p class="chart-hint"><a href="assets/apero-switzerland.jpg" target="_blank" rel="noopener" data-i18n="chart.hint">Tap the plan to open it full size</a></p>
 </main>
 
 <footer>
@@ -99,6 +106,7 @@ window.I18N_PAGE = { de: {
   "apero.h1": "Apéro-Plan",
   "apero.desc": "So ist der Apéro-Bereich aufgebaut.",
   "apero.alt": "Plan des Apéro-Bereichs mit Buffet, Getränken, Stehtischen, Abfall, Gästebuch, Geschenke-Auto und Gartenspielen",
+  "chart.hint": "Tippe auf den Plan, um ihn gross zu öffnen",
   "apero.footer": "Wir freuen uns auf dich!"
 } };
 </script>

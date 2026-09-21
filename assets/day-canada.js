@@ -14,6 +14,7 @@
 
   var GROUPS = [];
   var DAY_PAGE = "canada.html";
+  var TABLES_PAGE = "tables-canada.html";
   var SETUP_PAGE = "setup-canada.html";
 
   // Must match groupId() in canada.html: slug the English name so the anchors
@@ -36,6 +37,7 @@
     });
     if (!items.length) items.push({ href: base + "#schedule", label: t("Day-of Timeline") });
     items.push({ href: base + "#team", label: t("Day-of Team") });
+    items.push({ href: TABLES_PAGE, label: t("Table Layout") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
     return items;
   };
