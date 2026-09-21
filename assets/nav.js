@@ -58,6 +58,21 @@
     var lang = bar.querySelector(".lang-switch");   // injected by i18n.js
     if (lang) panel.appendChild(lang);
 
+    // A page can describe its own menu (the sections of that day) through
+    // window.WD_NAV_ITEMS; otherwise the markup's links are kept as they are.
+    function fillLinks() {
+      if (typeof window.WD_NAV_ITEMS !== "function") return;
+      var items = window.WD_NAV_ITEMS() || [];
+      while (links.firstChild) links.removeChild(links.firstChild);
+      items.forEach(function (item) {
+        var a = document.createElement("a");
+        a.href = item.href;
+        a.textContent = item.label;
+        links.appendChild(a);
+      });
+    }
+    fillLinks();
+
     var toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "nav-toggle";
@@ -103,6 +118,7 @@
     if (window.WD_I18N) {
       window.WD_I18N.onChange(function () {
         toggle.setAttribute("aria-label", window.WD_I18N.t("Menu", "Menu"));
+        fillLinks();
       });
     }
   }

@@ -91,8 +91,21 @@ moves `.navlinks` and the language switcher into one `.nav-panel`: inline above
 pick, Escape, an outside click, or on resize back to desktop. `index.html` has
 no top bar, so it keeps the floating switcher and loads no `nav.js`.
 
+**The menu lists only the day the reader is already in.** Once an event is
+picked there is no link back to the hub — `index.html` is reached by entering
+the domain. The event pages set `window.WD_NAV_ITEMS`, a function returning
+`[{href, label}]`, and `nav.js` renders it into `.navlinks` and re-renders it
+on every language switch; a page without that global keeps its markup links.
+Switzerland lists its four day-groups, then Day-of Team, then Seating; Canada
+has no groups, so it lists Day-of Timeline and Day-of Team; the seating page
+points back into the Switzerland day.
+
+Group anchors come from `groupId()`, which slugs the **English** group name, so
+`#g-apero` survives a switch to German. Keep it that way — slugging the
+translated name would break every menu link in German.
+
 Each page's `de` dictionary needs a `"Menu"` entry — it is the toggle's
-`aria-label`.
+`aria-label` — plus entries for the labels `WD_NAV_ITEMS` builds.
 
 ## Timeline row layout
 

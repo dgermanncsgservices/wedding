@@ -317,12 +317,7 @@
 
 <div class="topbar">
   <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
-  <nav class="navlinks">
-    <a href="index.html" data-i18n="nav.events">All Events</a>
-    <a href="seating-switzerland.html" data-i18n="nav.seating">Seating</a>
-    <a href="#schedule" data-i18n="nav.schedule">Schedule</a>
-    <a href="#team" data-i18n="nav.team">Day-of Team</a>
-  </nav>
+  <nav class="navlinks"></nav>
 </div>
 
 <header class="hero" id="overview">
@@ -402,8 +397,9 @@
 
 <script>
 window.I18N_PAGE = { de: {
-  "nav.events": "Alle Anlässe",
   "Menu": "Menü",
+  "Day-of Team": "Team vor Ort",
+  "Seating": "Sitzplan",
   "nav.seating": "Sitzplan",
   "nav.schedule": "Programm",
   "nav.team": "Team vor Ort",
@@ -609,6 +605,15 @@ window.I18N_PAGE = { de: {
   function clear(node) { while (node && node.firstChild) node.removeChild(node.firstChild); }
 
   // ---------------- SCHEDULE ----------------
+  // Anchors key off the English group name so they survive a language switch.
+  function groupId(name) {
+    return "g-" + name.toLowerCase()
+      .replace(/\u00e9/g, "e").replace(/[\u00e4\u00f6\u00fc]/g, function (c) {
+        return { "\u00e4": "a", "\u00f6": "o", "\u00fc": "u" }[c];
+      })
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
   // A row is ["group", "time", "activity", "responsible", "notes"].
   function timelineRow(r) {
     var row = el("div", "t-row");
@@ -670,6 +675,7 @@ window.I18N_PAGE = { de: {
       // No group name (the sheet has no Group column for this tab) - render flat.
       if (!g.name) { c.appendChild(tl); return; }
       var det = el("details", "t-group");
+      det.id = groupId(g.name);
       det.open = true;
       var sum = el("summary", "");
       sum.appendChild(el("span", "t-group-name", t(g.name)));
@@ -731,6 +737,21 @@ window.I18N_PAGE = { de: {
       root.appendChild(card);
     });
   }
+
+  // ---------------- NAV ----------------
+  // The menu lists this day's own sections; the events hub is reachable only
+  // by entering the domain.
+  window.WD_NAV_ITEMS = function () {
+    var items = [], seen = {};
+    scheduleCH.forEach(function (r) {
+      if (!r[0] || seen[r[0]]) return;
+      seen[r[0]] = true;
+      items.push({ href: "#" + groupId(r[0]), label: t(r[0]) });
+    });
+    items.push({ href: "#team", label: t("Day-of Team") });
+    items.push({ href: "seating-switzerland.html", label: t("Seating") });
+    return items;
+  };
 
   // ---------------- SYNC TIME ----------------
   function renderSyncTime(lang) {
