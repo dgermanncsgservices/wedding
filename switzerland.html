@@ -491,6 +491,11 @@ window.I18N_PAGE = { de: {
   "Apéro cleanup (food)": "Abbau Apéro (Essen)",
   "Apéro cleanup (tables etc.)": "Abbau Apéro (Tische usw.)",
   "Tell guests invited to the reception to be there at 18:00.; Parking is not available directly at the location, directions on the website; Lavinia & Daniel might leave a little earlier": "Den zum Fest eingeladenen Gästen sagen, dass sie um 18:00 dort sein sollen.; Direkt beim Ort gibt es keine Parkplätze, Wegbeschreibung auf der Website; Lavinia & Daniel gehen allenfalls etwas früher",
+  "Drink trailer with drinks leaves for Leissigen": "Getränkeanhänger fährt nach Leissigen",
+  "Drink trailer with drinks arrives": "Getränkeanhänger trifft ein",
+  "Setup will be done in the morning by Gabriel and Jael; Tables with table cloths, plates and cutlery; Decorations": "Der Aufbau erfolgt am Morgen durch Gabriel und Jael; Tische mit Tischtüchern, Teller und Besteck; Dekoration",
+  "Food will be ready to serve, including utensils for dishing up; Metzgerei Nussbaum will help with setting the food up": "Das Essen ist servierbereit, inklusive Schöpfbesteck; Die Metzgerei Nussbaum hilft beim Anrichten",
+  "Gabriel Leutenegger takes the lead; Things that go back to Wichtrach will be taken by Sannie and Andreas; Garbage → Gabriel Leutenegger": "Gabriel Leutenegger übernimmt die Leitung; Was zurück nach Wichtrach geht, nehmen Sannie und Andreas mit; Abfall → Gabriel Leutenegger",
   "Apéro Setup": "Aufbau Apéro",
   "Apéro Teardown": "Abbau Apéro",
   "To Bring — Apéro": "Mitbringen — Apéro",
@@ -504,7 +509,7 @@ window.I18N_PAGE = { de: {
   "Decorations, table cloths and napkins": "Dekoration, Tischtücher und Servietten",
   "Drink trailer": "Getränkeanhänger",
   "Cakes": "Kuchen",
-  "Big candles for entrance": "Grosse Kerzen für den Eingang",
+  "Big candles for entrance (after use at church, put in the drink trailer going to Leissigen)": "Grosse Kerzen für den Eingang (nach der Kirche in den Getränkeanhänger nach Leissigen legen)",
   "110L garbage bags": "110L-Abfallsäcke"
 } };
 </script>
@@ -515,7 +520,7 @@ window.I18N_PAGE = { de: {
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Switzerland" tab only.
-  var SYNCED_AT = "2026-09-21T09:00:00.000000-07:00";
+  var SYNCED_AT = "2026-09-21T14:00:00.000000-07:00";
 
   var scheduleCH = [
     ["Setup","10:00","Apéro setup","Gabriel Niederhauser","Set up according to the setup plan; Tables; Garbage cans; Benches/Chairs; Table cloths (tape to table)"],
@@ -542,17 +547,19 @@ window.I18N_PAGE = { de: {
     ["Apéro","14:40","Apéro opens","Lavinia & Daniel",""],
     ["Apéro","15:30","Group photos","Mathias Josi",""],
     ["Apéro","17:00","Apéro ends","Michelle & Mike","Tell guests invited to the reception to be there at 18:00.; Parking is not available directly at the location, directions on the website; Lavinia & Daniel might leave a little earlier"],
+    ["Apéro","17:10","Drink trailer with drinks leaves for Leissigen","Gabriel Leutenegger",""],
     ["Apéro","17:15","Apéro cleanup (food)","Mathias Josi",""],
     ["Apéro","17:30","Apéro cleanup (tables etc.)","Benjamin Saltzmann",""],
     ["Apéro","17:30","Photoshoot at Aschiried","Mathias Josi",""],
-    ["Reception","18:00","Reception begins","",""],
-    ["Reception","18:15","Food arrives","Metzgerei Nussbaum / Ladina",""],
+    ["Reception","17:40","Drink trailer with drinks arrives","Gabriel Leutenegger",""],
+    ["Reception","18:00","Reception begins","","Setup will be done in the morning by Gabriel and Jael; Tables with table cloths, plates and cutlery; Decorations"],
+    ["Reception","18:15","Food arrives","Metzgerei Nussbaum / Ladina","Food will be ready to serve, including utensils for dishing up; Metzgerei Nussbaum will help with setting the food up"],
     ["Reception","18:20","Announce dinner & pray for food","Michelle & Mike","Bridal table goes first, then down the table"],
     ["Reception","19:20","Inputs as per signups","Michelle & Mike","Possible breaks in between"],
     ["Reception","20:30","Dessert buffet announcement","Michelle & Mike","Same order as main course"],
     ["Reception","21:00","Possible additional inputs","Michelle & Mike",""],
     ["Reception","21:30","Good night — Daniel and Lavinia leave","",""],
-    ["Reception","21:45","Cleanup","Everyone available",""]
+    ["Reception","21:45","Cleanup","Everyone available","Gabriel Leutenegger takes the lead; Things that go back to Wichtrach will be taken by Sannie and Andreas; Garbage → Gabriel Leutenegger"]
   ];
 
   // Grouped by when/where each role is needed: Ceremony first, then Apéro & Reception.
@@ -696,7 +703,8 @@ window.I18N_PAGE = { de: {
     ]],
     ["To Bring — Reception", [
       "Kettle", "Coffee maker", "Coffee cream", "Decorations, table cloths and napkins",
-      "Drink trailer", "Cakes", "Big candles for entrance", "110L garbage bags"
+      "Drink trailer", "Cakes",
+      "Big candles for entrance (after use at church, put in the drink trailer going to Leissigen)", "110L garbage bags"
     ]]
   ];
   function renderEquipment() {
