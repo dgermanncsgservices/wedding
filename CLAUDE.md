@@ -91,11 +91,21 @@ and again on every switch.
 
 ## Navigation
 
-`assets/nav.js` loads after `i18n.js` on the three pages with a `.topbar`. It
-moves `.navlinks` and the language switcher into one `.nav-panel`: inline above
-640px, behind a hamburger below it. The panel closes on a link, a language
-pick, Escape, an outside click, or on resize back to desktop. `index.html` has
-no top bar, so it keeps the floating switcher and loads no `nav.js`.
+`assets/nav.js` loads after `i18n.js` on the pages with a `.topbar`. It moves
+`.navlinks` and the language switcher into one `.nav-panel`, shown inline when
+the links fit and behind a hamburger when they do not. The panel closes on a
+link, a language pick, Escape, an outside click, and when the bar goes back to
+inline. `index.html` has no top bar, so it keeps the floating switcher and
+loads no `nav.js`.
+
+**Collapsing is measured, never a breakpoint.** `updateCollapsed()` compares
+`.navlinks` scrollWidth against clientWidth and sets `data-collapsed` on the
+bar; the CSS keys off that attribute. It re-runs on resize, on orientation
+change, after `document.fonts.ready`, and after a language switch, because
+label widths change. A fixed breakpoint is what previously left menu items
+scrolled out of sight in the horizontally scrolling bar at desktop widths —
+with seven items the bar needs about 1200px, and it silently hid the last of
+them. Adding a menu item must never be able to hide one.
 
 **The menu lists only the day the reader is already in.** Once an event is
 picked there is no link back to the hub — `index.html` is reached by entering
