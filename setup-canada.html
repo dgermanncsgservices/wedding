@@ -108,6 +108,14 @@
   ul.steps b { font-weight: 500; color: var(--maroon-900); }
   ul.steps ul.steps b { color: var(--ink-900); }
 
+  .shot { margin: 0 0 1rem; }
+  .shot a { display: block; border-radius: 10px; }
+  .shot a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .shot img {
+    width: 100%; height: auto; display: block; border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+
   footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
   footer .script { font-size: 1.3rem; color: var(--maroon-800); display: block; margin-bottom: 0.3rem; }
 </style>
@@ -166,13 +174,26 @@ window.I18N_PAGE = { de: {
   // ---------------- DATA ----------------
   // Transcribed from the Google Doc "Canada Setup Notes".
   // A bullet is either a string or [string, [sub-bullets]].
+  var PIC_RECT = [{ src: "assets/setup-ca-rect-table.jpg",
+    alt: "A rectangular guest table: white cloth, the sage runner bunched over string lights with ivy and bud vases along it, place settings with a scalloped sage napkin and gold pen, and the table number card" }];
+
+  var PIC_ROUND = [{ src: "assets/setup-ca-round-table.jpg",
+    alt: "A round guest table centrepiece: the sage runner gathered into a nest over string lights with ivy and bud vases, and one place setting with plate, game card, scalloped sage napkin, gold pen and goblet" }];
+
+  var PIC_HEAD = [
+    { src: "assets/setup-ca-head-draping.jpg",
+      alt: "The head table draped in white fabric, with pillar vases, bud vases, tea candle holders and ivy along the top" },
+    { src: "assets/setup-ca-head-table.jpg",
+      alt: "The finished head table: two place settings, a long ivy garland across the front, tea candle holders and bud vases" }
+  ];
+
   var PLACE_SETTING = [
     "Large plate",
     "Knife on the right side",
     "Fork on the left side",
     "Water goblet at the top right side",
     "Game card on the plate",
-    "Sage cocktail napkin on top of the game card, with the <b>scalloped edge facing up</b>",
+    "Sage cocktail napkin on top of the game card, with the <b>scalloped edge pointing up</b>",
     "Gold pen placed <b>diagonally on top of the napkin</b>"
   ];
 
@@ -207,7 +228,7 @@ window.I18N_PAGE = { de: {
 
   var GUESTBOOK_TABLE = [
     "Use an oval tablecloth.",
-    "Place <b>2 guestbook and gift signs</b>.",
+    "Set up <b>guestbook and gift signs</b>.",
     "Set up a basket for cards, the guestbook, pens, and camera.",
     "Create a pretty table arrangement using the <b>green table runner, ivy, and any remaining bud vases</b>."
   ];
@@ -226,7 +247,6 @@ window.I18N_PAGE = { de: {
 
   var SOUND = [
     "Set up the <b>speaker and wireless microphone near the head table</b>.",
-    "Refer to the <b>floor plan</b> for placement.",
     "Set up the <b>iPad with the wedding soundtrack</b>."
   ];
 
@@ -260,9 +280,9 @@ window.I18N_PAGE = { de: {
            "Sage cocktail napkin on top of the game card, with the <b>scalloped edge facing up</b>",
            "Gold pen placed <b>diagonally on top of the napkin</b>"]],
         "Refer to the picture for final placement."
-      ]],
-      ["Round Guest Tables ×6", ROUND_TABLE(6)],
-      ["Head Table", HEAD_TABLE],
+      ], PIC_RECT],
+      ["Round Guest Tables ×6", ROUND_TABLE(6), PIC_ROUND],
+      ["Head Table", HEAD_TABLE, PIC_HEAD],
       ["Food & Drinks Tables — Andrada & Bogdan", FOOD_TABLES(3, 4)],
       ["Games", [
         "Set up <b>Connect Four</b> — Andria.",
@@ -279,15 +299,14 @@ window.I18N_PAGE = { de: {
         ["Set up <b>1 rectangular plastic table</b> for the guestbook and gifts.", GUESTBOOK_TABLE],
         "Set up <b>3 rectangular plastic tables for food</b> and <b>1 round plastic table for drinks</b>."
       ]],
-      ["Round Guest Tables ×9", ROUND_TABLE(9)],
-      ["Head Table", HEAD_TABLE],
+      ["Round Guest Tables ×9", ROUND_TABLE(9), PIC_ROUND],
+      ["Head Table", HEAD_TABLE, PIC_HEAD],
       ["Food & Drinks Tables — Andrada & Bogdan", FOOD_TABLES(2, 3)],
       ["Games", [
         "Set up <b>Connect Four</b> — Andria.",
         "Set up <b>Cornhole</b> — Liz.",
         "Set up <b>Croquet</b> — Sandi & Dan.",
-        "Set up <b>Bocce</b> — Jordie.",
-        "Set up games <b>if space permits</b>."
+        "Set up <b>Bocce</b> — Jordie."
       ]],
       ["Sound System — Ann Ng", SOUND]
     ]]
@@ -330,6 +349,17 @@ window.I18N_PAGE = { de: {
         var d = el("details", "task");
         d.appendChild(el("summary", "", t(task[0])));
         d.appendChild(bullets(task[1]));
+        // Where the doc says "refer to the picture", show it.
+        (task[2] || []).forEach(function (pic) {
+          var fig = el("figure", "shot");
+          var a = el("a");
+          a.href = pic.src; a.target = "_blank"; a.rel = "noopener";
+          var img = el("img");
+          img.src = pic.src; img.alt = t(pic.alt); img.loading = "lazy";
+          a.appendChild(img);
+          fig.appendChild(a);
+          d.appendChild(fig);
+        });
         body.appendChild(d);
       });
       box.appendChild(body);

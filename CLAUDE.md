@@ -156,11 +156,18 @@ semicolon-separated fragment, with a gold `•` marker.
 `setup-canada.html` holds the Google Doc "Canada Setup Notes" (Drive id
 `1drUKNLj_l04rsj4-kcBpZTt827AQwIYzewucJYiX5Eg`), which is crew-facing detail
 rather than guest content — hence its own page. It renders from a `setup`
-array of `[plan, [[task, [bullets]]]]`, where a bullet is a string or
-`[string, [sub-bullets]]`; shared fragments (place setting, head table, round
-table, food tables) are variables, so the inside and outside plans cannot drift
-apart where the doc repeats itself. `<b>` inside a bullet marks the quantities
-the doc bolds.
+array of `[plan, [[task, [bullets], [pictures]]]]`, where a bullet is a string
+or `[string, [sub-bullets]]` and a picture is `{src, alt}`; shared fragments
+(place setting, head table, round table, food tables, and the photos) are
+variables, so the inside and outside plans cannot drift apart where the doc
+repeats itself. `<b>` inside a bullet marks the quantities the doc bolds.
+
+The doc's photos live in `assets/setup-ca-*.jpg`, attached to the task whose
+bullets say "refer to the picture" — the rectangular table, the round table,
+and two on the head table (draping, then the finished look). They are resized
+to 1600px on the long edge and open full size when tapped, like the plan
+pages. Their alt text is translated; re-export the doc as `application/zip` to
+pull fresh copies, since the text export drops images entirely.
 
 Its headings are translated; the step text is deliberately English-only, since
 the Canada crew works in English and the i18n fallback shows it untranslated.
