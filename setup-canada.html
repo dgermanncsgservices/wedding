@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8" />
+<title>Lavinia & Daniel — Setup Plan (Canada)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon-900: #4A161E;
+    --maroon-800: #5C1F26;
+    --cream-050: #FBF7EE;
+    --gold-500: #C9A877;
+    --ink-900: #2A1418;
+    --ink-500: #7A6266;
+    --line: #DACBAE;
+    --surface: #FFFFFF;
+    --accent: var(--gold-500);
+    --text-soft: var(--ink-500);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream-050);
+    color: var(--ink-900);
+    font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+    background: color-mix(in srgb, var(--cream-050) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: baseline; gap: 0.5rem; }
+  .script { font-family: 'Herr Von Muellerhoff', cursive; font-size: 1.6rem; color: var(--maroon-900); line-height: 1; }
+  .amp { color: var(--gold-500); }
+  .navlinks { display: flex; gap: 0.35rem; overflow-x: auto; scrollbar-width: none; }
+  .navlinks::-webkit-scrollbar { display: none; }
+  .navlinks a {
+    white-space: nowrap; text-decoration: none; font-size: 0.78rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ink-500);
+  }
+  .navlinks a:hover { border-color: var(--gold-500); color: var(--ink-900); }
+
+  main { max-width: 820px; margin: 0 auto; padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem); }
+  .section-head { text-align: center; margin-bottom: 2.2rem; }
+  .eyebrow { font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.72rem; font-weight: 500; color: var(--gold-500); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0.4rem 0 0.3rem; }
+  .section-head p { color: var(--ink-500); font-size: 0.95rem; margin: 0; }
+
+  /* ---------- Plan (Inside / Outside) ---------- */
+  .plan { margin-bottom: 1.4rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); overflow: hidden; box-shadow: 0 20px 50px -34px rgba(42,20,24,0.35); }
+  .plan > summary {
+    display: flex; align-items: center; gap: 0.7rem; cursor: pointer; list-style: none;
+    padding: 1.1rem clamp(1rem, 3vw, 1.6rem);
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3vw, 1.8rem); color: var(--maroon-900);
+  }
+  .plan > summary::-webkit-details-marker { display: none; }
+  .plan > summary::before {
+    content: ""; flex: none;
+    border-left: 9px solid var(--accent);
+    border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+    transition: transform .2s ease;
+  }
+  .plan[open] > summary::before { transform: rotate(90deg); }
+  .plan > summary:hover { color: var(--gold-500); }
+  .plan > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+  .plan-body { padding: 0 clamp(1rem, 3vw, 1.6rem) 0.6rem; }
+
+  /* ---------- Task group ---------- */
+  .task { border-top: 1px solid var(--line); }
+  .task > summary {
+    display: flex; align-items: center; gap: 0.6rem; cursor: pointer; list-style: none;
+    padding: 0.85rem 0;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+    color: var(--maroon-800);
+  }
+  .task > summary::-webkit-details-marker { display: none; }
+  .task > summary::before {
+    content: ""; flex: none;
+    border-left: 6px solid var(--accent);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+    transition: transform .2s ease;
+  }
+  .task[open] > summary::before { transform: rotate(90deg); }
+  .task > summary:hover { color: var(--gold-500); }
+  .task > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  ul.steps { list-style: none; margin: 0 0 0.9rem; padding: 0; }
+  ul.steps li { position: relative; padding-left: 1.05rem; margin-bottom: 0.45rem; font-size: 0.95rem; }
+  ul.steps li::before {
+    content: "\2022"; position: absolute; left: 0.15rem; top: -0.05rem;
+    color: var(--accent); font-size: 1rem; line-height: 1.5;
+  }
+  ul.steps ul.steps { margin: 0.4rem 0 0.2rem; }
+  ul.steps ul.steps li { font-size: 0.9rem; color: var(--ink-500); }
+  ul.steps ul.steps li::before { content: "\2013"; color: var(--line); }
+  ul.steps b { font-weight: 500; color: var(--maroon-900); }
+  ul.steps ul.steps b { color: var(--ink-900); }
+
+  footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
+  footer .script { font-size: 1.3rem; color: var(--maroon-800); display: block; margin-bottom: 0.3rem; }
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
+  <nav class="navlinks"></nav>
+</div>
+
+<main>
+  <div class="section-head">
+    <span class="eyebrow" data-i18n="setup.eyebrow">Canada · Setup crew</span>
+    <h1 data-i18n="setup.h1">Setup Plan</h1>
+    <p data-i18n="setup.desc">Everything that goes up before the guests arrive. Tap a heading to open it.</p>
+  </div>
+  <div id="plans"></div>
+</main>
+
+<footer>
+  <span class="script">Lavinia &amp; Daniel</span>
+  <span data-i18n="setup.footer">Thank you for setting all of this up.</span>
+</footer>
+
+<script>
+window.I18N_PAGE = { de: {
+  "page.title": "Lavinia & Daniel — Aufbauplan (Kanada)",
+  "Menu": "Menü",
+  "Day-of Timeline": "Tagesablauf",
+  "Day-of Team": "Team vor Ort",
+  "Setup Plan": "Aufbauplan",
+  "setup.eyebrow": "Kanada · Aufbauteam",
+  "setup.h1": "Aufbauplan",
+  "setup.desc": "Alles, was vor dem Eintreffen der Gäste aufgebaut wird. Tippe auf einen Titel, um ihn zu öffnen.",
+  "setup.footer": "Danke, dass ihr das alles aufbaut.",
+  "Inside Plan": "Plan drinnen",
+  "Outside Plan": "Plan draußen",
+  "Lighting": "Beleuchtung",
+  "Tables & Chairs": "Tische & Stühle",
+  "Rectangular Guest Tables \u00d74": "Rechteckige Gästetische \u00d74",
+  "Round Guest Tables \u00d76": "Runde Gästetische \u00d76",
+  "Round Guest Tables \u00d79": "Runde Gästetische \u00d79",
+  "Head Table": "Brauttisch",
+  "Food & Drinks Tables \u2014 Andrada & Bogdan": "Essen & Getränke \u2014 Andrada & Bogdan",
+  "Games": "Spiele",
+  "Sound System \u2014 Ann Ng": "Tonanlage \u2014 Ann Ng"
+} };
+</script>
+<script src="assets/i18n.js"></script>
+<script src="assets/day-canada.js"></script>
+<script src="assets/nav.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // ---------------- DATA ----------------
+  // Transcribed from the Google Doc "Canada Setup Notes".
+  // A bullet is either a string or [string, [sub-bullets]].
+  var PLACE_SETTING = [
+    "Large plate",
+    "Knife on the right side",
+    "Fork on the left side",
+    "Water goblet at the top right side",
+    "Game card on the plate",
+    "Sage cocktail napkin on top of the game card, with the <b>scalloped edge facing up</b>",
+    "Gold pen placed <b>diagonally on top of the napkin</b>"
+  ];
+
+  var HEAD_TABLE = [
+    "Place <b>1 round tablecloth</b> on the head table.",
+    ["<b>Table draping:</b> start in the middle of the table at about lap length. Bring it forward and down the length of the table, stopping just above the floor. Twist the fabric, then bring it back up and down the back of the table. Wrap the remaining material along the table and tuck it underneath.",
+      ["Repeat the same draping on the <b>second half of the table</b>.",
+       "Refer to the picture for the final look."]],
+    ["Set up <b>3 pillar vases at each end of the front of the table</b>.",
+      ["Fill each vase with ivy.", "Fill with water.", "Place <b>1 floating candle</b> in each vase."]],
+    "Place <b>4 tea candle holders on each side</b> of the table — <b>8 holders total</b>.",
+    "Place <b>1 bud vase in the middle</b> of the table, with <b>2 more bud vases on either side</b> — <b>5 vases total</b>.",
+    "Fill the space among the vases and candles with <b>long pieces of ivy</b>.",
+    ["Set up <b>2 places</b>:",
+      ["Large plate", "Knife on the right side", "Fork on the left side",
+       "Water goblet at the top right side", "Cocktail napkin"]],
+    "Refer to the picture for final placement."
+  ];
+
+  var ROUND_TABLE = function (count) {
+    return [
+      "Place <b>1 round tablecloth</b> on each table.",
+      "Lay <b>1 set of string lights in the middle</b> of each table.",
+      "Wrap the <b>green table runner over the string lights</b> so the lights are not visible, creating a <b>“nest”</b> effect.",
+      "Place <b>3 bud vases</b> on each table.",
+      "Place <b>4 small pieces of ivy</b> around the centrepiece.",
+      "Place the <b>table number in the centre</b> of the table.",
+      ["Set up <b>8 places</b> at each table:", PLACE_SETTING],
+      "Refer to the picture for final placement."
+    ];
+  };
+
+  var GUESTBOOK_TABLE = [
+    "Use an oval tablecloth.",
+    "Place <b>2 guestbook and gift signs</b>.",
+    "Set up a basket for cards, the guestbook, pens, and camera.",
+    "Create a pretty table arrangement using the <b>green table runner, ivy, and any remaining bud vases</b>."
+  ];
+
+  var COLORING_TABLE = ["Use a plastic tablecloth.", "Set up <b>30 coloring books</b> and pencil crayons."];
+
+  var FOOD_TABLES = function (rect, total) {
+    return [
+      ["Set up <b>" + total + " plastic tables</b>:",
+        ["<b>" + rect + " rectangular tables for food</b>", "<b>1 round table for drinks</b>"]],
+      "Cover each table with a <b>white tablecloth</b>.",
+      "Cover the tablecloth with <b>butcher paper</b>.",
+      "Use <b>ivy and any remaining bud vases</b> for decoration."
+    ];
+  };
+
+  var SOUND = [
+    "Set up the <b>speaker and wireless microphone near the head table</b>.",
+    "Refer to the <b>floor plan</b> for placement.",
+    "Set up the <b>iPad with the wedding soundtrack</b>."
+  ];
+
+  var setup = [
+    ["Inside Plan", [
+      ["Lighting", [
+        "Set up hanging lights throughout the community centre, including behind the head table.",
+        "Refer to the <b>floor plan</b> for the lighting layout."
+      ]],
+      ["Tables & Chairs", [
+        "Set up <b>4 wooden tables together to create one long table</b> in front of the head table.",
+        "Place <b>12 chairs on each side</b> of the long table — <b>24 chairs total</b>.",
+        "Cover all chairs with <b>white chair covers</b>.",
+        "Set up <b>6 plastic round tables</b>, with <b>8 chairs at each table — 48 chairs total</b>.",
+        "Cover all chairs with <b>white chair covers</b>.",
+        "Refer to the <b>floor plan</b> for exact table placement.",
+        ["Set up <b>1 rectangular plastic table for the coloring station</b>, if space permits.", COLORING_TABLE],
+        ["Set up <b>1 rectangular plastic table in the foyer</b> for the guestbook and gifts.", GUESTBOOK_TABLE],
+        "Set up <b>3 rectangular plastic tables for food</b> and <b>1 round plastic table for drinks</b>."
+      ]],
+      ["Rectangular Guest Tables ×4", [
+        "Place <b>1 rectangular tablecloth</b> on each table.",
+        "Spread <b>1 set of string lights across each table</b>, with each set extending across <b>2 tables</b>.",
+        "Wrap the <b>green table runner over the string lights</b> so the lights are not visible.",
+        "Place <b>4 bud vases</b> on each table, on top of the table runner.",
+        "Place <b>3 long pieces of ivy</b> among the vases along the runner.",
+        "Place the <b>table number in the centre</b> of the table.",
+        ["Set up <b>6 places per table</b> — 3 on each side:",
+          ["Large plate", "Knife on the right side", "Fork on the left side",
+           "Water goblet on the right side", "Game card on the plate",
+           "Sage cocktail napkin on top of the game card, with the <b>scalloped edge facing up</b>",
+           "Gold pen placed <b>diagonally on top of the napkin</b>"]],
+        "Refer to the picture for final placement."
+      ]],
+      ["Round Guest Tables ×6", ROUND_TABLE(6)],
+      ["Head Table", HEAD_TABLE],
+      ["Food & Drinks Tables — Andrada & Bogdan", FOOD_TABLES(3, 4)],
+      ["Games", [
+        "Set up <b>Connect Four</b> — Andria.",
+        "Set up <b>Cornhole</b> — Liz.",
+        "Set up games <b>if space permits</b>."
+      ]],
+      ["Sound System — Ann Ng", SOUND]
+    ]],
+    ["Outside Plan", [
+      ["Tables & Chairs", [
+        "Set up <b>9 plastic round tables</b>, with <b>8 chairs at each table — 74 chairs total</b>.",
+        "Refer to the <b>outside floor plan</b> for exact table placement.",
+        ["Set up <b>1 picnic table for the coloring station</b>.", COLORING_TABLE],
+        ["Set up <b>1 rectangular plastic table</b> for the guestbook and gifts.", GUESTBOOK_TABLE],
+        "Set up <b>3 rectangular plastic tables for food</b> and <b>1 round plastic table for drinks</b>."
+      ]],
+      ["Round Guest Tables ×9", ROUND_TABLE(9)],
+      ["Head Table", HEAD_TABLE],
+      ["Food & Drinks Tables — Andrada & Bogdan", FOOD_TABLES(2, 3)],
+      ["Games", [
+        "Set up <b>Connect Four</b> — Andria.",
+        "Set up <b>Cornhole</b> — Liz.",
+        "Set up <b>Croquet</b> — Sandi & Dan.",
+        "Set up <b>Bocce</b> — Jordie.",
+        "Set up games <b>if space permits</b>."
+      ]],
+      ["Sound System — Ann Ng", SOUND]
+    ]]
+  ];
+
+  // ---------------- HELPERS ----------------
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+  function t(s) { return (window.WD_I18N && s) ? window.WD_I18N.t(s, s) : s; }
+  function clear(n) { while (n && n.firstChild) n.removeChild(n.firstChild); }
+
+  // ---------------- RENDER ----------------
+  // A bullet is a string, or [string, [sub-bullets]] for a nested list.
+  function bullets(items) {
+    var ul = el("ul", "steps");
+    items.forEach(function (item) {
+      var text = typeof item === "string" ? item : item[0];
+      var li = el("li", "", t(text));
+      if (typeof item !== "string" && item[1]) li.appendChild(bullets(item[1]));
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+
+  function render() {
+    var root = document.getElementById("plans");
+    if (!root) return;
+    clear(root);
+    setup.forEach(function (plan, i) {
+      var box = el("details", "plan");
+      box.open = i === 0;                       // the inside plan starts open
+      var sum = el("summary", "", t(plan[0]));
+      box.appendChild(sum);
+      var body = el("div", "plan-body");
+      plan[1].forEach(function (task) {
+        var d = el("details", "task");
+        d.appendChild(el("summary", "", t(task[0])));
+        d.appendChild(bullets(task[1]));
+        body.appendChild(d);
+      });
+      box.appendChild(body);
+      root.appendChild(box);
+    });
+  }
+
+  if (window.WD_I18N) window.WD_I18N.onChange(render);
+  else render();
+})();
+</script>
+</html>

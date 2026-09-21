@@ -8,6 +8,7 @@ Static site, no build step. GitHub Pages deploys from `main`; custom domain
 - `switzerland.html` — Switzerland (ceremony, Apéro, reception)
 - `seating-switzerland.html` + `assets/seating-switzerland.jpg` — static seating chart
 - `apero-switzerland.html` + `assets/apero-switzerland.jpg` — static Apéro site plan
+- `setup-canada.html` — the Canada setup plan for the crew
 
 The two static plan pages share one template: top bar, centred `.section-head`,
 a `.chart-frame` holding the image, footer. To add another, copy one of them,
@@ -113,14 +114,15 @@ the domain. Pages set `window.WD_NAV_ITEMS`, a function returning
 `[{href, label}]`, and `nav.js` renders it into `.navlinks` and re-renders it
 on every language switch; a page without that global keeps its markup links.
 
-**Every page in a section shows the same menu.** The Switzerland section's menu
-lives in `assets/day-switzerland.js`, loaded by both `switzerland.html` and
-`seating-switzerland.html`, so the two are identical; only the hrefs differ,
-picked by whether `#tl-ch` is on the current page. Its `GROUPS` array mirrors
-the sheet's Group column — **update it when a sync adds or renames a group**;
-`switzerland.html` logs a console warning when the two drift apart. Every page
-in the section also needs the group labels in its own `de` dictionary. Canada
-is a one-page section and builds its menu from `scheduleCA` directly.
+**Every page in a section shows the same menu.** Each section's menu lives in
+one file — `assets/day-switzerland.js` and `assets/day-canada.js` — loaded by
+every page of that section, so they cannot differ; only the hrefs change,
+picked by whether the timeline (`#tl-ch` / `#tl-ca`) is on the current page.
+Each file's `GROUPS` array mirrors that tab's Group column — **update it when a
+sync adds or renames a group**; the day page logs a console warning when the
+two drift apart. Canada's is empty, so its menu points at `#schedule` as a
+whole. Every page in a section also needs the menu labels in its own `de`
+dictionary.
 
 `nav.js` must not set `position` on `.topbar`. The bar is `position: sticky`,
 which is both the containing block `.nav-panel` anchors to and the reason the
@@ -144,3 +146,19 @@ full-width toggle costs roughly 180px over the Switzerland timeline on a phone.
 
 Note lines render as a bulleted `<ul class="t-notes">`, one `<li>` per
 semicolon-separated fragment, with a gold `•` marker.
+
+## The Canada setup page
+
+`setup-canada.html` holds the Google Doc "Canada Setup Notes" (Drive id
+`1drUKNLj_l04rsj4-kcBpZTt827AQwIYzewucJYiX5Eg`), which is crew-facing detail
+rather than guest content — hence its own page. It renders from a `setup`
+array of `[plan, [[task, [bullets]]]]`, where a bullet is a string or
+`[string, [sub-bullets]]`; shared fragments (place setting, head table, round
+table, food tables) are variables, so the inside and outside plans cannot drift
+apart where the doc repeats itself. `<b>` inside a bullet marks the quantities
+the doc bolds.
+
+Its headings are translated; the step text is deliberately English-only, since
+the Canada crew works in English and the i18n fallback shows it untranslated.
+If that changes, add the bullet strings to the page's `de` dictionary keyed by
+the English source, as everywhere else.

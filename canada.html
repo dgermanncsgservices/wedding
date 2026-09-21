@@ -388,6 +388,7 @@
 window.I18N_PAGE = { de: {
   "Menu": "Menü",
   "Day-of Timeline": "Tagesablauf",
+  "Setup Plan": "Aufbauplan",
   "Day-of Team": "Team vor Ort",
   "nav.schedule": "Programm",
   "nav.team": "Team vor Ort",
@@ -455,6 +456,7 @@ window.I18N_PAGE = { de: {
 } };
 </script>
 <script src="assets/i18n.js"></script>
+<script src="assets/day-canada.js"></script>
 <script src="assets/nav.js"></script>
 <script>
 (function () {
@@ -639,19 +641,20 @@ window.I18N_PAGE = { de: {
   }
 
   // ---------------- NAV ----------------
-  // The menu lists this day's own sections; the events hub is reachable only
-  // by entering the domain.
-  window.WD_NAV_ITEMS = function () {
-    var items = [], seen = {};
+  // The menu lives in assets/day-canada.js, shared with the setup page so the
+  // whole day carries one menu. Warn if the sheet gains a group it lacks.
+  (function () {
+    if (!window.WD_DAY_GROUPS || !window.console) return;
+    var known = {};
+    window.WD_DAY_GROUPS.forEach(function (g) { known[g] = true; });
     scheduleCA.forEach(function (r) {
-      if (!r[0] || seen[r[0]]) return;
-      seen[r[0]] = true;
-      items.push({ href: "#" + groupId(r[0]), label: t(r[0]) });
+      if (r[0] && !known[r[0]]) {
+        known[r[0]] = true;
+        console.warn("Day menu is missing group '" + r[0] +
+                     "' - add it to assets/day-canada.js");
+      }
     });
-    if (!items.length) items.push({ href: "#schedule", label: t("Day-of Timeline") });
-    items.push({ href: "#team", label: t("Day-of Team") });
-    return items;
-  };
+  })();
 
   // ---------------- SYNC TIME ----------------
   function renderSyncTime(lang) {
