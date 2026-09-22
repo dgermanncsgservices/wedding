@@ -79,10 +79,6 @@
     display: block; width: 100%; border: 0; border-radius: 12px;
     height: min(70vh, 620px); min-height: 400px; background: #f2f2f3;
   }
-  .pending {
-    background: var(--surface); border: 1px dashed var(--line); border-radius: 16px;
-    padding: 2rem 1.5rem; text-align: center; color: var(--ink-500); font-size: 0.92rem;
-  }
   .chart-hint a { color: inherit; border-bottom: 1px dotted var(--gold-500); text-decoration: none; }
   footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
   footer .script { font-size: 1.3rem; color: var(--maroon-800); display: block; margin-bottom: 0.3rem; }
@@ -117,8 +113,15 @@
   <section class="panel" id="seating">
     <div class="panel-head">
       <h2 data-i18n="out.seat.h2">Seating</h2>
+      <p class="lead" data-i18n="out.seat.lead">Find your table below.</p>
     </div>
-    <p class="pending" data-i18n="out.seat.pending">The outdoor seating chart goes here once it is ready.</p>
+    <div class="chart-frame">
+      <a href="assets/seating-outdoor-canada.jpg" target="_blank" rel="noopener">
+        <img src="assets/seating-outdoor-canada.jpg" alt="Outdoor seating chart: the bridal table at the top with Lavinia and Daniel, and round tables 1 to 9 laid out across the lawn" data-i18n-attr="alt:out.seat.alt" />
+      </a>
+    </div>
+    <p class="chart-hint"><a href="assets/seating-outdoor-canada.jpg" target="_blank" rel="noopener"
+       data-i18n="chart.hint">Tap the chart to open it full size</a></p>
   </section>
 </main>
 
@@ -143,7 +146,8 @@ window.I18N_PAGE = { de: {
   "out.plan.lead": "Wo draußen die Tische und alles andere stehen.",
   "out.plan.alt": "Plan für draußen mit den Tischen 1 bis 9, dem Brauttisch von Lavinia und Daniel, Buffet, Getränken, Gästebuch, Geschenktisch, Rasenspielen und dem Picknicktisch für die Kinder",
   "out.seat.h2": "Sitzplan",
-  "out.seat.pending": "Der Sitzplan für draußen kommt hier hin, sobald er fertig ist.",
+  "out.seat.lead": "Hier findest du deinen Tisch.",
+  "out.seat.alt": "Sitzplan draußen: oben der Brauttisch mit Lavinia und Daniel, dazu die runden Tische 1 bis 9 auf der Wiese",
   "chart.hint": "Tippe auf den Plan, um ihn gross zu öffnen",
   "seating.footer": "Wir freuen uns auf dich!"
 } };

@@ -200,7 +200,6 @@ Canada's plans are grouped by **where you are**, not by what kind of drawing
 they are: the menu has **Indoors** and **Outdoors**, and each page stacks two
 `.panel` sections — `#floorplan` then `#seating`. Indoors the floor plan is the
 3D string-light artifact in a `.stage-frame` iframe; outdoors it is the aerial
-photo. The outdoor seating chart does not exist yet, so that panel carries a
-`.pending` placeholder — replace it with the same `.chart-frame` markup the
-other charts use. Assets keep their own names (`seating-canada.jpg`,
-`tables-canada.jpg`, `string-lights-canada.html`) and are not tied to a page.
+photo. Both seating panels now hold a real chart. Assets are named for what
+they are, not for the page they sit on: `seating-indoor-canada.jpg`,
+`seating-outdoor-canada.jpg`, `tables-canada.jpg`, `string-lights-canada.html`.
