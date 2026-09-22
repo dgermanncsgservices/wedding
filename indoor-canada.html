@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Jost:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --maroon-900: #4A161E;
@@ -79,6 +79,37 @@
     display: block; width: 100%; border: 0; border-radius: 12px;
     height: min(70vh, 620px); min-height: 400px; background: #f2f2f3;
   }
+  .cutlist {
+    margin-top: 1.6rem; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; padding: clamp(1.1rem, 3vw, 1.6rem);
+    box-shadow: 0 20px 50px -34px rgba(42,20,24,0.35);
+  }
+  .cut-kicker {
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold-500); margin: 0 0 0.35rem;
+  }
+  .cutlist h3 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: clamp(1.25rem, 2.6vw, 1.5rem); margin: 0 0 0.35rem; color: var(--maroon-900);
+  }
+  .cut-lead { color: var(--ink-500); font-size: 0.9rem; margin: 0 0 1rem; }
+  .cut-table { width: 100%; border-collapse: collapse; }
+  .cut-table th, .cut-table td { text-align: left; padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+  .cut-table th { padding-right: 1rem; width: 8.5rem; }
+  @media (max-width: 380px) { .cut-table th { width: 7rem; } .cut-table td { font-size: 0.85rem; } }
+  .cut-table thead th {
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-500); font-weight: 500; padding-top: 0;
+  }
+  .cut-table tbody th {
+    font-weight: 500; color: var(--ink-900); font-size: 0.95rem;
+    display: flex; align-items: center; gap: 0.55rem;
+  }
+  .cut-table td { font-size: 0.92rem; color: var(--ink-900); }
+  .sw { width: 14px; height: 14px; border-radius: 3px; flex: none; box-shadow: 0 0 0 1px rgba(0,0,0,0.12) inset; }
+  .cut-total th, .cut-total td { border-bottom: 0; font-weight: 500; color: var(--maroon-900); }
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
   .pending {
     background: var(--surface); border: 1px dashed var(--line); border-radius: 16px;
     padding: 2rem 1.5rem; text-align: center; color: var(--ink-500); font-size: 0.92rem;
@@ -111,6 +142,28 @@
     </div>
     <p class="chart-hint"><a href="assets/string-lights-canada.html" target="_blank" rel="noopener"
        data-i18n="in.plan.hint">Open the 3D plan full screen</a></p>
+    <div class="cutlist">
+      <p class="cut-kicker mono" data-i18n="in.cut.kicker">Hall 40 × 60 ft · hooks at 12 ft</p>
+      <h3 data-i18n="in.cut.h3">String light cut list</h3>
+      <p class="cut-lead" data-i18n="in.cut.lead">Four strings. The colours match the 3D plan — tag each string at both ends before it goes up.</p>
+      <table class="cut-table">
+        <thead>
+          <tr><th data-i18n="in.cut.col1">Colour</th><th data-i18n="in.cut.col2">String lights to use</th></tr>
+        </thead>
+        <tbody>
+          <tr><th><i class="sw" style="background:#B93B33"></i><span data-i18n="in.cut.red">Red</span></th>
+              <td class="mono" data-i18n="in.cut.red.v">1 × 100 ft</td></tr>
+          <tr><th><i class="sw" style="background:#4B8646"></i><span data-i18n="in.cut.green">Green</span></th>
+              <td class="mono" data-i18n="in.cut.green.v">2 × 25 ft, joined</td></tr>
+          <tr><th><i class="sw" style="background:#395BBD"></i><span data-i18n="in.cut.blue">Blue</span></th>
+              <td class="mono" data-i18n="in.cut.blue.v">2 × 25 ft, joined</td></tr>
+          <tr><th><i class="sw" style="background:#D2A539"></i><span data-i18n="in.cut.yellow">Yellow</span></th>
+              <td class="mono" data-i18n="in.cut.yellow.v">1 × 25 ft</td></tr>
+          <tr class="cut-total"><th data-i18n="in.cut.total">Total</th>
+              <td class="mono" data-i18n="in.cut.total.v">1 × 100 ft + 5 × 25 ft = 225 ft</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section class="panel" id="seating">
@@ -149,6 +202,21 @@ window.I18N_PAGE = { de: {
   "in.plan.lead": "Die Lichterketten in 3D. Ziehen zum Drehen, scrollen zum Zoomen.",
   "in.plan.frame": "3D-Plan für die Lichterketten",
   "in.plan.hint": "Den 3D-Plan im Vollbild öffnen",
+  "in.cut.kicker": "Saal 40 × 60 ft · Haken auf 12 ft",
+  "in.cut.h3": "Zuschnittliste Lichterketten",
+  "in.cut.lead": "Vier Ketten. Die Farben entsprechen dem 3D-Plan — beschrifte jede Kette an beiden Enden, bevor sie hochgeht.",
+  "in.cut.col1": "Farbe",
+  "in.cut.col2": "Zu verwendende Lichterketten",
+  "in.cut.red": "Rot",
+  "in.cut.red.v": "1 × 100 ft",
+  "in.cut.green": "Grün",
+  "in.cut.green.v": "2 × 25 ft, verbunden",
+  "in.cut.blue": "Blau",
+  "in.cut.blue.v": "2 × 25 ft, verbunden",
+  "in.cut.yellow": "Gelb",
+  "in.cut.yellow.v": "1 × 25 ft",
+  "in.cut.total": "Total",
+  "in.cut.total.v": "1 × 100 ft + 5 × 25 ft = 225 ft",
   "in.seat.h2": "Sitzplan",
   "in.seat.lead": "Hier findest du deinen Tisch.",
   "in.seat.alt": "Sitzplan drinnen: der Brauttisch mit den Tischen 1 bis 4 in einer Reihe davor, die runden Tische 5 bis 10 im Saal, der Maltisch, drei Buffets und der Getränketisch",

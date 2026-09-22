@@ -179,15 +179,22 @@ the English source, as everywhere else.
 
 `assets/string-lights-canada.html` is a self-contained three.js artifact,
 uploaded as-is and never edited: a bundler HTML that gunzips its own assets
-into blob URLs and swaps in the real page. `lights-canada.html` wraps it in
-the site's chrome — top bar, section menu, heading — with the artifact in a
-`.stage-frame` iframe plus a link to open it full screen, which is the usable
-way to orbit it on a phone.
+into blob URLs and swaps in the real page. The `#floorplan` panel of
+`indoor-canada.html` holds it in a `.stage-frame` iframe, plus a link to open
+it full screen, which is the usable way to orbit it on a phone.
 
 It pulls three.js from unpkg at runtime via an importmap inside the bundle, so
-the 3D view needs a working connection; the spec plate renders regardless. To
-replace it, drop in a new export under the same filename — the wrapper does
-not care what the artifact contains.
+the 3D view needs a working connection. To replace it, drop in a new export
+under the same filename — the panel does not care what the artifact contains.
+Before publishing a new one, diff its first 381 lines against the copy in the
+repo: that is the bundler loader, and if it matches byte for byte only the
+payload changed, so the whole file does not need re-reading.
+
+The export carries no legend, so the rigging numbers live on the page as the
+`.cutlist` table under the 3D: four strings keyed by colour, with the swatch
+hexes sampled from the companion cut list so they match the colours in the
+model. Those four hexes are the one place in the site where a colour is not a
+theme token — they are data, not decoration, and must not be restyled.
 
 Canada's plans are grouped by **where you are**, not by what kind of drawing
 they are: the menu has **Indoors** and **Outdoors**, and each page stacks two
