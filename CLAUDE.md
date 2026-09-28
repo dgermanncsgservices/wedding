@@ -57,6 +57,12 @@ Rules when syncing:
 - The sheet's "Phone Nr" column sometimes holds status text (`?`, `Confirmed`)
   instead of a number — leave those blank rather than rendering them as phones.
 - Bump `SYNCED_AT` in the page you touched; the footer shows it.
+- `read_file_content` on the spreadsheet sometimes returns a **sampled** view —
+  about 24 rows per sheet with long notes cut off at `...`. Never sync from
+  that: it would read as rows deleted. When the response looks sampled, pull
+  the whole workbook with `download_file_content` and
+  `exportMimeType: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`,
+  then read every sheet with openpyxl.
 - `equipment` is a list of `[heading, [items]]`, one entry per "Equipment ..."
   block in the sheet, each rendered as its own card. The sheet currently has
   two, Apéro and Reception.

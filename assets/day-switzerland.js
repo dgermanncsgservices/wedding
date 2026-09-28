@@ -11,7 +11,7 @@
 (function () {
   "use strict";
 
-  var GROUPS = ["Setup", "Ceremony", "Apéro", "Reception"];
+  var GROUPS = ["Setup", "Setup Ceremony", "Ceremony", "Apéro", "Reception"];
   var DAY_PAGE = "switzerland.html";
   var APERO_PAGE = "apero-switzerland.html";
   var SEATING_PAGE = "seating-switzerland.html";
