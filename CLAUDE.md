@@ -184,6 +184,39 @@ the Canada crew works in English and the i18n fallback shows it untranslated.
 If that changes, add the bullet strings to the page's `de` dictionary keyed by
 the English source, as everywhere else.
 
+## The offline bundle
+
+`wedding-offline.html` is the whole site as one file, for the venue where
+there is no signal. `tools/build-offline.py` generates it — **re-run it after
+every sheet sync, or the offline copy goes stale**:
+
+```
+python3 tools/build-offline.py
+```
+
+It needs no network. Each page keeps its own markup, styles and scripts and
+travels as a `srcdoc` document inside one host frame, so the sticky bar,
+hamburger, EN/DE switch and collapsible groups all behave exactly as they do
+online. Three things cannot survive as they are, and the build rewrites them:
+
+- Cross-page links (`canada.html#team`) become a message to the host frame,
+  which swaps the document and scrolls to the anchor. The host mirrors it in
+  its own hash — `#canada.html!team` — so Back works and a page can be linked.
+- A plan's `<a href="assets/....jpg">` becomes a lightbox, because a browser
+  will not navigate to a `data:` URL. Only the `<img>` carries the bytes and
+  the links find it by `data-wd-name`; inlining every reference would carry
+  the larger plans three times over.
+- The 3D plan's "open full screen" link calls the Fullscreen API on the frame.
+
+Fonts live once in the host, spliced into each page as it is shown — the
+`/*WD_FONTS*/` slot. `tools/fetch-fonts.py` regenerates
+`tools/offline-fonts.css` from Google Fonts, latin subset only; run it only
+when a page starts using a new family or weight.
+
+**The 3D string light view is the one thing that still needs a connection** —
+the artifact pulls three.js from unpkg at runtime and that cannot be carried
+in the file. The cut list beside it, and everything else, works offline.
+
 ## The Canada string-light page
 
 `assets/string-lights-canada.html` is a self-contained three.js artifact,
