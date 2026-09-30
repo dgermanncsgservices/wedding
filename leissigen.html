@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Parken · Lavinia &amp; Daniel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --maroon-950: #2C0D12;
+    --maroon-900: #4A161E;
+    --maroon-800: #5C1F26;
+    --maroon-700: #712833;
+    --cream-050: #FBF7EE;
+    --cream-100: #F1E7D6;
+    --cream-200: #E4D5BC;
+    --gold-500: #C9A877;
+    --gold-600: #AD8A5C;
+    --ink-900: #2A1418;
+    --ink-700: #4A3236;
+    --ink-500: #7A6266;
+    --line: #DACBAE;
+    --bg: var(--cream-050);
+    --surface: #FFFFFF;
+    --panel: var(--maroon-900);
+    --panel-2: var(--maroon-800);
+    --text: var(--ink-900);
+    --text-soft: var(--ink-500);
+    --on-panel: var(--cream-100);
+    --on-panel-soft: #D9C3B0;
+    --accent: var(--gold-500);
+    --brand-ink: var(--maroon-900);
+    --shadow: 0 20px 50px -25px rgba(42, 20, 24, 0.35);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1B0F11;
+      --surface: #26161A;
+      --panel: #170A0C;
+      --panel-2: #241417;
+      --text: #F1E7D6;
+      --text-soft: #B7A199;
+      --on-panel: #F1E7D6;
+      --on-panel-soft: #C9AC9B;
+      --line: #3E2A2C;
+      --accent: #D9B98A;
+      --brand-ink: #D9B98A;
+      --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1B0F11;
+    --surface: #26161A;
+    --panel: #170A0C;
+    --panel-2: #241417;
+    --text: #F1E7D6;
+    --text-soft: #B7A199;
+    --on-panel: #F1E7D6;
+    --on-panel-soft: #C9AC9B;
+    --line: #3E2A2C;
+    --accent: #D9B98A;
+    --brand-ink: #D9B98A;
+    --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .script {
+    font-family: 'Herr Von Muellerhoff', cursive;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .mono, .num {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ---------- Top pill nav ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: baseline; gap: 0.5rem; }
+  .brand .script { font-size: 1.6rem; color: var(--brand-ink); }
+  .brand .amp { color: var(--accent); }
+  
+  /* ---------- Intro ---------- */
+  .intro { background: var(--panel); color: var(--on-panel); text-align: center; padding: clamp(2rem, 6vw, 3.5rem) 1.25rem; }
+  .intro-title { font-size: clamp(2rem, 6vw, 3rem); }
+  .intro-meta { margin-top: 0.4rem; color: var(--on-panel-soft); font-size: 0.95rem; }
+
+  /* ---------- Sections ---------- */
+  main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+  section { padding: clamp(3rem, 6vw, 5rem) 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .section-head { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.2rem; max-width: 60ch; }
+  .section-head .eyebrow { color: var(--accent); }
+  .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+  .section-head p { color: var(--text-soft); font-size: 0.98rem; margin: 0.3rem 0 0; }
+
+  /* ---------- Parken ---------- */
+  .park-layout { display: grid; grid-template-columns: minmax(300px, 400px) 1fr; gap: 1.6rem; align-items: start; }
+  @media (max-width: 900px) { .park-layout { grid-template-columns: 1fr; } .park-map-col { order: -1; } }
+  .park-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .p-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 0.35rem;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .p-card.is-selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), var(--shadow);
+    background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  }
+  .p-select {
+    all: unset;
+    box-sizing: border-box;
+    display: flex; align-items: center; gap: 0.95rem;
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .p-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .p-badge {
+    flex: none;
+    width: 2.1rem; height: 2.1rem; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--accent) 35%, var(--surface));
+    color: var(--ink-900);
+    font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 0.95rem;
+    transition: background .2s ease, color .2s ease;
+  }
+  :root[data-theme="dark"] .p-badge { color: #F1E7D6; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .p-badge { color: #F1E7D6; } }
+  .p-card.is-selected .p-badge { background: var(--maroon-900); color: var(--cream-100); }
+  .p-info { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+  .p-name { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; font-weight: 500; line-height: 1.25; color: var(--text); }
+  .p-meta { font-size: 0.8rem; color: var(--text-soft); }
+  .p-nav {
+    display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+    margin: 0.1rem 0.85rem 0.8rem;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+    background: var(--maroon-900);
+    color: var(--cream-100);
+    text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+    transition: background .2s ease, transform .15s ease;
+  }
+  .p-nav:hover { background: var(--maroon-700); }
+  .p-nav:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .park-hint { color: var(--text-soft); font-size: 0.88rem; margin: 0 0 0.2rem; }
+
+  .park-map-col { position: sticky; top: 5rem; }
+  @media (max-width: 900px) { .park-map-col { position: static; scroll-margin-top: 4.5rem; } }
+  .map-wrap { position: relative; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #FBF7EE; box-shadow: var(--shadow); }
+  .map { position: relative; width: 100%; height: 520px; overflow: hidden; background: #FBF7EE; touch-action: pan-y; }
+  @media (max-width: 900px) { .map { height: 340px; } }
+  .map svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+  .map { user-select: none; -webkit-user-select: none; cursor: grab; }
+  .map.dragging { cursor: grabbing; }
+  .map-ctrl { position: absolute; top: 10px; left: 10px; z-index: 4; display: flex; flex-direction: column; gap: 6px; }
+  .map-ctrl button { width: 40px; height: 40px; border-radius: 10px; border: 1px solid #D9C3A0; background: rgba(251,247,238,0.95); color: #4A161E; font: 500 22px/1 'Jost', sans-serif; cursor: pointer; box-shadow: 0 1px 4px rgba(74,22,30,0.15); display: flex; align-items: center; justify-content: center; padding: 0; }
+  .map-ctrl button:hover { background: #F1E7D6; }
+  .map-ctrl button:focus-visible { outline: 2px solid #8A4B12; outline-offset: 2px; }
+  .map-ctrl button:disabled { opacity: 0.4; cursor: default; }
+  .map-ctrl .mc-reset { font-size: 18px; }
+  .map-attrib { position: absolute; right: 0; bottom: 0; z-index: 3; background: rgba(255,255,255,0.78); color: #333; font-size: 10px; padding: 1px 6px; border-top-left-radius: 6px; font-family: 'Jost', sans-serif; }
+  .map-attrib a { color: #333; }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.3rem; margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-soft); }
+  .map-legend span { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .lg-line { display: inline-block; width: 26px; height: 5px; border-radius: 3px; }
+  .lg-dark { background: #8A4B12; }
+  .lg-light { background: #D1B074; }
+
+  footer {
+    padding: 2.5rem clamp(1rem, 4vw, 2.5rem) 3rem;
+    text-align: center; color: var(--text-soft); font-size: 0.82rem;
+  }
+  footer .script { font-size: 1.5rem; color: var(--panel-2); display: block; margin-bottom: 0.4rem; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) footer .script { color: var(--accent); } }
+  :root[data-theme="dark"] footer .script { color: var(--accent); }
+  footer a { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="script">Lavinia <span class="amp">&amp;</span> Daniel</span></div>
+</div>
+
+<header class="intro">
+  <div class="intro-title display">Feier Schweiz</div>
+  <div class="intro-meta mono">Samstag, 17. Oktober 2026 · 18:00 Uhr</div>
+  <div class="intro-meta">Alti Sagi Leissigen · Läntiweg, Leissigen</div>
+</header>
+
+<main>
+  <section id="parken">
+    <div class="section-head">
+      <span class="eyebrow">Anreise · Parken</span>
+      <h2>Parkplätze in Leissigen</h2>
+      <p>Direkt bei der Alti Sagi hat es keine Parkplätze. Bitte parkiere an einem der folgenden Orte und gehe von dort zu Fuss zur Feier. Tippe auf einen Parkplatz, um den Fussweg auf der Karte zu sehen.</p>
+    </div>
+    <div class="park-layout">
+      <div>
+        <div class="park-list" id="park-list"></div>
+      </div>
+      <div class="park-map-col" id="park-map-col">
+        <div class="map-wrap">
+          <div class="map" id="park-map" role="img" aria-label="Karte mit den Fusswegen von den Parkplätzen zur Alti Sagi"></div>
+          <div class="map-ctrl">
+            <button type="button" class="mc-in" aria-label="Karte vergrössern">+</button>
+            <button type="button" class="mc-out" aria-label="Karte verkleinern">−</button>
+            <button type="button" class="mc-reset" aria-label="Ansicht zurücksetzen" title="Ansicht zurücksetzen">⤢</button>
+          </div>
+          <div class="map-attrib">Kartendaten © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende</div>
+        </div>
+        <div class="map-legend">
+          <span><i class="lg-line lg-dark"></i>Gewählter Fussweg</span>
+          <span><i class="lg-line lg-light"></i>Weitere Fusswege</span>
+          <span>♥ Alti Sagi</span>
+          <span>Zoomen: +/− oder zwei Finger · Verschieben: ziehen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="script">Lavinia &amp; Daniel</span>
+  Alle Infos auf <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+    // ---------------- PARKEN ----------------
+  // Walking routes computed with OpenStreetMap
+  // foot routing from each parking spot to the Alti Sagi. dist = walking metres.
+  // Coordinates are [lng, lat].
+  var VENUE = { lng: 7.7724087, lat: 46.6551289 };
+
+  var MID_A = [[7.774187,46.654665],[7.774066,46.654644],[7.773923,46.654627],[7.773762,46.654613],[7.773708,46.654608]];
+  var MID_B = [[7.773687,46.654559],[7.773668,46.654522],[7.773638,46.654472],[7.773625,46.654457],[7.77361,46.654449],[7.7736,46.654443],[7.773569,46.654432],[7.773494,46.654413]];
+  var TAIL = [[7.773438,46.654398],[7.773405,46.654441],[7.773379,46.654455],[7.773348,46.654467],[7.773308,46.654473],[7.773204,46.654479],[7.772946,46.654482],[7.772921,46.654481],[7.772895,46.654478],[7.772869,46.654472],[7.772845,46.65447],[7.77282,46.654473],[7.7728,46.654478],[7.772787,46.654486],[7.772771,46.654501],[7.772692,46.65458],[7.772685,46.654588],[7.772615,46.654668],[7.772599,46.654691],[7.772523,46.654779],[7.772482,46.654777],[VENUE.lng, VENUE.lat]];
+
+  var parking = [
+    { id: "dorfplatz", name: "Dorfplatz vis-à-vis Volg", short: "Dorfplatz", lat: 46.654139, lng: 7.77225, dist: 208,
+      route: [[7.77225,46.654139],[7.772243,46.654065],[7.772247,46.654034],[7.772426,46.654049],[7.77256,46.654086],[7.772649,46.654111],[7.772731,46.654137],[7.772744,46.654143],[7.772991,46.654246],[7.773057,46.654271]].concat(TAIL) },
+    { id: "rosengaertli", name: "Tea Room Rosengärtli", short: "Rosengärtli", lat: 46.65451, lng: 7.774213, dist: 197,
+      route: [[7.774213,46.65451],[7.774213,46.654611]].concat(MID_A, MID_B, TAIL) },
+    { id: "bahnhof", name: "Bahnhofareal", short: "Bahnhofareal", lat: 46.655118, lng: 7.77498, dist: 254,
+      route: [[7.77498,46.655118],[7.774869,46.654996],[7.774673,46.654904],[7.774597,46.654879],[7.774421,46.654844],[7.774399,46.654837],[7.77438,46.654826],[7.77437,46.654812],[7.774365,46.654798],[7.774367,46.654776],[7.774373,46.654757],[7.774385,46.654725],[7.774396,46.654704],[7.774313,46.654686]].concat(MID_A, MID_B, TAIL) },
+    { id: "turnhalle", name: "Turnhalle / Schulhaus Bettenried", short: "Turnhalle Bettenried", lat: 46.656359, lng: 7.781214, dist: 863,
+      route: [[7.781214,46.656359],[7.7812,46.656595],[7.781029,46.656598],[7.780934,46.65658],[7.780776,46.65655],[7.78054,46.656506],[7.779892,46.656394],[7.779611,46.656346],[7.77957,46.656339],[7.778746,46.656192],[7.778493,46.656141],[7.778198,46.656069],[7.778059,46.656031],[7.777901,46.655983],[7.777769,46.65594],[7.777546,46.655857],[7.777229,46.655728],[7.777019,46.655632],[7.776927,46.655594],[7.776301,46.655312],[7.776005,46.655183],[7.775847,46.655123],[7.775505,46.655007],[7.775099,46.654883],[7.774942,46.654838],[7.774709,46.654785],[7.774396,46.654704],[7.774313,46.654686]].concat(MID_A, MID_B, TAIL) },
+    { id: "bkw", name: "BKW Trafostation, Dorfeingang West", short: "BKW Trafostation", lat: 46.654646, lng: 7.763346, dist: 1000,
+      route: [[7.763346,46.654646],[7.763274,46.654638],[7.763249,46.654644],[7.763235,46.654658],[7.763235,46.654684],[7.763262,46.654726],[7.763416,46.654804],[7.763459,46.654824],[7.763498,46.654833],[7.763545,46.654844],[7.763608,46.654849],[7.763678,46.654845],[7.763714,46.654849],[7.763741,46.654851],[7.763808,46.654869],[7.763848,46.654962],[7.763875,46.655003],[7.763945,46.655071],[7.764026,46.655119],[7.764145,46.655174],[7.764183,46.655192],[7.764282,46.655238],[7.764392,46.655286],[7.764503,46.655322],[7.764594,46.655351],[7.764651,46.655368],[7.764724,46.655393],[7.764809,46.655423],[7.76501,46.655505],[7.76521,46.655553],[7.765383,46.655586],[7.765582,46.65562],[7.7658,46.65565],[7.766052,46.655673],[7.766264,46.655686],[7.766472,46.655692],[7.766699,46.65569],[7.766989,46.65568],[7.76724,46.655663],[7.767471,46.655635],[7.767689,46.655603],[7.767901,46.655565],[7.768107,46.655516],[7.76837,46.655451],[7.768578,46.65539],[7.768838,46.655302],[7.769051,46.655225],[7.769348,46.65511],[7.76965,46.654987],[7.769811,46.654924],[7.770014,46.654852],[7.770208,46.654783],[7.770408,46.654725],[7.77062,46.65467],[7.770814,46.654628],[7.771054,46.654589],[7.771235,46.654567],[7.771448,46.654551],[7.771558,46.654545],[7.771659,46.654541],[7.771854,46.654536],[7.772058,46.654536],[7.772365,46.65454],[7.77265,46.654544],[7.772893,46.65455],[7.773054,46.654554],[7.773127,46.654549],[7.773394,46.654548],[7.773516,46.654549]].concat(MID_B, TAIL) }
+  ];
+  parking.sort(function (a, b) { return a.dist - b.dist; });
+  var byId = {};
+  parking.forEach(function (p, i) { p.n = i + 1; byId[p.id] = p; });
+
+  function fmtDist(m) {
+    var r = Math.round(m / 10) * 10;
+    if (r >= 950) return "ca. " + (r / 1000).toFixed(1).replace(/\.0$/, "") + " km";
+    return "ca. " + r + " m";
+  }
+  function fmtMin(m) { return "ca. " + Math.max(1, Math.ceil(m / 80)) + " Min. zu Fuss"; }
+  function navUrl(p) {
+    return "https://www.google.com/maps/dir/?api=1&destination=" + p.lat + "," + p.lng + "&travelmode=driving";
+  }
+
+  // Street network for the map (OpenStreetMap data via foot routing), [lng, lat]
+  var MAIN_ROAD = [[7.763346,46.654643],[7.763274,46.654638],[7.763249,46.654644],[7.763235,46.654658],[7.763235,46.654684],[7.763262,46.654726],[7.763416,46.654804],[7.763459,46.654824],[7.763498,46.654833],[7.763545,46.654844],[7.763608,46.654849],[7.763678,46.654845],[7.763714,46.654849],[7.763741,46.654851],[7.763808,46.654869],[7.763848,46.654962],[7.763875,46.655003],[7.763945,46.655071],[7.764026,46.655119],[7.764145,46.655174],[7.764183,46.655192],[7.764282,46.655238],[7.764392,46.655286],[7.764503,46.655322],[7.764594,46.655351],[7.764651,46.655368],[7.764724,46.655393],[7.764809,46.655423],[7.76501,46.655505],[7.76521,46.655553],[7.765383,46.655586],[7.765582,46.65562],[7.7658,46.65565],[7.766052,46.655673],[7.766264,46.655686],[7.766472,46.655692],[7.766699,46.65569],[7.766989,46.65568],[7.76724,46.655663],[7.767471,46.655635],[7.767689,46.655603],[7.767901,46.655565],[7.768107,46.655516],[7.76837,46.655451],[7.768578,46.65539],[7.768838,46.655302],[7.769051,46.655225],[7.769348,46.65511],[7.76965,46.654987],[7.769811,46.654924],[7.770014,46.654852],[7.770208,46.654783],[7.770408,46.654725],[7.77062,46.65467],[7.770814,46.654628],[7.771054,46.654589],[7.771235,46.654567],[7.771448,46.654551],[7.771558,46.654545],[7.771659,46.654541],[7.771854,46.654536],[7.772058,46.654536],[7.772365,46.65454],[7.77265,46.654544],[7.772893,46.65455],[7.773054,46.654554],[7.773127,46.654549],[7.773394,46.654548],[7.773516,46.654549],[7.773687,46.654559],[7.773896,46.654577],[7.774053,46.654583],[7.774137,46.654593],[7.774213,46.654611],[7.774351,46.654648],[7.774416,46.654669],[7.774522,46.654702],[7.774622,46.654728],[7.774745,46.654761],[7.774942,46.654838],[7.775099,46.654883],[7.775505,46.655007],[7.775847,46.655123],[7.776005,46.655183],[7.776301,46.655312],[7.776927,46.655594],[7.777019,46.655632],[7.777229,46.655728],[7.777546,46.655857],[7.777769,46.65594],[7.777901,46.655983],[7.778059,46.656031],[7.778198,46.656069],[7.778493,46.656141],[7.778746,46.656192],[7.77957,46.656339],[7.779611,46.656346],[7.779892,46.656394],[7.78054,46.656506],[7.780776,46.65655],[7.780934,46.65658],[7.781029,46.656598],[7.7812,46.656595]];
+  var SIDE_ROADS = [
+    [[7.771558,46.654545],[7.771555,46.654506],[7.771536,46.654416],[7.771479,46.654411],[7.771298,46.654366],[7.771171,46.654298],[7.771104,46.654247],[7.771449,46.654165],[7.771553,46.654143],[7.771726,46.654108],[7.772079,46.654044],[7.772247,46.654034],[7.772426,46.654049],[7.772461,46.653743],[7.772492,46.653417],[7.77241,46.65335],[7.772346,46.653266],[7.772145,46.653302],[7.771899,46.653369],[7.7717,46.653424],[7.771455,46.653471],[7.770958,46.653596],[7.770762,46.653374],[7.770525,46.653123],[7.770296,46.652917],[7.770218,46.65286]],
+    [[7.772492,46.653417],[7.772623,46.653478],[7.772743,46.653546],[7.772874,46.653661],[7.773072,46.653787],[7.773115,46.653804],[7.773163,46.653824],[7.773379,46.653822],[7.77353,46.653863],[7.773661,46.653866],[7.773629,46.653737],[7.773649,46.653709],[7.773851,46.653365],[7.774029,46.653149],[7.774165,46.652962]],
+    [[7.773661,46.653866],[7.773753,46.653876],[7.773914,46.653895],[7.774141,46.653918],[7.774452,46.653894],[7.774399,46.654059],[7.774379,46.654204],[7.774357,46.654223],[7.774277,46.654249],[7.774095,46.654337],[7.773918,46.654375],[7.77378,46.654394],[7.773643,46.654419],[7.773569,46.654432]],
+    [[7.770958,46.653596],[7.770637,46.653656],[7.77008,46.653759],[7.769595,46.653854],[7.769287,46.653894],[7.769216,46.653868],[7.769146,46.653842],[7.768863,46.653753],[7.768373,46.653679],[7.76828,46.653668],[7.767661,46.653586],[7.767467,46.653566],[7.766996,46.653517]],
+    [[7.772482,46.654777],[7.772293,46.654747],[7.772252,46.654742],[7.772219,46.65474],[7.772171,46.654741],[7.772131,46.654745],[7.772093,46.654754],[7.772059,46.654768],[7.771898,46.654849],[7.771732,46.654976],[7.771608,46.655064],[7.771429,46.655101],[7.77123,46.655133],[7.771126,46.655147],[7.770959,46.655178],[7.77082,46.655228],[7.770747,46.655254],[7.770475,46.655331],[7.770444,46.655327],[7.770399,46.655326],[7.770369,46.655325],[7.770196,46.655361],[7.770086,46.655388],[7.769965,46.655421],[7.769801,46.655471],[7.769267,46.655651],[7.769095,46.655683]],
+    [[7.772599,46.654691],[7.77284,46.654766],[7.773054,46.654815],[7.773353,46.654869],[7.773555,46.654915],[7.773479,46.655076],[7.77337,46.655274]],
+    [[7.775028,46.655067],[7.774869,46.654996],[7.774673,46.654904],[7.774597,46.654879],[7.774421,46.654844],[7.774399,46.654837],[7.77438,46.654826],[7.77437,46.654812],[7.774365,46.654798],[7.774367,46.654776],[7.774373,46.654757],[7.774385,46.654725],[7.774396,46.654704]],
+    [[7.777019,46.655632],[7.777114,46.65547],[7.777132,46.655402],[7.777166,46.65533],[7.777248,46.65521],[7.777374,46.655044],[7.777425,46.65502],[7.777471,46.65501],[7.777515,46.655007],[7.778431,46.655008],[7.778624,46.655027],[7.778788,46.655085],[7.778807,46.655091],[7.778935,46.655136],[7.779168,46.655232],[7.779504,46.655296],[7.779804,46.655293],[7.779947,46.655294]],
+    [[7.779947,46.655294],[7.779887,46.655124],[7.779852,46.654965],[7.779876,46.654742],[7.779904,46.654605],[7.779896,46.654536],[7.779857,46.654403],[7.779762,46.654248],[7.779707,46.654181],[7.779681,46.65415],[7.779643,46.654122],[7.779778,46.654065],[7.780056,46.653943],[7.780333,46.653823],[7.780485,46.653774],[7.780611,46.653745],[7.780877,46.653703],[7.781055,46.65368],[7.782117,46.653556],[7.782336,46.653523],[7.782423,46.653517],[7.782528,46.653519],[7.782505,46.653596],[7.782452,46.653765],[7.78244,46.653836],[7.782464,46.653898],[7.782518,46.653998],[7.782623,46.654172],[7.782699,46.654291],[7.7831,46.654603],[7.782988,46.65472],[7.782914,46.654778],[7.782827,46.654824]],
+    [[7.779947,46.655294],[7.780019,46.655464],[7.780041,46.655546],[7.780053,46.655642],[7.779965,46.655912],[7.779804,46.656071],[7.779662,46.656214],[7.779611,46.656346]],
+    [[7.780776,46.65655],[7.780795,46.656518],[7.780886,46.65625]],
+    [[7.778198,46.656069],[7.778188,46.6561],[7.778173,46.656145],[7.778177,46.656159],[7.778262,46.65641],[7.77827,46.656425],[7.778282,46.656442],[7.778304,46.656455],[7.778331,46.656466],[7.778484,46.656505],[7.779493,46.656716],[7.779489,46.656767],[7.779478,46.656954],[7.779471,46.65702],[7.779458,46.657158],[7.779477,46.65719],[7.779591,46.65722],[7.780505,46.657359],[7.7808,46.657404],[7.780917,46.657416],[7.780957,46.65745],[7.780949,46.657496]],
+    [[7.778282,46.656442],[7.778265,46.65645],[7.778258,46.656456],[7.778253,46.656466],[7.778243,46.656496],[7.778239,46.656508],[7.778223,46.656563],[7.778215,46.656577],[7.778201,46.65659],[7.778176,46.656604],[7.77815,46.656611],[7.778109,46.65662],[7.778051,46.656623],[7.778028,46.656585],[7.777967,46.656525],[7.77793,46.6565],[7.777884,46.656482],[7.777659,46.656425],[7.777362,46.656374],[7.777217,46.656334],[7.777045,46.656285],[7.776814,46.656198],[7.776654,46.656131],[7.776454,46.656046],[7.77643,46.656036]],
+    [[7.764011,46.655168],[7.764153,46.655239]]
+  ];
+  var STREET_LABELS = [
+    { name: "Hauptstrasse", pts: MAIN_ROAD.filter(function (c) { return c[0] >= 7.7650 && c[0] <= 7.7714; }) },
+    { name: "Hauptstrasse", pts: MAIN_ROAD.filter(function (c) { return c[0] >= 7.7752 && c[0] <= 7.7806; }) },
+    { name: "Läntiweg", pts: [[7.772482,46.654777],[7.772293,46.654747],[7.772252,46.654742],[7.772219,46.65474],[7.772171,46.654741],[7.772131,46.654745],[7.772093,46.654754],[7.772059,46.654768],[7.771898,46.654849],[7.771732,46.654976],[7.771608,46.655064],[7.771429,46.655101],[7.77123,46.655133],[7.771126,46.655147],[7.770959,46.655178],[7.77082,46.655228],[7.770747,46.655254],[7.770475,46.655331],[7.770444,46.655327],[7.770399,46.655326],[7.770369,46.655325],[7.770196,46.655361],[7.770086,46.655388],[7.769965,46.655421],[7.769801,46.655471],[7.769267,46.655651],[7.769095,46.655683]] },
+    { name: "Chrüzweg", pts: [[7.770958,46.653596],[7.770762,46.653374],[7.770525,46.653123],[7.770296,46.652917],[7.770218,46.65286]] },
+    { name: "Weidweg", pts: [[7.773661,46.653866],[7.773629,46.653737],[7.773649,46.653709],[7.773851,46.653365],[7.774029,46.653149],[7.774165,46.652962]] },
+    { name: "Zihl-Zälgweg", pts: [[7.777884,46.656482],[7.777659,46.656425],[7.777362,46.656374],[7.777217,46.656334],[7.777045,46.656285],[7.776814,46.656198],[7.776654,46.656131],[7.776454,46.656046],[7.77643,46.656036]] },
+    { name: "Spissiweg", pts: [[7.778431,46.655008],[7.778624,46.655027],[7.778788,46.655085],[7.778935,46.655136],[7.779168,46.655232],[7.779504,46.655296],[7.779804,46.655293]] },
+    { name: "Mettlenweg", pts: [[7.770637,46.653656],[7.77008,46.653759],[7.769595,46.653854],[7.769287,46.653894],[7.769146,46.653842],[7.768863,46.653753],[7.768373,46.653679],[7.767661,46.653586],[7.766996,46.653517]] }
+  ];
+
+  var selected = null;
+  var listRoot = document.getElementById("park-list");
+  var mapEl = document.getElementById("park-map");
+  var mapCol = document.getElementById("park-map-col");
+
+  var hint = el("p", "park-hint", "Sortiert nach Gehdistanz zur Alti Sagi.");
+  listRoot.appendChild(hint);
+
+  parking.forEach(function (p) {
+    var card = el("article", "p-card");
+    card.id = "pc-" + p.id;
+    var sel = el("button", "p-select");
+    sel.type = "button";
+    sel.setAttribute("aria-pressed", "false");
+    sel.appendChild(el("span", "p-badge", String(p.n)));
+    var info = el("span", "p-info");
+    info.appendChild(el("span", "p-name", p.name));
+    info.appendChild(el("span", "p-meta mono", fmtDist(p.dist) + " · " + fmtMin(p.dist)));
+    sel.appendChild(info);
+    sel.addEventListener("click", function () { select(selected === p.id ? null : p.id, true); });
+    card.appendChild(sel);
+    var nav = el("a", "p-nav", "Mit Google Maps navigieren <span aria-hidden=\"true\">↗</span>");
+    nav.href = navUrl(p);
+    nav.target = "_blank";
+    nav.rel = "noopener";
+    nav.setAttribute("aria-label", "Mit Google Maps zu " + p.name + " navigieren");
+    card.appendChild(nav);
+    listRoot.appendChild(card);
+  });
+
+  function select(id, scrollToMap) {
+    selected = id;
+    parking.forEach(function (p) {
+      var card = document.getElementById("pc-" + p.id);
+      var on = p.id === id;
+      card.classList.toggle("is-selected", on);
+      card.querySelector(".p-select").setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    view = null;
+    renderMap();
+    if (id && scrollToMap && window.matchMedia("(max-width: 900px)").matches) {
+      var r = mapCol.getBoundingClientRect();
+      if (r.top < 70 || r.bottom > window.innerHeight) {
+        mapCol.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }
+
+  // ---- vector street map (styled like the printed booklet map) ----
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var XLINK = "http://www.w3.org/1999/xlink";
+  function svgEl(name, attrs) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function mx(lng) { return (lng + 180) / 360; }
+  function my(lat) { var s = Math.sin(lat * Math.PI / 180); return 0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI); }
+
+  var C_BG = "#FBF7EE", C_ROAD = "#E3D8C2", C_LABEL = "#8A7A60", C_ROUTE_ON = "#8A4B12", C_ROUTE_OFF = "#D1B074", C_INK = "#3A2A1E";
+  // label offsets for the overview (dx, dy, text-anchor)
+  var LAB = { dorfplatz: [-16, 27, "end"], rosengaertli: [14, 31, "start"], bahnhof: [19, 5, "start"], turnhalle: [-4, -20, "end"], bkw: [-10, -20, "start"] };
+
+  var view = null, fitZ = 13, MAXZ = 19.5;
+  function minZ() { return Math.max(fitZ - 1.2, 12); }
+  function renderMap() {
+    var W = mapEl.clientWidth, H = mapEl.clientHeight;
+    if (!W || !H) return;
+    var focus = selected ? [byId[selected]] : parking;
+    var pts = [[VENUE.lng, VENUE.lat]];
+    focus.forEach(function (p) {
+      pts.push([p.lng, p.lat]);
+      p.route.forEach(function (c) { pts.push(c); });
+    });
+    var minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
+    pts.forEach(function (c) {
+      var x = mx(c[0]), y = my(c[1]);
+      if (x < minx) minx = x; if (x > maxx) maxx = x;
+      if (y < miny) miny = y; if (y > maxy) maxy = y;
+    });
+    var pad = 54;
+    var k = Math.min((W - 2 * pad) / ((maxx - minx) * 256), (H - 2 * pad) / ((maxy - miny) * 256));
+    fitZ = Math.min(Math.max(Math.log(k) / Math.LN2, 13), 18.6);
+    if (!view) view = { cx: (minx + maxx) / 2, cy: (miny + maxy) / 2, z: fitZ, fit: true };
+    var z = view.z;
+    var S = 256 * Math.pow(2, z);
+    var ox = view.cx * S - W / 2, oy = view.cy * S - H / 2;
+    mapEl.style.touchAction = view.fit ? "pan-y" : "none";
+    var bi = document.querySelector(".mc-in"), bo = document.querySelector(".mc-out");
+    if (bi) bi.disabled = z >= MAXZ - 0.01;
+    if (bo) bo.disabled = z <= minZ() + 0.01;
+    function px(c) { return [mx(c[0]) * S - ox, my(c[1]) * S - oy]; }
+    function dpath(arr) {
+      return arr.map(function (c, i) { var q = px(c); return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1); }).join(" ");
+    }
+
+    mapEl.innerHTML = "";
+    var svg = svgEl("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H });
+    mapEl.appendChild(svg);
+    var defs = svgEl("defs", {});
+    svg.appendChild(defs);
+    svg.appendChild(svgEl("rect", { x: 0, y: 0, width: W, height: H, fill: C_BG }));
+
+    // streets
+    var rw = Math.max(2.6, Math.min(9, 2.6 + (z - 14.5) * 1.5));
+    var roads = svgEl("g", { fill: "none", stroke: C_ROAD, "stroke-linecap": "round", "stroke-linejoin": "round" });
+    roads.appendChild(svgEl("path", { d: dpath(MAIN_ROAD), "stroke-width": rw * 1.35 }));
+    SIDE_ROADS.forEach(function (r) { roads.appendChild(svgEl("path", { d: dpath(r), "stroke-width": rw })); });
+    parking.forEach(function (p) { roads.appendChild(svgEl("path", { d: dpath(p.route), "stroke-width": rw })); });
+    svg.appendChild(roads);
+
+    // walking routes: light = other options, dark = selected
+    function line(p, on) {
+      var d = dpath(p.route);
+      svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: C_BG, "stroke-width": on ? 11 : 7.5, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0.95 }));
+      svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: on ? C_ROUTE_ON : C_ROUTE_OFF, "stroke-width": on ? 6.5 : 4, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+    }
+    parking.forEach(function (p) { if (p.id !== selected) line(p, false); });
+    if (selected) line(byId[selected], true);
+
+    // street names along the roads
+    STREET_LABELS.forEach(function (st, i) {
+      var arr = st.pts.map(px);
+      if (arr.length < 2) return;
+      if (arr[0][0] > arr[arr.length - 1][0]) arr.reverse();
+      var len = 0;
+      for (var j = 1; j < arr.length; j++) len += Math.hypot(arr[j][0] - arr[j - 1][0], arr[j][1] - arr[j - 1][1]);
+      if (len < st.name.length * 6.2 + 16) return;
+      var id = "sp" + i;
+      defs.appendChild(svgEl("path", { id: id, d: arr.map(function (q, n) { return (n ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1); }).join(" ") }));
+      var t = svgEl("text", { "font-size": 10.5, "font-style": "italic", fill: C_LABEL, stroke: C_BG, "stroke-width": 3, "paint-order": "stroke", dy: 3.5 });
+      var tp = svgEl("textPath", { startOffset: "50%", "text-anchor": "middle" });
+      tp.setAttribute("href", "#" + id);
+      tp.setAttributeNS(XLINK, "xlink:href", "#" + id);
+      tp.textContent = st.name;
+      t.appendChild(tp);
+      svg.appendChild(t);
+    });
+
+
+    function text(x, y, str, size, weight, anchor, serif, fill) {
+      var t = svgEl("text", { x: x, y: y, "text-anchor": anchor || "middle", "font-size": size, "font-weight": weight || 400, fill: fill || C_INK, stroke: C_BG, "stroke-width": 4, "paint-order": "stroke" });
+      t.setAttribute("style", serif ? "font-family:'Cormorant Garamond',Georgia,serif" : "font-family:'Jost',sans-serif");
+      t.textContent = str;
+      svg.appendChild(t);
+      return t;
+    }
+
+    function marker(p) {
+      var on = p.id === selected;
+      var q = px([p.lng, p.lat]);
+      var g = svgEl("g", { style: "cursor:pointer" });
+      g.appendChild(svgEl("circle", { cx: q[0], cy: q[1], r: on ? 15 : 12.5, fill: on ? "#7A3E0E" : C_BG, stroke: on ? C_BG : "#B98A4E", "stroke-width": on ? 3 : 2.5 }));
+      var t = svgEl("text", { x: q[0], y: q[1] + 4.5, "text-anchor": "middle", "font-size": 13, "font-weight": 600, fill: on ? C_BG : "#7A3E0E" });
+      t.setAttribute("style", "font-family:'Jost',sans-serif");
+      t.textContent = String(p.n);
+      g.appendChild(t);
+      g.addEventListener("click", function () { select(selected === p.id ? null : p.id, false); });
+      svg.appendChild(g);
+      if (on) {
+        var anchor = q[0] < 150 ? "start" : (q[0] > W - 150 ? "end" : "middle");
+        var lx = anchor === "start" ? q[0] - 14 : (anchor === "end" ? q[0] + 14 : q[0]);
+        var below = q[1] + 92 < H;
+        text(lx, below ? q[1] + 36 : q[1] - 34, p.short, 15, 700, anchor, true);
+        text(lx, below ? q[1] + 52 : q[1] - 18, fmtDist(p.dist) + " · " + fmtMin(p.dist).replace(" zu Fuss", ""), 11.5, 400, anchor, false, "#6B5A48");
+      } else if (!selected && W >= 560 && LAB[p.id]) {
+        var o = LAB[p.id];
+        text(q[0] + o[0], q[1] + o[1], p.short, 13.5, 700, o[2], true);
+      }
+    }
+    parking.forEach(function (p) { if (p.id !== selected) marker(p); });
+    if (selected) marker(byId[selected]);
+
+    // venue
+    var v = px([VENUE.lng, VENUE.lat]);
+    var vg = svgEl("g", {});
+    vg.appendChild(svgEl("circle", { cx: v[0], cy: v[1], r: 16, fill: "#4A161E", stroke: C_BG, "stroke-width": 3 }));
+    var vh = svgEl("text", { x: v[0], y: v[1] + 5.5, "text-anchor": "middle", "font-size": 16, fill: "#F1E7D6" });
+    vh.textContent = "♥";
+    vg.appendChild(vh);
+    svg.appendChild(vg);
+    var vAbove = v[1] - 56 > 0;
+    var vAnch = v[0] < 90 ? "start" : (v[0] > W - 90 ? "end" : "middle");
+    var vx = vAnch === "start" ? v[0] - 16 : (vAnch === "end" ? v[0] + 16 : v[0]);
+    text(vx, vAbove ? v[1] - 30 : v[1] + 36, "Alti Sagi", 16, 700, vAnch, true);
+    text(vx, vAbove ? v[1] - 16 : v[1] + 50, "Feier · 18:00 Uhr", 11.5, 400, vAnch, false, "#6B5A48");
+
+    // compass (top right)
+    var ccx = W - 34, ccy = 44;
+    var cg = svgEl("g", {});
+    var nt = svgEl("text", { x: ccx, y: ccy - 22, "text-anchor": "middle", "font-size": 11, fill: C_LABEL });
+    nt.setAttribute("style", "font-family:'Jost',sans-serif");
+    nt.textContent = "N";
+    cg.appendChild(nt);
+    cg.appendChild(svgEl("circle", { cx: ccx, cy: ccy, r: 16, fill: C_BG, stroke: "#A9712F", "stroke-width": 1.6 }));
+    cg.appendChild(svgEl("path", { d: "M" + ccx + " " + (ccy - 10) + " L" + (ccx + 5) + " " + ccy + " L" + (ccx - 5) + " " + ccy + " Z", fill: "#7A3E0E" }));
+    cg.appendChild(svgEl("path", { d: "M" + ccx + " " + (ccy + 10) + " L" + (ccx + 5) + " " + ccy + " L" + (ccx - 5) + " " + ccy + " Z", fill: "#D9C3A0" }));
+    svg.appendChild(cg);
+
+    // scale bar (bottom left)
+    var mpp = 156543.03392 * Math.cos(VENUE.lat * Math.PI / 180) / Math.pow(2, z);
+    var steps = [10, 20, 50, 100, 200, 500, 1000], sm = steps[0];
+    for (var si = 0; si < steps.length; si++) { if (steps[si] / mpp <= 110) sm = steps[si]; }
+    var sw = sm / mpp, sx = 16, sy = H - 16;
+    var sb = svgEl("g", {});
+    sb.appendChild(svgEl("path", { d: "M" + sx + " " + (sy - 7) + " V" + sy + " H" + (sx + sw) + " V" + (sy - 7), fill: "none", stroke: C_LABEL, "stroke-width": 1.8 }));
+    var stx = svgEl("text", { x: sx + sw + 8, y: sy - 1, "font-size": 11, fill: C_LABEL });
+    stx.setAttribute("style", "font-family:'Jost',sans-serif");
+    stx.textContent = sm >= 1000 ? (sm / 1000) + " km" : sm + " m";
+    sb.appendChild(stx);
+    svg.appendChild(sb);
+  }
+
+  renderMap();
+  window.addEventListener("load", renderMap);
+  var rzT;
+  window.addEventListener("resize", function () { clearTimeout(rzT); rzT = setTimeout(function () { view = null; renderMap(); }, 150); });
+
+  // ---- zoom & pan ----
+  var raf = 0;
+  function schedule() { if (!raf) raf = requestAnimationFrame(function () { raf = 0; renderMap(); }); }
+  function clampZ(z) { return Math.min(MAXZ, Math.max(minZ(), z)); }
+  function zoomAt(sx, sy, nz) {
+    nz = clampZ(nz);
+    var W = mapEl.clientWidth, H = mapEl.clientHeight;
+    var S0 = 256 * Math.pow(2, view.z), S1 = 256 * Math.pow(2, nz);
+    var wx = view.cx + (sx - W / 2) / S0, wy = view.cy + (sy - H / 2) / S0;
+    view.cx = wx - (sx - W / 2) / S1;
+    view.cy = wy - (sy - H / 2) / S1;
+    view.z = nz;
+    view.fit = false;
+    schedule();
+  }
+  function panBy(dx, dy) {
+    var S = 256 * Math.pow(2, view.z);
+    view.cx -= dx / S; view.cy -= dy / S;
+    view.fit = false;
+    schedule();
+  }
+  function rel(e) { var r = mapEl.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  function center() { return [mapEl.clientWidth / 2, mapEl.clientHeight / 2]; }
+  document.querySelector(".mc-in").addEventListener("click", function () { var c = center(); zoomAt(c[0], c[1], view.z + 1); });
+  document.querySelector(".mc-out").addEventListener("click", function () { var c = center(); zoomAt(c[0], c[1], view.z - 1); });
+  document.querySelector(".mc-reset").addEventListener("click", function () { view = null; renderMap(); });
+
+  var ptrs = {}, dragging = false, moved = false, pinchD = 0, lastTap = null, lastType = "";
+  mapEl.addEventListener("pointerdown", function (e) {
+    if (e.button > 0) return;
+    ptrs[e.pointerId] = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY };
+    lastType = e.pointerType;
+    moved = false;
+    var ids = Object.keys(ptrs);
+    if (ids.length === 2) { pinchD = Math.hypot(ptrs[ids[0]].x - ptrs[ids[1]].x, ptrs[ids[0]].y - ptrs[ids[1]].y); moved = true; }
+  });
+  mapEl.addEventListener("pointermove", function (e) {
+    var p = ptrs[e.pointerId];
+    if (!p) return;
+    var ids = Object.keys(ptrs);
+    if (ids.length >= 2) {
+      var a = ptrs[ids[0]], b = ptrs[ids[1]];
+      p.x = e.clientX; p.y = e.clientY;
+      var d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (pinchD > 0 && d > 0) {
+        var r = mapEl.getBoundingClientRect();
+        zoomAt((a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top, view.z + Math.log(d / pinchD) / Math.LN2);
+      }
+      pinchD = d;
+      return;
+    }
+    var dx = e.clientX - p.x, dy = e.clientY - p.y;
+    if (!dragging) {
+      if (Math.hypot(e.clientX - p.sx, e.clientY - p.sy) < 5) return;
+      // one-finger touch on the unzoomed map keeps scrolling the page
+      if (e.pointerType === "touch" && view.fit) return;
+      dragging = true; moved = true;
+      mapEl.classList.add("dragging");
+      try { mapEl.setPointerCapture(e.pointerId); } catch (x) {}
+    }
+    p.x = e.clientX; p.y = e.clientY;
+    panBy(dx, dy);
+  });
+  function endPtr(e) {
+    var p = ptrs[e.pointerId];
+    delete ptrs[e.pointerId];
+    if (Object.keys(ptrs).length < 2) pinchD = 0;
+    if (!Object.keys(ptrs).length) {
+      mapEl.classList.remove("dragging");
+      if (dragging) { dragging = false; moved = true; setTimeout(function () { moved = false; }, 0); }
+      else if (p && e.type === "pointerup" && e.pointerType === "touch" && !moved) {
+        var now = Date.now();
+        if (lastTap && now - lastTap.t < 320 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 28) {
+          var q = rel(e); zoomAt(q[0], q[1], view.z + 1); lastTap = null;
+        } else lastTap = { t: now, x: e.clientX, y: e.clientY };
+      }
+    }
+  }
+  mapEl.addEventListener("pointerup", endPtr);
+  mapEl.addEventListener("pointercancel", endPtr);
+  // swallow the click that ends a drag/pinch so it does not toggle a marker
+  mapEl.addEventListener("click", function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); } }, true);
+  mapEl.addEventListener("dblclick", function (e) {
+    if (lastType === "touch") return;
+    var q = rel(e); zoomAt(q[0], q[1], view.z + 1);
+  });
+  mapEl.addEventListener("wheel", function (e) {
+    if (!(e.ctrlKey || e.metaKey)) return;   // plain scroll keeps scrolling the page
+    e.preventDefault();
+    var q = rel(e);
+    zoomAt(q[0], q[1], view.z - e.deltaY * 0.01);
+  }, { passive: false });
+
+})();
+</script>
+</body>
+</html>

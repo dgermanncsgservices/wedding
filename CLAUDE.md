@@ -11,6 +11,7 @@ Static site, no build step. GitHub Pages deploys from `main`; custom domain
 - `indoor-canada.html` — Canada indoors: the 3D floor plan and the seating chart
 - `outdoor-canada.html` — Canada outdoors: the floor plan and the seating chart
 - `setup-canada.html` — the Canada setup plan for the crew
+- `leissigen.html` — German-only parking directions for the Swiss reception at the Alti Sagi in Leissigen, served at `/leissigen`. Guest-facing but deliberately **unlinked**: no page links to it and it links to no other page (share the URL directly). Self-contained — own inline street map and data, no `i18n.js`/`nav.js`; `noindex`.
 
 The static plan pages share one template: top bar, centred
 `.section-head`, a `.chart-frame` holding the image, a `.chart-hint` line,
