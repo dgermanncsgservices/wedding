@@ -201,6 +201,14 @@
   .map { position: relative; width: 100%; height: 520px; overflow: hidden; background: #FBF7EE; touch-action: pan-y; }
   @media (max-width: 900px) { .map { height: 340px; } }
   .map svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+  .map { user-select: none; -webkit-user-select: none; cursor: grab; }
+  .map.dragging { cursor: grabbing; }
+  .map-ctrl { position: absolute; top: 10px; left: 10px; z-index: 4; display: flex; flex-direction: column; gap: 6px; }
+  .map-ctrl button { width: 40px; height: 40px; border-radius: 10px; border: 1px solid #D9C3A0; background: rgba(251,247,238,0.95); color: #4A161E; font: 500 22px/1 'Jost', sans-serif; cursor: pointer; box-shadow: 0 1px 4px rgba(74,22,30,0.15); display: flex; align-items: center; justify-content: center; padding: 0; }
+  .map-ctrl button:hover { background: #F1E7D6; }
+  .map-ctrl button:focus-visible { outline: 2px solid #8A4B12; outline-offset: 2px; }
+  .map-ctrl button:disabled { opacity: 0.4; cursor: default; }
+  .map-ctrl .mc-reset { font-size: 18px; }
   .map-attrib { position: absolute; right: 0; bottom: 0; z-index: 3; background: rgba(255,255,255,0.78); color: #333; font-size: 10px; padding: 1px 6px; border-top-left-radius: 6px; font-family: 'Jost', sans-serif; }
   .map-attrib a { color: #333; }
   .map-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.3rem; margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-soft); }
@@ -247,12 +255,18 @@
       <div class="park-map-col" id="park-map-col">
         <div class="map-wrap">
           <div class="map" id="park-map" role="img" aria-label="Karte mit den Fusswegen von den Parkplätzen zur Alti Sagi"></div>
+          <div class="map-ctrl">
+            <button type="button" class="mc-in" aria-label="Karte vergrössern">+</button>
+            <button type="button" class="mc-out" aria-label="Karte verkleinern">−</button>
+            <button type="button" class="mc-reset" aria-label="Ansicht zurücksetzen" title="Ansicht zurücksetzen">⤢</button>
+          </div>
           <div class="map-attrib">Kartendaten © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende</div>
         </div>
         <div class="map-legend">
           <span><i class="lg-line lg-dark"></i>Gewählter Fussweg</span>
           <span><i class="lg-line lg-light"></i>Weitere Fusswege</span>
           <span>♥ Alti Sagi</span>
+          <span>Zoomen: +/− oder zwei Finger · Verschieben: ziehen</span>
         </div>
       </div>
     </div>
@@ -379,6 +393,7 @@
       card.classList.toggle("is-selected", on);
       card.querySelector(".p-select").setAttribute("aria-pressed", on ? "true" : "false");
     });
+    view = null;
     renderMap();
     if (id && scrollToMap && window.matchMedia("(max-width: 900px)").matches) {
       var r = mapCol.getBoundingClientRect();
@@ -403,6 +418,8 @@
   // label offsets for the overview (dx, dy, text-anchor)
   var LAB = { dorfplatz: [-16, 27, "end"], rosengaertli: [14, 31, "start"], bahnhof: [19, 5, "start"], turnhalle: [-4, -20, "end"], bkw: [-10, -20, "start"] };
 
+  var view = null, fitZ = 13, MAXZ = 19.5;
+  function minZ() { return Math.max(fitZ - 1.2, 12); }
   function renderMap() {
     var W = mapEl.clientWidth, H = mapEl.clientHeight;
     if (!W || !H) return;
@@ -420,9 +437,15 @@
     });
     var pad = 54;
     var k = Math.min((W - 2 * pad) / ((maxx - minx) * 256), (H - 2 * pad) / ((maxy - miny) * 256));
-    var z = Math.min(Math.max(Math.log(k) / Math.LN2, 13), 18.6);
+    fitZ = Math.min(Math.max(Math.log(k) / Math.LN2, 13), 18.6);
+    if (!view) view = { cx: (minx + maxx) / 2, cy: (miny + maxy) / 2, z: fitZ, fit: true };
+    var z = view.z;
     var S = 256 * Math.pow(2, z);
-    var ox = (minx + maxx) / 2 * S - W / 2, oy = (miny + maxy) / 2 * S - H / 2;
+    var ox = view.cx * S - W / 2, oy = view.cy * S - H / 2;
+    mapEl.style.touchAction = view.fit ? "pan-y" : "none";
+    var bi = document.querySelector(".mc-in"), bo = document.querySelector(".mc-out");
+    if (bi) bi.disabled = z >= MAXZ - 0.01;
+    if (bo) bo.disabled = z <= minZ() + 0.01;
     function px(c) { return [mx(c[0]) * S - ox, my(c[1]) * S - oy]; }
     function dpath(arr) {
       return arr.map(function (c, i) { var q = px(c); return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1); }).join(" ");
@@ -548,7 +571,100 @@
   renderMap();
   window.addEventListener("load", renderMap);
   var rzT;
-  window.addEventListener("resize", function () { clearTimeout(rzT); rzT = setTimeout(renderMap, 150); });
+  window.addEventListener("resize", function () { clearTimeout(rzT); rzT = setTimeout(function () { view = null; renderMap(); }, 150); });
+
+  // ---- zoom & pan ----
+  var raf = 0;
+  function schedule() { if (!raf) raf = requestAnimationFrame(function () { raf = 0; renderMap(); }); }
+  function clampZ(z) { return Math.min(MAXZ, Math.max(minZ(), z)); }
+  function zoomAt(sx, sy, nz) {
+    nz = clampZ(nz);
+    var W = mapEl.clientWidth, H = mapEl.clientHeight;
+    var S0 = 256 * Math.pow(2, view.z), S1 = 256 * Math.pow(2, nz);
+    var wx = view.cx + (sx - W / 2) / S0, wy = view.cy + (sy - H / 2) / S0;
+    view.cx = wx - (sx - W / 2) / S1;
+    view.cy = wy - (sy - H / 2) / S1;
+    view.z = nz;
+    view.fit = false;
+    schedule();
+  }
+  function panBy(dx, dy) {
+    var S = 256 * Math.pow(2, view.z);
+    view.cx -= dx / S; view.cy -= dy / S;
+    view.fit = false;
+    schedule();
+  }
+  function rel(e) { var r = mapEl.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  function center() { return [mapEl.clientWidth / 2, mapEl.clientHeight / 2]; }
+  document.querySelector(".mc-in").addEventListener("click", function () { var c = center(); zoomAt(c[0], c[1], view.z + 1); });
+  document.querySelector(".mc-out").addEventListener("click", function () { var c = center(); zoomAt(c[0], c[1], view.z - 1); });
+  document.querySelector(".mc-reset").addEventListener("click", function () { view = null; renderMap(); });
+
+  var ptrs = {}, dragging = false, moved = false, pinchD = 0, lastTap = null, lastType = "";
+  mapEl.addEventListener("pointerdown", function (e) {
+    if (e.button > 0) return;
+    ptrs[e.pointerId] = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY };
+    lastType = e.pointerType;
+    moved = false;
+    var ids = Object.keys(ptrs);
+    if (ids.length === 2) { pinchD = Math.hypot(ptrs[ids[0]].x - ptrs[ids[1]].x, ptrs[ids[0]].y - ptrs[ids[1]].y); moved = true; }
+  });
+  mapEl.addEventListener("pointermove", function (e) {
+    var p = ptrs[e.pointerId];
+    if (!p) return;
+    var ids = Object.keys(ptrs);
+    if (ids.length >= 2) {
+      var a = ptrs[ids[0]], b = ptrs[ids[1]];
+      p.x = e.clientX; p.y = e.clientY;
+      var d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (pinchD > 0 && d > 0) {
+        var r = mapEl.getBoundingClientRect();
+        zoomAt((a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top, view.z + Math.log(d / pinchD) / Math.LN2);
+      }
+      pinchD = d;
+      return;
+    }
+    var dx = e.clientX - p.x, dy = e.clientY - p.y;
+    if (!dragging) {
+      if (Math.hypot(e.clientX - p.sx, e.clientY - p.sy) < 5) return;
+      // one-finger touch on the unzoomed map keeps scrolling the page
+      if (e.pointerType === "touch" && view.fit) return;
+      dragging = true; moved = true;
+      mapEl.classList.add("dragging");
+      try { mapEl.setPointerCapture(e.pointerId); } catch (x) {}
+    }
+    p.x = e.clientX; p.y = e.clientY;
+    panBy(dx, dy);
+  });
+  function endPtr(e) {
+    var p = ptrs[e.pointerId];
+    delete ptrs[e.pointerId];
+    if (Object.keys(ptrs).length < 2) pinchD = 0;
+    if (!Object.keys(ptrs).length) {
+      mapEl.classList.remove("dragging");
+      if (dragging) { dragging = false; moved = true; setTimeout(function () { moved = false; }, 0); }
+      else if (p && e.type === "pointerup" && e.pointerType === "touch" && !moved) {
+        var now = Date.now();
+        if (lastTap && now - lastTap.t < 320 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 28) {
+          var q = rel(e); zoomAt(q[0], q[1], view.z + 1); lastTap = null;
+        } else lastTap = { t: now, x: e.clientX, y: e.clientY };
+      }
+    }
+  }
+  mapEl.addEventListener("pointerup", endPtr);
+  mapEl.addEventListener("pointercancel", endPtr);
+  // swallow the click that ends a drag/pinch so it does not toggle a marker
+  mapEl.addEventListener("click", function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); } }, true);
+  mapEl.addEventListener("dblclick", function (e) {
+    if (lastType === "touch") return;
+    var q = rel(e); zoomAt(q[0], q[1], view.z + 1);
+  });
+  mapEl.addEventListener("wheel", function (e) {
+    if (!(e.ctrlKey || e.metaKey)) return;   // plain scroll keeps scrolling the page
+    e.preventDefault();
+    var q = rel(e);
+    zoomAt(q[0], q[1], view.z - e.deltaY * 0.01);
+  }, { passive: false });
 
 })();
 </script>
