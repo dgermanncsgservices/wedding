@@ -25,6 +25,10 @@ PAGES = [
     "index.html",
     "switzerland.html", "apero-switzerland.html", "seating-switzerland.html",
     "canada.html", "indoor-canada.html", "outdoor-canada.html", "setup-canada.html",
+    # Carried because parking directions are the thing you most want without a
+    # signal. It stays as unlinked here as it is on the site: nothing links to
+    # it, it links to nothing, and it is only reachable at #leissigen.html.
+    "leissigen.html",
 ]
 HOME = PAGES[0]
 ARTIFACT = "assets/string-lights-canada.html"
@@ -199,8 +203,8 @@ def build_page(name: str, artifact: str) -> str:
         js = (ROOT / m.group(1)).read_text(encoding="utf-8")
         return "<script>\n" + js + "</script>"
     src, n = re.subn(r'<script src="(assets/[\w.-]+\.js)"></script>', inline_script, src)
-    if n == 0:
-        sys.exit("%s: no page scripts inlined" % name)
+    if n == 0 and 'assets/' in src:
+        sys.exit("%s: asset references left but no scripts inlined" % name)
 
     # 3. The 3D artifact, before the image pass so its own paths are untouched.
     if ARTIFACT in src:

@@ -214,6 +214,11 @@ Fonts live once in the host, spliced into each page as it is shown — the
 `tools/offline-fonts.css` from Google Fonts, latin subset only; run it only
 when a page starts using a new family or weight.
 
+`leissigen.html` is in the bundle too — parking directions are the thing you
+most want without a signal — and stays as unlinked there as it is on the site,
+reachable only at `#leissigen.html`. Add a new page to `PAGES` in the build
+script, or it is simply left out.
+
 **The 3D string light view is the one thing that still needs a connection** —
 the artifact pulls three.js from unpkg at runtime and that cannot be carried
 in the file. The cut list beside it, and everything else, works offline.
