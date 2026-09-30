@@ -199,21 +199,25 @@ window.I18N_PAGE = { de: {
     "Gold pen placed <b>diagonally on top of the napkin</b>"
   ];
 
-  var HEAD_TABLE = [
-    "Place <b>1 round tablecloth</b> on the head table.",
-    ["<b>Table draping:</b> start in the middle of the table at about lap length. Bring it forward and down the length of the table, stopping just above the floor. Twist the fabric, then bring it back up and down the back of the table. Wrap the remaining material along the table and tuck it underneath.",
-      ["Repeat the same draping on the <b>second half of the table</b>.",
-       "Refer to the picture for the final look."]],
-    ["Set up <b>3 pillar vases at each end of the front of the table</b>.",
-      ["Fill each vase with ivy.", "Fill with water.", "Place <b>1 floating candle</b> in each vase."]],
-    "Place <b>4 tea candle holders on each side</b> of the table — <b>8 holders total</b>.",
-    "Place <b>1 bud vase in the middle</b> of the table, with <b>2 more bud vases on either side</b> — <b>5 vases total</b>.",
-    "Fill the space among the vases and candles with <b>long pieces of ivy</b>.",
-    ["Set up <b>2 places</b>:",
-      ["Large plate", "Knife on the right side", "Fork on the left side",
-       "Water goblet at the top right side", "Cocktail napkin"]],
-    "Refer to the picture for final placement."
-  ];
+  // The doc gives the inside plan an oval cloth and the outside plan a round
+  // one; everything after that line is identical, so only the shape varies.
+  var HEAD_TABLE = function (cloth) {
+    return [
+      "Place <b>1 " + cloth + " tablecloth</b> on the head table.",
+      ["<b>Table draping:</b> start in the middle of the table at about lap length. Bring it forward and down the length of the table, stopping just above the floor. Twist the fabric, then bring it back up and down the back of the table. Wrap the remaining material along the table and tuck it underneath.",
+        ["Repeat the same draping on the <b>second half of the table</b>.",
+         "Refer to the picture for the final look."]],
+      ["Set up <b>3 pillar vases at each end of the front of the table</b>.",
+        ["Fill each vase with ivy.", "Fill with water.", "Place <b>1 floating candle</b> in each vase."]],
+      "Place <b>4 tea candle holders on each side</b> of the table — <b>8 holders total</b>.",
+      "Place <b>1 bud vase in the middle</b> of the table, with <b>2 more bud vases on either side</b> — <b>5 vases total</b>.",
+      "Fill the space among the vases and candles with <b>long pieces of ivy</b>.",
+      ["Set up <b>2 places</b>:",
+        ["Large plate", "Knife on the right side", "Fork on the left side",
+         "Water goblet at the top right side", "Cocktail napkin"]],
+      "Refer to the picture for final placement."
+    ];
+  };
 
   var ROUND_TABLE = function (count) {
     return [
@@ -285,7 +289,7 @@ window.I18N_PAGE = { de: {
         "Refer to the picture for final placement."
       ], PIC_RECT],
       ["Round Guest Tables ×6", ROUND_TABLE(6), PIC_ROUND],
-      ["Head Table", HEAD_TABLE, PIC_HEAD],
+      ["Head Table", HEAD_TABLE("oval"), PIC_HEAD],
       ["Food & Drinks Tables — Andrada & Bogdan", FOOD_TABLES(3, 4)],
       ["Games", [
         "Set up <b>Connect Four</b> — Andria.",
@@ -303,7 +307,7 @@ window.I18N_PAGE = { de: {
         "Set up <b>3 rectangular plastic tables for food</b> and <b>1 round plastic table for drinks</b>."
       ]],
       ["Round Guest Tables ×9", ROUND_TABLE(9), PIC_ROUND],
-      ["Head Table", HEAD_TABLE, PIC_HEAD],
+      ["Head Table", HEAD_TABLE("round"), PIC_HEAD],
       ["Food & Drinks Tables — Andrada & Bogdan", FOOD_TABLES(2, 3)],
       ["Games", [
         "Set up <b>Connect Four</b> — Andria.",

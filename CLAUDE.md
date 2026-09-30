@@ -167,7 +167,10 @@ array of `[plan, [[task, [bullets], [pictures]]]]`, where a bullet is a string
 or `[string, [sub-bullets]]` and a picture is `{src, alt}`; shared fragments
 (place setting, head table, round table, food tables, and the photos) are
 variables, so the inside and outside plans cannot drift apart where the doc
-repeats itself. `<b>` inside a bullet marks the quantities the doc bolds.
+repeats itself. Where the doc repeats a block but varies one detail, the
+variable takes that detail as an argument rather than being forked in two —
+`HEAD_TABLE(cloth)` is called with `"oval"` inside and `"round"` outside.
+`<b>` inside a bullet marks the quantities the doc bolds.
 
 The doc's photos live in `assets/setup-ca-*.jpg`, attached to the task whose
 bullets say "refer to the picture" — the rectangular table, the round table,
