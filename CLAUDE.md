@@ -68,6 +68,32 @@ Rules when syncing:
   block in the sheet, each rendered as its own card. The sheet currently has
   two, Apéro and Reception.
 
+### "Update" means the whole pipeline, every time
+
+When the user says **update** or **sync**, do all of this without being asked
+and without checking back:
+
+1. Pull the **whole workbook** (xlsx export + openpyxl, never the sampled
+   view) and compare both tabs against the pages.
+2. Check the **"Canada Setup Notes"** doc's `modifiedTime`; re-read it only if
+   it has moved since the page was last synced.
+3. Apply every change, add the matching `de` entries, bump `SYNCED_AT` on the
+   pages touched.
+4. **Rebuild the derived artifacts** — one command:
+
+   ```
+   python3 tools/rebuild.py          # the bundle and all four PDFs
+   python3 tools/rebuild.py --check  # only report what is stale
+   ```
+
+5. Verify in a browser, commit, push to `main`, and report what changed —
+   including "nothing changed", when that is the answer.
+
+Step 4 is the one that gets skipped and the one that matters most: the PDFs
+are what guests actually download, so a sync that stops after step 3 leaves
+them reading yesterday's schedule. `rebuild.py --check` compares every
+artifact against the newest page and says what is out of date.
+
 Hero event details (date, venue, dress code) are **not** from the sheet — they
 are static and sourced from withjoy.com/laviniadaniel.
 
@@ -188,12 +214,9 @@ the English source, as everywhere else.
 ## The offline bundle
 
 `wedding-offline.html` is the whole site as one file, for the venue where
-there is no signal. `tools/build-offline.py` generates it — **re-run it after
-every sheet sync, or the offline copy goes stale**:
-
-```
-python3 tools/build-offline.py
-```
+there is no signal. `tools/build-offline.py` generates it, and
+`tools/rebuild.py` runs that along with the PDFs — **re-run after every sheet
+sync, or the offline copy goes stale**.
 
 It needs no network. Each page keeps its own markup, styles and scripts and
 is carried as a string; the router swaps one into the live document at a
@@ -302,8 +325,8 @@ python3 tools/build-pdf.py                 # all four
 python3 tools/build-pdf.py switzerland de  # just one
 ```
 
-**After a sync, three things need rebuilding**: the page you edited, then
-`build-offline.py`, then `build-pdf.py`.
+**After a sync** run `python3 tools/rebuild.py`, which does both builds; see
+*"Update" means the whole pipeline* above.
 
 Each day holds only its own pages — a Switzerland guest has no use for the
 Canada setup plan. `leissigen.html` is in neither: it is unlinked on the site
