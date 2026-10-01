@@ -99,16 +99,38 @@ SHIM = r"""
     if (m) {
       e.preventDefault();
       parent.postMessage({ wdNav: 1, page: m[1], hash: m[2] || "" }, "*");
+      return;
+    }
+    // A bare fragment. This document is a srcdoc, so it inherits the host's
+    // base URL and the browser would resolve "#team" against the bundle file
+    // and reload the whole thing into this frame. Scroll it ourselves, and
+    // route through the host so Back still works.
+    if (href.charAt(0) === "#") {
+      e.preventDefault();
+      if (window.WD_PAGE) {
+        parent.postMessage({ wdNav: 1, page: window.WD_PAGE, hash: href.length > 1 ? href : "" }, "*");
+      } else {
+        jump(href);
+      }
     }
   }, true);
+
+  // instant for a jump that arrives with a freshly loaded page, the way the
+  // real site lands on canada.html#team; smooth for a click within the page,
+  // which is what the page's own scroll-behavior asks for.
+  function jump(hash, instant) {
+    if (!hash || hash === "#") return window.scrollTo(0, 0);
+    var el = null;
+    try { el = document.querySelector(hash); } catch (err) { /* not a selector */ }
+    if (!el) return;
+    try { el.scrollIntoView(instant ? { behavior: "instant", block: "start" } : undefined); }
+    catch (err) { el.scrollIntoView(); }
+  }
 
   // The host frame asks for an anchor once the page has loaded.
   window.addEventListener("message", function (e) {
     var d = e.data || {};
-    if (!d.wdGo) return;
-    var el = null;
-    try { el = document.querySelector(d.wdGo); } catch (err) { /* not a selector */ }
-    if (el) el.scrollIntoView();
+    if (d.wdGo) jump(d.wdGo === "top" ? "" : d.wdGo, !!d.instant);
   });
 })();
 </script>
@@ -150,7 +172,7 @@ function go() {{
   var s = parse();
   if (!PAGES[s.page]) s = {{ page: HOME, hash: "" }};
   if (s.page === current) {{                     // same page, just jump
-    if (s.hash) view.contentWindow.postMessage({{ wdGo: s.hash }}, "*");
+    view.contentWindow.postMessage({{ wdGo: s.hash || "top" }}, "*");
     return;
   }}
   current = s.page; pending = s.hash;
@@ -159,7 +181,8 @@ function go() {{
 }}
 
 view.addEventListener("load", function () {{
-  if (pending) view.contentWindow.postMessage({{ wdGo: pending }}, "*");
+  // A page that has just loaded should land on its anchor, not glide to it.
+  if (pending) view.contentWindow.postMessage({{ wdGo: pending, instant: 1 }}, "*");
   pending = "";
 }});
 
@@ -203,7 +226,8 @@ def build_page(name: str, artifact: str) -> str:
     #    The charset tag is spelled a few different ways across the pages, so
     #    match it rather than guess.
     src, n = re.subn(r'(<meta charset=["\']?[\w-]+["\']?\s*/?>)',
-                     r'\1\n<script>window.WD_OFFLINE = 1;</script>', src, count=1)
+                     r'\1\n<script>window.WD_OFFLINE = 1; window.WD_PAGE = "%s";</script>' % name,
+                     src, count=1)
     if n != 1:
         sys.exit("%s: no <meta charset> to mark the document as offline" % name)
 
@@ -215,12 +239,25 @@ def build_page(name: str, artifact: str) -> str:
     if n == 0 and 'assets/' in src:
         sys.exit("%s: asset references left but no scripts inlined" % name)
 
-    # 4. The 3D artifact, before the image pass so its own paths are untouched.
+    # 4. The shim, while the page still owns the only closing tag in the file.
+    #    It has to go in before the 3D artifact: that artifact is a whole
+    #    document with its own </body>, and once it sits in a srcdoc attribute
+    #    a search for the page's closing tag finds the artifact's first and
+    #    injects the shim into the nested frame, leaving this page without one.
+    close = next((c for c in ("</body>", "</html>") if c in src), None)
+    if close is None:
+        src = src + SHIM                       # most pages close neither tag
+    elif src.count(close) != 1:
+        sys.exit("%s: %d copies of %s — cannot place the shim" % (name, src.count(close), close))
+    else:
+        src = src.replace(close, SHIM + close, 1)
+
+    # 5. The 3D artifact, before the image pass so its own paths are untouched.
     if ARTIFACT in src:
         src = src.replace('src="%s"' % ARTIFACT, 'srcdoc="%s"' % attr_escape(artifact))
         src = src.replace('href="%s" target="_blank" rel="noopener"' % ARTIFACT, 'href="#wd-fullscreen"')
 
-    # 5. Images, in markup and in the setup page's JS data alike. A plan is
+    # 6. Images, in markup and in the setup page's JS data alike. A plan is
     #    referenced up to three times per page — the <img>, the link around it
     #    and the "tap to open full size" hint — so only the <img> gets the
     #    bytes and the links point at it by name; the shim opens the lightbox
@@ -237,12 +274,12 @@ def build_page(name: str, artifact: str) -> str:
     if left:
         sys.exit("%s: un-inlined asset(s): %s" % (name, sorted(set(left))))
 
-    # 6. The shim goes last so it sees the finished document. Most pages close
-    #    neither <body> nor <html> explicitly, so fall through to appending.
-    for close in ("</body>", "</html>"):
-        if close in src:
-            return src.replace(close, SHIM + close, 1)
-    return src + SHIM
+    # The shim must be in this document, not swallowed by a nested frame's
+    # srcdoc. Without it the page's whole menu is dead, and nothing else in
+    # the build complains, so check it rather than trust the ordering above.
+    if SHIM not in re.sub(r'srcdoc="[^"]*"', 'srcdoc=""', src):
+        sys.exit("%s: the shim is missing, or ended up inside a nested frame" % name)
+    return src
 
 
 def main() -> None:

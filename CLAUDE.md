@@ -203,11 +203,24 @@ online. Three things cannot survive as they are, and the build rewrites them:
 - Cross-page links (`canada.html#team`) become a message to the host frame,
   which swaps the document and scrolls to the anchor. The host mirrors it in
   its own hash — `#canada.html!team` — so Back works and a page can be linked.
+- **Bare fragments too** (`#team`, `#g-apero`). A `srcdoc` document inherits
+  the host's base URL, so the browser resolves `#team` against the bundle
+  file and reloads the whole bundle into the frame. They are intercepted and
+  routed through the host like any other link. A jump that arrives with a
+  freshly loaded page is instant, the way the real site lands on
+  `canada.html#team`; a click within the page keeps the smooth scroll.
 - A plan's `<a href="assets/....jpg">` becomes a lightbox, because a browser
   will not navigate to a `data:` URL. Only the `<img>` carries the bytes and
   the links find it by `data-wd-name`; inlining every reference would carry
   the larger plans three times over.
 - The 3D plan's "open full screen" link calls the Fullscreen API on the frame.
+
+The shim is inserted **before** the 3D artifact is embedded. The artifact is
+a whole document with its own `</body>`, and once it sits in a `srcdoc`
+attribute a search for the page's closing tag finds the artifact's first and
+injects the shim into the nested frame — leaving that page with no shim and a
+completely dead menu, with nothing else in the build complaining. A guard at
+the end of `build_page` checks the shim survived outside any `srcdoc`.
 
 Fonts live once in the host, spliced into each page as it is shown — the
 `/*WD_FONTS*/` slot. `tools/fetch-fonts.py` regenerates
