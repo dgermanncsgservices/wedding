@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Print the whole site to one PDF — the fallback that opens on any device.
+"""Print each event day to its own PDF — what the menus offer for download.
 
-The offline HTML bundle needs a browser that will run its JavaScript. A PDF
-needs nothing, so this is what to hand someone whose device will not open the
-bundle, and what to print for the day itself.
+A PDF needs nothing of the device, so this is what a guest gets when they tap
+"Download PDF", and what to print for the day itself. One per day per
+language: a Switzerland guest has no use for the Canada setup plan.
 
-    python3 tools/build-pdf.py          # English  -> wedding-offline.pdf
-    python3 tools/build-pdf.py de       # German   -> wedding-offline-de.pdf
+    python3 tools/build-pdf.py                 # all four
+    python3 tools/build-pdf.py switzerland de  # just one
 
 Re-run after a sheet sync, like the HTML bundle. Needs Chromium and pdfrw.
 """
@@ -14,14 +14,18 @@ import pathlib, re, shutil, subprocess, sys, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# Reading order: the hub as a cover, then each event with its plans, then the
-# parking directions. Matches how someone would page through it on the day.
-PAGES = [
-    "index.html",
-    "canada.html", "indoor-canada.html", "outdoor-canada.html", "setup-canada.html",
-    "switzerland.html", "apero-switzerland.html", "seating-switzerland.html",
-    "leissigen.html",
-]
+# One document per event, in the order someone would page through it on the
+# day: the schedule and team first, then the plans.
+#
+# leissigen.html is deliberately left out. It is unlinked on the site by
+# design — the URL is shared directly with the people who need it — and a PDF
+# has no way to carry a page without also handing it to everyone who opens
+# the file.
+SECTIONS = {
+    "switzerland": ["switzerland.html", "apero-switzerland.html", "seating-switzerland.html"],
+    "canada": ["canada.html", "indoor-canada.html", "outdoor-canada.html", "setup-canada.html"],
+}
+LANGS = ["en", "de"]
 
 CHROME_CANDIDATES = [
     "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
@@ -122,28 +126,19 @@ def prepare(name: str, lang: str, dest: pathlib.Path) -> pathlib.Path:
     return out
 
 
-def main() -> None:
-    lang = (sys.argv[1] if len(sys.argv) > 1 else "en").lower()
-    if lang not in ("en", "de"):
-        sys.exit("language must be en or de")
-    out_pdf = ROOT / ("wedding-offline.pdf" if lang == "en" else "wedding-offline-%s.pdf" % lang)
+def build(section: str, lang: str, browser: str) -> pathlib.Path:
+    from pdfrw import PdfReader, PdfWriter
 
-    try:
-        from pdfrw import PdfReader, PdfWriter
-    except ImportError:
-        sys.exit("pdfrw is needed to join the pages: pip install pdfrw")
-
-    browser = chrome()
+    names = SECTIONS[section]
+    out_pdf = ROOT / ("wedding-%s%s.pdf" % (section, "" if lang == "en" else "-" + lang))
     with tempfile.TemporaryDirectory() as tmp:
         work = pathlib.Path(tmp)
         # The pages reference assets/ relatively, so give them one.
         (work / "assets").symlink_to(ROOT / "assets")
-        for name in PAGES:
-            prepare(name, lang, work)
-
         parts = []
-        for name in PAGES:
-            pdf = work / (name.replace(".html", ".pdf"))
+        for name in names:
+            prepare(name, lang, work)
+            pdf = work / name.replace(".html", ".pdf")
             r = subprocess.run([
                 browser, "--headless", "--disable-gpu", "--no-sandbox",
                 "--no-pdf-header-footer", "--virtual-time-budget=20000",
@@ -152,7 +147,6 @@ def main() -> None:
             if not pdf.exists():
                 sys.exit("failed to print %s\n%s" % (name, r.stderr[-800:]))
             parts.append(pdf)
-            print("  printed %-26s %6.0f KB" % (name, pdf.stat().st_size / 1024))
 
         writer = PdfWriter()
         for pdf in parts:
@@ -160,8 +154,29 @@ def main() -> None:
         writer.write(str(out_pdf))
 
     pages = len(PdfReader(str(out_pdf)).pages)
-    print("wrote %s — %d pages from %d sections, %.1f MB"
-          % (out_pdf.name, pages, len(PAGES), out_pdf.stat().st_size / 1048576))
+    print("  %-28s %2d pages from %d sections, %.1f MB"
+          % (out_pdf.name, pages, len(names), out_pdf.stat().st_size / 1048576))
+    return out_pdf
+
+
+def main() -> None:
+    args = [a.lower() for a in sys.argv[1:]]
+    sections = [a for a in args if a in SECTIONS] or list(SECTIONS)
+    langs = [a for a in args if a in LANGS] or LANGS
+    unknown = [a for a in args if a not in SECTIONS and a not in LANGS]
+    if unknown:
+        sys.exit("unknown argument(s): %s — expected one of %s"
+                 % (", ".join(unknown), ", ".join(list(SECTIONS) + LANGS)))
+
+    try:
+        import pdfrw  # noqa: F401
+    except ImportError:
+        sys.exit("pdfrw is needed to join the pages: pip install pdfrw")
+
+    browser = chrome()
+    for section in sections:
+        for lang in langs:
+            build(section, lang, browser)
 
 
 if __name__ == "__main__":

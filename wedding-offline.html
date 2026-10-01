@@ -797,7 +797,7 @@ window.I18N_PAGE = { de: {
   "Day-of Team": "Team vor Ort",
   "Apéro Plan": "Apéro-Plan",
   "Seating": "Sitzplan",
-  "Offline copy": "Offline-Version",
+  "Download PDF": "PDF herunterladen",
   "nav.seating": "Sitzplan",
   "nav.schedule": "Programm",
   "nav.team": "Team vor Ort",
@@ -1090,7 +1090,8 @@ window.I18N_PAGE = { de: {
   "use strict";
 
   var GROUPS = ["Setup", "Setup Ceremony", "Ceremony", "Apéro", "Reception"];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-switzerland.pdf", de: "wedding-switzerland-de.pdf" };
   var DAY_PAGE = "switzerland.html";
   var APERO_PAGE = "apero-switzerland.html";
   var SEATING_PAGE = "seating-switzerland.html";
@@ -1117,10 +1118,12 @@ window.I18N_PAGE = { de: {
     items.push({ href: base + "#team", label: t("Day-of Team") });
     items.push({ href: APERO_PAGE, label: t("Ap\\u00e9ro Plan") });
     items.push({ href: SEATING_PAGE, label: t("Seating") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };
@@ -1649,7 +1652,7 @@ window.I18N_PAGE = { de: {
   "Day-of Team": "Team vor Ort",
   "Apéro Plan": "Apéro-Plan",
   "Seating": "Sitzplan",
-  "Offline copy": "Offline-Version",
+  "Download PDF": "PDF herunterladen",
   "apero.eyebrow": "Schweiz · Apéro",
   "apero.h1": "Apéro-Plan",
   "apero.desc": "So ist der Apéro-Bereich aufgebaut.",
@@ -1826,7 +1829,8 @@ window.I18N_PAGE = { de: {
   "use strict";
 
   var GROUPS = ["Setup", "Setup Ceremony", "Ceremony", "Apéro", "Reception"];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-switzerland.pdf", de: "wedding-switzerland-de.pdf" };
   var DAY_PAGE = "switzerland.html";
   var APERO_PAGE = "apero-switzerland.html";
   var SEATING_PAGE = "seating-switzerland.html";
@@ -1853,10 +1857,12 @@ window.I18N_PAGE = { de: {
     items.push({ href: base + "#team", label: t("Day-of Team") });
     items.push({ href: APERO_PAGE, label: t("Ap\\u00e9ro Plan") });
     items.push({ href: SEATING_PAGE, label: t("Seating") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };
@@ -2115,7 +2121,7 @@ window.I18N_PAGE = { de: {
   "Day-of Team": "Team vor Ort",
   "Apéro Plan": "Apéro-Plan",
   "Seating": "Sitzplan",
-  "Offline copy": "Offline-Version",
+  "Download PDF": "PDF herunterladen",
   "seating.eyebrow": "Schweiz · Fest",
   "seating.h1": "Sitzplan",
   "seating.desc": "Hier findest du deinen Tisch.",
@@ -2292,7 +2298,8 @@ window.I18N_PAGE = { de: {
   "use strict";
 
   var GROUPS = ["Setup", "Setup Ceremony", "Ceremony", "Apéro", "Reception"];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-switzerland.pdf", de: "wedding-switzerland-de.pdf" };
   var DAY_PAGE = "switzerland.html";
   var APERO_PAGE = "apero-switzerland.html";
   var SEATING_PAGE = "seating-switzerland.html";
@@ -2319,10 +2326,12 @@ window.I18N_PAGE = { de: {
     items.push({ href: base + "#team", label: t("Day-of Team") });
     items.push({ href: APERO_PAGE, label: t("Ap\\u00e9ro Plan") });
     items.push({ href: SEATING_PAGE, label: t("Seating") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };
@@ -2869,7 +2878,7 @@ window.I18N_PAGE = { de: {
   "Indoors": "Drinnen",
   "Outdoors": "Draußen",
   "Setup Plan": "Aufbauplan",
-  "Offline copy": "Offline-Version",
+  "Download PDF": "PDF herunterladen",
   "Day-of Team": "Team vor Ort",
   "nav.schedule": "Programm",
   "nav.team": "Team vor Ort",
@@ -3107,7 +3116,8 @@ window.I18N_PAGE = { de: {
   "use strict";
 
   var GROUPS = [];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-canada.pdf", de: "wedding-canada-de.pdf" };
   var DAY_PAGE = "canada.html";
   var INDOOR_PAGE = "indoor-canada.html";
   var OUTDOOR_PAGE = "outdoor-canada.html";
@@ -3136,10 +3146,12 @@ window.I18N_PAGE = { de: {
     items.push({ href: INDOOR_PAGE, label: t("Indoors") });
     items.push({ href: OUTDOOR_PAGE, label: t("Outdoors") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };
@@ -4107,7 +4119,7 @@ window.I18N_PAGE = { de: {
   "Indoors": "Drinnen",
   "Outdoors": "Draußen",
   "Setup Plan": "Aufbauplan",
-  "Offline copy": "Offline-Version",
+  "Download PDF": "PDF herunterladen",
   "in.eyebrow": "Kanada · Drinnen",
   "in.h1": "Drinnen",
   "in.desc": "Der Saal: wie er eingerichtet ist und wo du sitzt.",
@@ -4306,7 +4318,8 @@ window.I18N_PAGE = { de: {
   "use strict";
 
   var GROUPS = [];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-canada.pdf", de: "wedding-canada-de.pdf" };
   var DAY_PAGE = "canada.html";
   var INDOOR_PAGE = "indoor-canada.html";
   var OUTDOOR_PAGE = "outdoor-canada.html";
@@ -4335,10 +4348,12 @@ window.I18N_PAGE = { de: {
     items.push({ href: INDOOR_PAGE, label: t("Indoors") });
     items.push({ href: OUTDOOR_PAGE, label: t("Outdoors") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };
@@ -4633,7 +4648,7 @@ window.I18N_PAGE = { de: {
   "Indoors": "Drinnen",
   "Outdoors": "Draußen",
   "Setup Plan": "Aufbauplan",
-  "Offline copy": "Offline-Version",
+  "Download PDF": "PDF herunterladen",
   "out.eyebrow": "Kanada · Draußen",
   "out.h1": "Draußen",
   "out.desc": "Die Wiese: wie sie eingerichtet ist und wo du sitzt.",
@@ -4816,7 +4831,8 @@ window.I18N_PAGE = { de: {
   "use strict";
 
   var GROUPS = [];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-canada.pdf", de: "wedding-canada-de.pdf" };
   var DAY_PAGE = "canada.html";
   var INDOOR_PAGE = "indoor-canada.html";
   var OUTDOOR_PAGE = "outdoor-canada.html";
@@ -4845,10 +4861,12 @@ window.I18N_PAGE = { de: {
     items.push({ href: INDOOR_PAGE, label: t("Indoors") });
     items.push({ href: OUTDOOR_PAGE, label: t("Outdoors") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };
@@ -5152,7 +5170,7 @@ window.I18N_PAGE = { de: {
   "Indoors": "Drinnen",
   "Outdoors": "Draußen",
   "Setup Plan": "Aufbauplan",
-  "Offline copy": "Offline-Version",
+  "Download PDF": "PDF herunterladen",
   "setup.eyebrow": "Kanada · Aufbauteam",
   "setup.h1": "Aufbauplan",
   "setup.desc": "Alles, was vor dem Eintreffen der Gäste aufgebaut wird. Tippe auf einen Titel, um ihn zu öffnen.",
@@ -5340,7 +5358,8 @@ window.I18N_PAGE = { de: {
   "use strict";
 
   var GROUPS = [];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-canada.pdf", de: "wedding-canada-de.pdf" };
   var DAY_PAGE = "canada.html";
   var INDOOR_PAGE = "indoor-canada.html";
   var OUTDOOR_PAGE = "outdoor-canada.html";
@@ -5369,10 +5388,12 @@ window.I18N_PAGE = { de: {
     items.push({ href: INDOOR_PAGE, label: t("Indoors") });
     items.push({ href: OUTDOOR_PAGE, label: t("Outdoors") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };

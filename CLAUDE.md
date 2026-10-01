@@ -274,12 +274,10 @@ Fonts live once in the host, in `<style id="wd-fonts">`.
 Fonts, latin subset only; run it only when a page starts using a new family
 or weight.
 
-Both day menus end with an **Offline copy** item that downloads the file —
-`nav.js` sets the `download` attribute when a `WD_NAV_ITEMS` entry asks for
-it. The build sets `window.WD_OFFLINE` before any page script runs, and the
-day files leave the item out when it is set, so the bundle does not offer a
-download of itself. It needs a `de` entry on every page of both sections,
-like any other menu label.
+**Nothing links to the bundle any more.** Both day menus used to offer it;
+they offer that day's PDF instead, which asks nothing of the device. The file
+and its build are kept because they work everywhere except, so far, an iPad —
+but it is reachable only by typing the URL.
 
 `leissigen.html` is in the bundle too — parking directions are the thing you
 most want without a signal — and stays as unlinked there as it is on the site,
@@ -292,20 +290,34 @@ in the file. It is still embedded the one way it can be, as a `srcdoc` frame,
 so on an iPad opened from a file it stays blank either way. The cut list
 beside it, and everything else, works offline everywhere.
 
-## The PDF
+## The PDFs
 
-`wedding-offline.pdf` (and `-de`) is the whole site printed to one document —
-the fallback for a device that will not run the HTML bundle's JavaScript, and
-what to print for the day. `tools/build-pdf.py` makes it, and like the bundle
-it goes stale after a sheet sync:
+One PDF per event day per language — `wedding-switzerland.pdf`,
+`wedding-switzerland-de.pdf`, `wedding-canada.pdf`, `wedding-canada-de.pdf`.
+This is what the day menus offer under **Download PDF**, and what to print for
+the day. A PDF asks nothing of the device, which the HTML bundle cannot say.
 
 ```
-python3 tools/build-pdf.py          # English
-python3 tools/build-pdf.py de       # German
+python3 tools/build-pdf.py                 # all four
+python3 tools/build-pdf.py switzerland de  # just one
 ```
 
 **After a sync, three things need rebuilding**: the page you edited, then
 `build-offline.py`, then `build-pdf.py`.
+
+Each day holds only its own pages — a Switzerland guest has no use for the
+Canada setup plan. `leissigen.html` is in neither: it is unlinked on the site
+by design, the URL being shared directly with the people who need it, and a
+PDF has no way to carry a page without handing it to everyone who opens the
+file. Say so before adding it.
+
+The menu item's `href` follows the reader's language, because `nav.js`
+re-runs `WD_NAV_ITEMS` on every switch; `nav.js` sets the `download`
+attribute when an entry asks for it. The build sets `window.WD_OFFLINE`
+before any page script runs and the day files drop the item when it is set,
+so the offline bundle — one file, with no PDF beside it — does not offer a
+link that cannot resolve. It needs a `de` entry on every page of both
+sections, like any other menu label.
 
 It prints each page separately with Chromium and joins them with pdfrw, so
 every section starts on a fresh sheet. Before printing, each page gets a print
@@ -323,7 +335,6 @@ sheets. `-webkit-print-color-adjust: exact` keeps the maroon and gold.
 
 German is produced by injecting the `wd-lang` choice into `localStorage`
 before `i18n.js` loads, which is why it is set right after `<meta charset>`.
-`leissigen.html` is German in both, being German-only.
 
 ## The Canada string-light page
 

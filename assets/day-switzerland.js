@@ -12,7 +12,8 @@
   "use strict";
 
   var GROUPS = ["Setup", "Setup Ceremony", "Ceremony", "Apéro", "Reception"];
-  var OFFLINE_FILE = "wedding-offline.html";
+  // One PDF per day per language; nav.js marks it as a download.
+  var PDF_FILE = { en: "wedding-switzerland.pdf", de: "wedding-switzerland-de.pdf" };
   var DAY_PAGE = "switzerland.html";
   var APERO_PAGE = "apero-switzerland.html";
   var SEATING_PAGE = "seating-switzerland.html";
@@ -39,10 +40,12 @@
     items.push({ href: base + "#team", label: t("Day-of Team") });
     items.push({ href: APERO_PAGE, label: t("Ap\u00e9ro Plan") });
     items.push({ href: SEATING_PAGE, label: t("Seating") });
-    // Last, and absent from the offline bundle itself — whoever is
-    // reading it there already has the file.
+    // Last. Left out of the offline bundle, which is one file and has no
+    // PDF beside it to link to.
     if (!window.WD_OFFLINE) {
-      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+      var lang = window.WD_I18N ? window.WD_I18N.lang : "en";
+      items.push({ href: PDF_FILE[lang] || PDF_FILE.en,
+                   label: t("Download PDF"), download: true });
     }
     return items;
   };
