@@ -292,6 +292,39 @@ in the file. It is still embedded the one way it can be, as a `srcdoc` frame,
 so on an iPad opened from a file it stays blank either way. The cut list
 beside it, and everything else, works offline everywhere.
 
+## The PDF
+
+`wedding-offline.pdf` (and `-de`) is the whole site printed to one document —
+the fallback for a device that will not run the HTML bundle's JavaScript, and
+what to print for the day. `tools/build-pdf.py` makes it, and like the bundle
+it goes stale after a sheet sync:
+
+```
+python3 tools/build-pdf.py          # English
+python3 tools/build-pdf.py de       # German
+```
+
+**After a sync, three things need rebuilding**: the page you edited, then
+`build-offline.py`, then `build-pdf.py`.
+
+It prints each page separately with Chromium and joins them with pdfrw, so
+every section starts on a fresh sheet. Before printing, each page gets a print
+stylesheet and a script that opens every `<details>` — a collapsed timeline on
+paper would hide the notes. The nav, the language switch, the "Details" pills
+and the "tap to open full size" hints are hidden, since none of them mean
+anything printed, and the 3D frame is replaced by a line pointing at the
+website; its cut list prints normally.
+
+Images are capped at `max-height: 200mm` so a tall plan fits beside its own
+heading. Without that the Switzerland seating chart (926×1880) ran past the
+bottom of the page and left the overflow on a blank one, and `.section-head`
+needs `break-inside: avoid` or the eyebrow and the title land on separate
+sheets. `-webkit-print-color-adjust: exact` keeps the maroon and gold.
+
+German is produced by injecting the `wd-lang` choice into `localStorage`
+before `i18n.js` loads, which is why it is set right after `<meta charset>`.
+`leissigen.html` is German in both, being German-only.
+
 ## The Canada string-light page
 
 `assets/string-lights-canada.html` is a self-contained three.js artifact,
