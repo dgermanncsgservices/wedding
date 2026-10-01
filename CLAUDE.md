@@ -214,6 +214,13 @@ Fonts live once in the host, spliced into each page as it is shown — the
 `tools/offline-fonts.css` from Google Fonts, latin subset only; run it only
 when a page starts using a new family or weight.
 
+Both day menus end with an **Offline copy** item that downloads the file —
+`nav.js` sets the `download` attribute when a `WD_NAV_ITEMS` entry asks for
+it. The build sets `window.WD_OFFLINE` before any page script runs, and the
+day files leave the item out when it is set, so the bundle does not offer a
+download of itself. It needs a `de` entry on every page of both sections,
+like any other menu label.
+
 `leissigen.html` is in the bundle too — parking directions are the thing you
 most want without a signal — and stays as unlinked there as it is on the site,
 reachable only at `#leissigen.html`. Add a new page to `PAGES` in the build

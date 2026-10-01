@@ -12,6 +12,7 @@
   "use strict";
 
   var GROUPS = ["Setup", "Setup Ceremony", "Ceremony", "Apéro", "Reception"];
+  var OFFLINE_FILE = "wedding-offline.html";
   var DAY_PAGE = "switzerland.html";
   var APERO_PAGE = "apero-switzerland.html";
   var SEATING_PAGE = "seating-switzerland.html";
@@ -38,6 +39,11 @@
     items.push({ href: base + "#team", label: t("Day-of Team") });
     items.push({ href: APERO_PAGE, label: t("Ap\u00e9ro Plan") });
     items.push({ href: SEATING_PAGE, label: t("Seating") });
+    // Last, and absent from the offline bundle itself — whoever is
+    // reading it there already has the file.
+    if (!window.WD_OFFLINE) {
+      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+    }
     return items;
   };
 })();

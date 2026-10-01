@@ -198,7 +198,16 @@ def build_page(name: str, artifact: str) -> str:
     if n != 1:
         sys.exit("%s: expected one Google Fonts <link>, found %d" % (name, n))
 
-    # 2. The shared modules, in the order the page loads them.
+    # 2. Mark the document as the offline copy, before any page script runs,
+    #    so the day menus leave out their "Offline copy" download link.
+    #    The charset tag is spelled a few different ways across the pages, so
+    #    match it rather than guess.
+    src, n = re.subn(r'(<meta charset=["\']?[\w-]+["\']?\s*/?>)',
+                     r'\1\n<script>window.WD_OFFLINE = 1;</script>', src, count=1)
+    if n != 1:
+        sys.exit("%s: no <meta charset> to mark the document as offline" % name)
+
+    # 3. The shared modules, in the order the page loads them.
     def inline_script(m: "re.Match") -> str:
         js = (ROOT / m.group(1)).read_text(encoding="utf-8")
         return "<script>\n" + js + "</script>"
@@ -206,12 +215,12 @@ def build_page(name: str, artifact: str) -> str:
     if n == 0 and 'assets/' in src:
         sys.exit("%s: asset references left but no scripts inlined" % name)
 
-    # 3. The 3D artifact, before the image pass so its own paths are untouched.
+    # 4. The 3D artifact, before the image pass so its own paths are untouched.
     if ARTIFACT in src:
         src = src.replace('src="%s"' % ARTIFACT, 'srcdoc="%s"' % attr_escape(artifact))
         src = src.replace('href="%s" target="_blank" rel="noopener"' % ARTIFACT, 'href="#wd-fullscreen"')
 
-    # 4. Images, in markup and in the setup page's JS data alike. A plan is
+    # 5. Images, in markup and in the setup page's JS data alike. A plan is
     #    referenced up to three times per page — the <img>, the link around it
     #    and the "tap to open full size" hint — so only the <img> gets the
     #    bytes and the links point at it by name; the shim opens the lightbox
@@ -228,9 +237,11 @@ def build_page(name: str, artifact: str) -> str:
     if left:
         sys.exit("%s: un-inlined asset(s): %s" % (name, sorted(set(left))))
 
-    # 5. The shim goes last so it sees the finished document.
-    if "</body>" in src:
-        return src.replace("</body>", SHIM + "</body>", 1)
+    # 6. The shim goes last so it sees the finished document. Most pages close
+    #    neither <body> nor <html> explicitly, so fall through to appending.
+    for close in ("</body>", "</html>"):
+        if close in src:
+            return src.replace(close, SHIM + close, 1)
     return src + SHIM
 
 

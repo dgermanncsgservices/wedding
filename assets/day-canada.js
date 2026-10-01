@@ -13,6 +13,7 @@
   "use strict";
 
   var GROUPS = [];
+  var OFFLINE_FILE = "wedding-offline.html";
   var DAY_PAGE = "canada.html";
   var INDOOR_PAGE = "indoor-canada.html";
   var OUTDOOR_PAGE = "outdoor-canada.html";
@@ -41,6 +42,11 @@
     items.push({ href: INDOOR_PAGE, label: t("Indoors") });
     items.push({ href: OUTDOOR_PAGE, label: t("Outdoors") });
     items.push({ href: SETUP_PAGE, label: t("Setup Plan") });
+    // Last, and absent from the offline bundle itself — whoever is
+    // reading it there already has the file.
+    if (!window.WD_OFFLINE) {
+      items.push({ href: OFFLINE_FILE, label: t("Offline copy"), download: true });
+    }
     return items;
   };
 })();

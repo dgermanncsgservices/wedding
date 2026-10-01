@@ -66,6 +66,8 @@
         var a = document.createElement("a");
         a.href = item.href;
         a.textContent = item.label;
+        // The offline copy is a file to keep, not a page to visit.
+        if (item.download) a.setAttribute("download", "");
         links.appendChild(a);
       });
     }
