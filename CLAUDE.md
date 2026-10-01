@@ -196,36 +196,52 @@ python3 tools/build-offline.py
 ```
 
 It needs no network. Each page keeps its own markup, styles and scripts and
-travels as a `srcdoc` document inside one host frame, so the sticky bar,
-hamburger, EN/DE switch and collapsible groups all behave exactly as they do
-online. Three things cannot survive as they are, and the build rewrites them:
+is carried as a string; the router swaps one into the live document at a
+time, so the sticky bar, hamburger, EN/DE switch and collapsible groups all
+behave exactly as they do online.
 
-- Cross-page links (`canada.html#team`) become a message to the host frame,
-  which swaps the document and scrolls to the anchor. The host mirrors it in
-  its own hash — `#canada.html!team` — so Back works and a page can be linked.
-- **Bare fragments too** (`#team`, `#g-apero`). A `srcdoc` document inherits
-  the host's base URL, so the browser resolves `#team` against the bundle
-  file and reloads the whole bundle into the frame. They are intercepted and
-  routed through the host like any other link. A jump that arrives with a
-  freshly loaded page is instant, the way the real site lands on
-  `canada.html#team`; a click within the page keeps the smooth scroll.
+**There is deliberately no iframe.** The bundle used to hold each page in a
+`srcdoc` frame. WebKit blocks `srcdoc` frames inside a `file://` document, so
+on an iPad the whole thing was a blank burgundy page — the host painted its
+background and nothing ever appeared, while Android was fine. One document
+has no origin to be refused, and works in restricted viewers like the iOS
+Files preview too. Keep it that way.
+
+Swapping a page in means: drop the previous page's `<style>` blocks, copy in
+this page's, set `body.innerHTML`, then **re-create every `<script>`** —
+scripts inserted through `innerHTML` never run. They execute in document
+order, which is what `i18n.js` and `nav.js` need, and both initialise
+immediately because `document.readyState` is no longer `"loading"`. The
+host's own styles are the only ones with an `id`, so everything else in
+`<head>` — including the styles `i18n.js` and `nav.js` append at runtime —
+is safe to clear on each swap. Only one page is ever in the document, so
+duplicate ids and class names across pages can never collide.
+
+The host is **ES5 only** (no arrow functions, `let`, or template strings) and
+pairs `inset` with `top/right/bottom/left`, so an older iPad runs it. If
+anything throws, it writes the error onto the page rather than leaving a
+blank one — a blank page tells the reader nothing.
+
+Three things cannot survive being served from one file, and the router
+handles them:
+
+- Cross-page links (`canada.html#team`) are intercepted and routed. The route
+  lives in the document's own hash — `#canada.html!team` — so Back works and
+  a page can be linked.
+- **Bare fragments too** (`#team`, `#g-apero`), because that same hash is the
+  route: letting the browser handle `#team` would overwrite it. A jump to a
+  freshly rendered page is instant, the way the real site lands on
+  `canada.html#team`; a click within a page keeps the page's smooth scroll.
 - A plan's `<a href="assets/....jpg">` becomes a lightbox, because a browser
   will not navigate to a `data:` URL. Only the `<img>` carries the bytes and
   the links find it by `data-wd-name`; inlining every reference would carry
   the larger plans three times over.
-- The 3D plan's "open full screen" link calls the Fullscreen API on the frame.
+- The 3D plan's "open full screen" link calls the Fullscreen API.
 
-The shim is inserted **before** the 3D artifact is embedded. The artifact is
-a whole document with its own `</body>`, and once it sits in a `srcdoc`
-attribute a search for the page's closing tag finds the artifact's first and
-injects the shim into the nested frame — leaving that page with no shim and a
-completely dead menu, with nothing else in the build complaining. A guard at
-the end of `build_page` checks the shim survived outside any `srcdoc`.
-
-Fonts live once in the host, spliced into each page as it is shown — the
-`/*WD_FONTS*/` slot. `tools/fetch-fonts.py` regenerates
-`tools/offline-fonts.css` from Google Fonts, latin subset only; run it only
-when a page starts using a new family or weight.
+Fonts live once in the host, in `<style id="wd-fonts">`.
+`tools/fetch-fonts.py` regenerates `tools/offline-fonts.css` from Google
+Fonts, latin subset only; run it only when a page starts using a new family
+or weight.
 
 Both day menus end with an **Offline copy** item that downloads the file —
 `nav.js` sets the `download` attribute when a `WD_NAV_ITEMS` entry asks for
@@ -241,7 +257,9 @@ script, or it is simply left out.
 
 **The 3D string light view is the one thing that still needs a connection** —
 the artifact pulls three.js from unpkg at runtime and that cannot be carried
-in the file. The cut list beside it, and everything else, works offline.
+in the file. It is still embedded the one way it can be, as a `srcdoc` frame,
+so on an iPad opened from a file it stays blank either way. The cut list
+beside it, and everything else, works offline everywhere.
 
 ## The Canada string-light page
 
