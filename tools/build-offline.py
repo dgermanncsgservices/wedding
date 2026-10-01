@@ -19,7 +19,7 @@ file can carry. Everything around it, the cut list included, works offline.
 Re-run after any sheet sync:  python3 tools/build-offline.py
 No network needed; the fonts come from tools/offline-fonts.css.
 """
-import base64, json, mimetypes, pathlib, re, sys
+import base64, json, mimetypes, pathlib, re, shutil, subprocess, sys, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "wedding-offline.html"
@@ -107,7 +107,11 @@ SHIM = r"""
 """
 
 
-HOST = """<!DOCTYPE html>
+# Each page travels in its own inert <script type="text/wd-page"> in <head>:
+# the HTML parser only has to store text, the JS engine never has to parse a
+# multi-megabyte string literal, and only the page being shown is ever turned
+# into a string. They live in <head> so replacing <body> cannot remove them.
+HOST = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -127,41 +131,59 @@ HOST = """<!DOCTYPE html>
   .wd-msg{margin:0;padding:2rem;background:#4A161E;color:#F1E7D6;
     font:400 1rem/1.6 system-ui,sans-serif;min-height:100vh}
   .wd-msg a{color:#C9A877}
-  .wd-msg code{display:block;margin-top:1rem;font-size:.82rem;color:#E6C9A0;word-break:break-word}
+  .wd-msg code{display:block;white-space:pre-wrap;margin-top:1rem;font-size:.78rem;
+    color:#E6C9A0;word-break:break-word}
 </style>
-</head>
-<body>
-<noscript><p class="wd-msg">This offline copy needs JavaScript. The live site is
-<a href="https://wedding.germann-mail.com">wedding.germann-mail.com</a>.</p></noscript>
+<script>
+/* First and smallest: if anything below fails to parse or run, this still
+   reports it. A blank page tells the reader nothing and tells us less. */
+window.WD = { booted: false, err: null };
+window.onerror = function (m, src, line) {
+  window.WD.err = m + "  (line " + line + ")";
+  if (window.WD.report) window.WD.report();
+  return false;
+};
+window.WD.report = function () {
+  var pages = document.querySelectorAll('script[type="text/wd-page"]').length;
+  var el = document.getElementById("wd-boot");
+  if (!el) {
+    el = document.createElement("div"); el.id = "wd-boot"; el.className = "wd-msg";
+    document.body.appendChild(el);
+  }
+  el.textContent = "Sorry \u2014 this offline copy could not open on this device. " +
+    "The live site is wedding.germann-mail.com.";
+  var c = document.createElement("code");
+  c.textContent = "error: " + (window.WD.err || "none") +
+    "\npage blocks found: " + pages +
+    "\nrouter: " + (window.WD.booted ? "started" : "never started") +
+    "\n" + navigator.userAgent;
+  el.appendChild(c);
+};
+setTimeout(function () { if (!window.WD.booted) window.WD.report(); }, 6000);
+</script>
+__PAGEDATA__
 <script>
 (function () {
   "use strict";
 
-  var PAGES = __PAGES__;
   var HOME = __HOME__;
   var current = null;
 
-  // A blank page tells the reader nothing. If anything here fails, say so.
-  function fail(what, err) {
-    document.body.innerHTML = "";
-    var p = document.createElement("p");
-    p.className = "wd-msg";
-    p.appendChild(document.createTextNode(
-      "Sorry — this offline copy could not open " + what + " on this device. " +
-      "The live site is wedding.germann-mail.com."));
-    var c = document.createElement("code");
-    c.textContent = String(err && (err.stack || err.message || err));
-    p.appendChild(c);
-    document.body.appendChild(p);
+  function source(name) {
+    var el = document.getElementById("wd-p-" + name.replace(/[^\w]/g, "-"));
+    if (!el) return null;
+    // "</" is escaped on the way in so the HTML parser cannot end the block
+    // early; the build refuses any page containing "<!--", which would start
+    // a comment state the same parser never leaves.
+    return __UNESCAPE__;
   }
-  window.onerror = function (msg, src, line) { fail("a page", msg + " (line " + line + ")"); };
 
   // ---------------- rendering ----------------
   // One document, one page in it at a time. Nothing is sandboxed, nothing is
   // fetched, and duplicate ids and styles across pages can never collide
   // because only one page is ever present.
   function render(name) {
-    var dom = new DOMParser().parseFromString(PAGES[name], "text/html");
+    var dom = new DOMParser().parseFromString(source(name), "text/html");
 
     // Drop the previous page: its <style> blocks, and the ones i18n.js and
     // nav.js append at runtime. Ours are the only styles with an id.
@@ -192,10 +214,10 @@ HOST = """<!DOCTYPE html>
     // the day menu, nav.js, and the page's renderer. Each checks
     // document.readyState and initialises straight away once loaded.
     for (var n = 0; n < scripts.length; n++) {
-      var s = document.createElement("script");
-      s.setAttribute("data-wd", "");
-      s.text = scripts[n];
-      document.body.appendChild(s);
+      var sc = document.createElement("script");
+      sc.setAttribute("data-wd", "");
+      sc.text = scripts[n];
+      document.body.appendChild(sc);
     }
     current = name;
   }
@@ -223,7 +245,7 @@ HOST = """<!DOCTYPE html>
 
   function go() {
     var s = parse();
-    if (!PAGES[s.page]) s = { page: HOME, hash: "" };
+    if (!source(s.page)) s = { page: HOME, hash: "" };
     try {
       if (s.page !== current) {
         render(s.page);
@@ -236,7 +258,11 @@ HOST = """<!DOCTYPE html>
       } else {
         window.scrollTo(0, 0);
       }
-    } catch (err) { fail(s.page, err); }
+      window.WD.booted = true;
+    } catch (err) {
+      window.WD.err = String(err && (err.stack || err.message || err));
+      window.WD.report();
+    }
   }
 
   function navigate(page, hash) {
@@ -251,14 +277,52 @@ __SHIM__
   else go();
 })();
 </script>
+</head>
+<body>
+<noscript><p class="wd-msg">This offline copy needs JavaScript. The live site is
+<a href="https://wedding.germann-mail.com">wedding.germann-mail.com</a>.</p></noscript>
+<div id="wd-boot" class="wd-msg">Opening&#8230;</div>
 </body>
 </html>
 """
+
+# Long edge and quality for the bundle's copies of the plans. The originals
+# stay untouched for the website; here the decoded bitmap is what a phone or
+# an iPad has to hold in memory, so 2000px plans are brought down to 1600.
+BS = chr(92)                 # a single backslash, spelled out to avoid escaping bugs
+# How the router undoes the escaping: one pass, so "\\" becomes "\" and "\/"
+# becomes "/" without either being re-read. Written from explicit characters
+# because this string passes through Python, HTML and JavaScript escaping, and
+# counting backslashes by eye is how it gets broken.
+UNESCAPE_JS = ('el.textContent.replace(/' + BS + BS + '([' + BS + 's' + BS + 'S])/g, "$1")')
+
+IMG_MAX_EDGE = 1600
+IMG_QUALITY = 72
 
 
 def data_uri(path: pathlib.Path) -> str:
     mime = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
     return "data:%s;base64,%s" % (mime, base64.b64encode(path.read_bytes()).decode("ascii"))
+
+
+def image_uri(path: pathlib.Path) -> str:
+    """A smaller copy of an image, or the original if Pillow is not installed."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return data_uri(path)
+    import io as _io
+    im = Image.open(path).convert("RGB")
+    w, h = im.size
+    if max(w, h) > IMG_MAX_EDGE:
+        r = IMG_MAX_EDGE / max(w, h)
+        im = im.resize((round(w * r), round(h * r)), Image.LANCZOS)
+    buf = _io.BytesIO()
+    im.save(buf, "JPEG", quality=IMG_QUALITY, optimize=True, progressive=True)
+    data = buf.getvalue()
+    if len(data) >= path.stat().st_size:          # already smaller than we manage
+        return data_uri(path)
+    return "data:image/jpeg;base64," + base64.b64encode(data).decode("ascii")
 
 
 def attr_escape(html: str) -> str:
@@ -309,8 +373,9 @@ def build_page(name: str, artifact: str) -> str:
         if ref not in src:
             continue
         src = src.replace('href="%s"' % ref, 'href="#wd-img" data-wd-img="%s"' % img.name)
-        src = src.replace('src="%s"' % ref, 'src="%s" data-wd-name="%s"' % (data_uri(img), img.name))
-        src = src.replace(ref, data_uri(img))   # the setup page's JS picture data
+        uri = image_uri(img)
+        src = src.replace('src="%s"' % ref, 'src="%s" data-wd-name="%s"' % (uri, img.name))
+        src = src.replace(ref, uri)             # the setup page's JS picture data
 
     left = re.findall(r'(?:src|href)="(assets/[^"]+)"', src)
     if left:
@@ -321,25 +386,70 @@ def build_page(name: str, artifact: str) -> str:
     return src
 
 
+def check_host_scripts(html: str) -> None:
+    """Syntax-check the bundle's own two scripts.
+
+    The host template passes through Python, the HTML parser and JavaScript,
+    and a miscounted backslash has twice produced a file that looks perfect
+    and dies on open — once a regex that ended early, once "\\n" decoded to a
+    real newline inside a string literal, which left the boot script
+    unparseable and the page blank. Neither showed up anywhere but a browser.
+    """
+    scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
+    # The page blocks hold escaped markup, not JavaScript; the host's own are
+    # the first (boot) and the last (router).
+    own = [scripts[0], scripts[-1]] if len(scripts) >= 2 else scripts
+    if shutil.which("node") is None:
+        print("  note: node not found, host scripts not syntax-checked")
+        return
+    with tempfile.TemporaryDirectory() as tmp:
+        for i, src in enumerate(own):
+            f = pathlib.Path(tmp) / ("host%d.js" % i)
+            f.write_text(src, encoding="utf-8")
+            r = subprocess.run(["node", "--check", str(f)], capture_output=True, text=True)
+            if r.returncode != 0:
+                sys.exit("host script %d is not valid JavaScript:\n%s" % (i, r.stderr))
+    print("  host scripts: valid JavaScript")
+
+
+def check_roundtrip(doc: str, safe: str) -> None:
+    """The router un-escapes with split/join; prove it restores the page."""
+    if re.sub(r"\\(.)", r"\1", safe, flags=re.S) != doc:
+        sys.exit("page block does not survive the escape round-trip")
+
+
 def main() -> None:
     if not FONT_CSS.exists():
         sys.exit("missing %s — run tools/fetch-fonts.py first" % FONT_CSS)
     fonts = FONT_CSS.read_text(encoding="utf-8")
     artifact = (ROOT / ARTIFACT).read_text(encoding="utf-8")
 
-    docs = {name: build_page(name, artifact) for name in PAGES}
-    # "</" would close the host's <script> early, wherever it appears in a page.
-    pages_json = json.dumps(docs, ensure_ascii=False).replace("</", "<\\/")
+    blocks = []
+    for name in PAGES:
+        doc = build_page(name, artifact)
+        # Inside a <script> block the HTML parser must not meet "</" — it would
+        # end the block — nor "<!--", which starts a comment state that a later
+        # "<script" turns into one "</script>" cannot close. The first is
+        # escaped; the second has never occurred and is refused outright.
+        if "<!--" in doc:
+            sys.exit("%s: contains <!--, which cannot live inside a page block" % name)
+        safe = doc.replace(BS, BS + BS).replace("</", "<" + BS + "/")
+        check_roundtrip(doc, safe)
+        blocks.append('<script type="text/wd-page" id="wd-p-%s" data-name="%s">%s</script>'
+                      % (re.sub(r"[^\w]", "-", name), name, safe))
 
-    html = (HOST.replace("__SHIM__", SHIM)
+    html = (HOST.replace("__UNESCAPE__", UNESCAPE_JS)
+                .replace("__SHIM__", SHIM)
                 .replace("__FONTS__", fonts)
-                .replace("__PAGES__", pages_json)
+                .replace("__PAGEDATA__", "\n".join(blocks))
                 .replace("__HOME__", json.dumps(HOME)))
-    for token in ("__SHIM__", "__FONTS__", "__PAGES__", "__HOME__"):
+    for token in ("__SHIM__", "__FONTS__", "__PAGEDATA__", "__HOME__", "__UNESCAPE__"):
         if token in html:
             sys.exit("host template still holds %s" % token)
+
+    check_host_scripts(html)
     OUT.write_text(html, encoding="utf-8")
-    print("wrote %s — %d pages, %.1f MB" % (OUT.name, len(docs), OUT.stat().st_size / 1048576))
+    print("wrote %s — %d pages, %.1f MB" % (OUT.name, len(PAGES), OUT.stat().st_size / 1048576))
 
 
 if __name__ == "__main__":

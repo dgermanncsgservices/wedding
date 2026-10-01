@@ -207,6 +207,11 @@ background and nothing ever appeared, while Android was fine. One document
 has no origin to be refused, and works in restricted viewers like the iOS
 Files preview too. Keep it that way.
 
+Each page sits in its own inert `<script type="text/wd-page">` in `<head>`.
+That keeps it out of `<body>`, which the router replaces wholesale, and means
+the JS engine never parses a multi-megabyte string literal — the HTML parser
+just stores text, and only the page being shown is ever made into a string.
+
 Swapping a page in means: drop the previous page's `<style>` blocks, copy in
 this page's, set `body.innerHTML`, then **re-create every `<script>`** —
 scripts inserted through `innerHTML` never run. They execute in document
@@ -217,10 +222,36 @@ host's own styles are the only ones with an `id`, so everything else in
 is safe to clear on each swap. Only one page is ever in the document, so
 duplicate ids and class names across pages can never collide.
 
+Inside a page block the HTML parser must never meet `</`, which would end the
+block early. The build escapes the backslash first and then `</` → `<\/`, and
+the router undoes both in one pass with `/\\([\s\S])/g`. Escaping only `</`
+is **not** reversible: the 3D artifact's own JavaScript already contains
+`<\/script>`, which would come back as `</script>` and corrupt it. The build
+asserts the round-trip for every page, and refuses any page containing
+`<!--`, which starts a comment state a later `<script` makes `</script>`
+unable to close.
+
+**The host template is a raw Python string, and must stay one.** It is
+JavaScript travelling through Python, the HTML parser and then JS, and a
+miscounted backslash has twice produced a file that looked perfect and died
+on open: once a regex that ended early, once `\n` decoded to a real newline
+inside a string literal, which left the boot script unparseable and the whole
+page blank. Neither was visible anywhere but in a browser, so
+`check_host_scripts()` now runs `node --check` over the host's two scripts at
+build time.
+
 The host is **ES5 only** (no arrow functions, `let`, or template strings) and
-pairs `inset` with `top/right/bottom/left`, so an older iPad runs it. If
-anything throws, it writes the error onto the page rather than leaving a
-blank one — a blank page tells the reader nothing.
+pairs `inset` with `top/right/bottom/left`, so an older iPad runs it. A tiny
+boot script runs before everything else and, if the router has not started
+within six seconds or anything throws, writes the error, the page-block count
+and the user agent onto the page. A blank page tells the reader nothing and
+tells us less.
+
+The bundle's copies of the plans are re-encoded (long edge 1600, quality 72)
+by `image_uri()`, which roughly halves them — the originals on the site are
+untouched. It is decoded bitmap, not file size, that a phone has to hold: the
+two 2000px plans were about 12 MB each in memory. Pillow is optional; without
+it the build falls back to the originals.
 
 Three things cannot survive being served from one file, and the router
 handles them:
