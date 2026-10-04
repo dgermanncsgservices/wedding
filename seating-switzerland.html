@@ -61,6 +61,16 @@
   .chart-frame img { width: 100%; height: auto; display: block; border-radius: 8px; }
   .chart-frame a { display: block; border-radius: 8px; }
   .chart-frame a:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
+  /* Two arrangements are live until one is dropped before the day. */
+  .plan { margin-top: 2.2rem; }
+  .plan:first-of-type { margin-top: 0; }
+  .plan-title { text-align: center; margin: 0 0 0.9rem; font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 500; color: var(--maroon-900); }
+  .plan-title .tag { display: block; font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold-500); margin-bottom: 0.25rem; }
+  .plan-note { max-width: 46ch; margin: 0 auto 1.8rem; text-align: center;
+    font-size: 0.9rem; line-height: 1.6; color: var(--ink-500); }
   .chart-hint { text-align: center; margin: 0.8rem 0 0; font-size: 0.78rem; color: var(--ink-500); }
   .chart-hint a { color: inherit; border-bottom: 1px dotted var(--gold-500); text-decoration: none; }
   footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-500); font-size: 0.8rem; }
@@ -78,12 +88,30 @@
     <h1 data-i18n="seating.h1">Seating Plan</h1>
     <p data-i18n="seating.desc">Find your table below.</p>
   </div>
-  <div class="chart-frame">
-    <a href="assets/seating-switzerland.jpg" target="_blank" rel="noopener">
-      <img src="assets/seating-switzerland.jpg" alt="Switzerland reception seating chart" data-i18n-attr="alt:seating.alt" />
-    </a>
-  </div>
-  <p class="chart-hint"><a href="assets/seating-switzerland.jpg" target="_blank" rel="noopener" data-i18n="chart.hint">Tap the plan to open it full size</a></p>
+  <p class="plan-note" data-i18n="seating.alt.note">Two arrangements are still open. We will confirm
+    which one applies shortly before the day — until then, look for your name in both.</p>
+
+  <section class="plan">
+    <h2 class="plan-title"><span class="tag" data-i18n="seating.a.tag">Arrangement A</span>
+      <span data-i18n="seating.a.h2">Long tables</span></h2>
+    <div class="chart-frame">
+      <a href="assets/seating-switzerland-a.jpg" target="_blank" rel="noopener">
+        <img src="assets/seating-switzerland-a.jpg" alt="Seating arrangement A for the Switzerland reception" data-i18n-attr="alt:seating.a.alt" />
+      </a>
+    </div>
+    <p class="chart-hint"><a href="assets/seating-switzerland-a.jpg" target="_blank" rel="noopener" data-i18n="chart.hint">Tap the plan to open it full size</a></p>
+  </section>
+
+  <section class="plan">
+    <h2 class="plan-title"><span class="tag" data-i18n="seating.b.tag">Arrangement B</span>
+      <span data-i18n="seating.b.h2">Four tables &amp; a round table</span></h2>
+    <div class="chart-frame">
+      <a href="assets/seating-switzerland-b.jpg" target="_blank" rel="noopener">
+        <img src="assets/seating-switzerland-b.jpg" alt="Seating arrangement B for the Switzerland reception: tables 1 to 4 and a round table for the children" data-i18n-attr="alt:seating.b.alt" />
+      </a>
+    </div>
+    <p class="chart-hint"><a href="assets/seating-switzerland-b.jpg" target="_blank" rel="noopener" data-i18n="chart.hint">Tap the plan to open it full size</a></p>
+  </section>
 </main>
 
 <footer>
@@ -107,7 +135,13 @@ window.I18N_PAGE = { de: {
   "seating.eyebrow": "Schweiz · Fest",
   "seating.h1": "Sitzplan",
   "seating.desc": "Hier findest du deinen Tisch.",
-  "seating.alt": "Sitzplan für das Fest in der Schweiz",
+  "seating.alt.note": "Es sind noch zwei Varianten offen. Kurz vor dem Fest bestätigen wir, welche gilt — bis dahin suche deinen Namen in beiden.",
+  "seating.a.tag": "Variante A",
+  "seating.a.h2": "Lange Tafeln",
+  "seating.a.alt": "Sitzvariante A für das Fest in der Schweiz",
+  "seating.b.tag": "Variante B",
+  "seating.b.h2": "Vier Tische & ein runder Tisch",
+  "seating.b.alt": "Sitzvariante B für das Fest in der Schweiz: Tische 1 bis 4 und ein runder Tisch für die Kinder",
   "chart.hint": "Tippe auf den Plan, um ihn gross zu öffnen",
   "seating.footer": "Wir freuen uns auf dich!"
 } };

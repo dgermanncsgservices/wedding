@@ -6,7 +6,7 @@ Static site, no build step. GitHub Pages deploys from `main`; custom domain
 - `index.html` — hub linking to both events
 - `canada.html` — Celebration Canada
 - `switzerland.html` — Switzerland (ceremony, Apéro, reception)
-- `seating-switzerland.html` + `assets/seating-switzerland.jpg` — static seating chart
+- `seating-switzerland.html` + `assets/seating-switzerland-a.jpg` and `-b.jpg` — the reception seating, as **two arrangements** while both are still possible
 - `apero-switzerland.html` + `assets/apero-switzerland.jpg` — static Apéro site plan
 - `indoor-canada.html` — Canada indoors: the 3D floor plan and the seating chart
 - `outdoor-canada.html` — Canada outdoors: the floor plan and the seating chart
@@ -20,6 +20,21 @@ plan are unreadable at phone width, so tapping opens it full size. To add
 another, copy one of them, swap the image, the `data-i18n` keys and the `de`
 entries, then add it to that section's day file so the whole section's menu
 picks it up.
+
+## The two Switzerland seating arrangements
+
+`seating-switzerland.html` carries both candidate layouts until one is chosen:
+**Arrangement A** (long tables) and **Arrangement B** (four tables and a round
+table for the children). Each is a `<section class="plan">` with its own
+`.plan-title`, chart and hint, and a `.plan-note` above them tells guests that
+both are live and to look for their name in each — two charts with no
+explanation would just leave people unsure which table is theirs.
+
+**Dropping one is the expected end state.** Delete that arrangement's
+`<section class="plan">`, its `seating.a.*` / `seating.b.*` `de` entries and
+its `assets/seating-switzerland-?.jpg`, then remove the `.plan-note` and the
+surviving `.plan-title` so the page is a single chart again, as it was. Then
+`python3 tools/rebuild.py`.
 
 ## The spreadsheet is the master
 
