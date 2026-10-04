@@ -2781,6 +2781,8 @@ window.I18N_PAGE = { de: {
   .team-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.2rem; }
   .team-role { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
   .team-name { margin-top: 0.35rem; font-size: 1.05rem; }
+  .team-note { font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-500); margin-top: 0.15rem; }
   .team-phone { margin-top: 0.3rem; font-size: 0.85rem; color: var(--text-soft); display: inline-block; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, var(--accent) 70%, transparent); }
   .team-phone:hover { color: var(--text); }
 
@@ -2902,15 +2904,20 @@ window.I18N_PAGE = { de: {
 
   "Details": "Details",
 
-  "Start set up": "Aufbau beginnt",
+  "Start setup": "Aufbau beginnt",
+  "Setup crew: Be ready at 9:00 am at the Columbia Valley Community Center, Jordie & Andrew will do a briefing and inform everyone of their tasks": "Aufbauteam: Um 9:00 Uhr im Columbia Valley Community Center bereit sein, Jordie & Andrew instruieren alle über ihre Aufgaben",
   "Guests arriving": "Gäste treffen ein",
   "Welcome everyone": "Begrüssung",
   "Grand entry": "Grosser Einzug",
+  "Cue Dance It All Away (reception entrance) song": "Song «Dance It All Away» (Einzug zum Fest) starten",
   "Announce program & quiz": "Programm & Quiz ankündigen",
   "Pray for food & open Apéro": "Tischgebet & Apéro eröffnen",
-  "Bingo with story": "Bingo mit Geschichte",
   "Open mic": "Offenes Mikrofon",
-  "Shoe game (without shoes)": "Schuhspiel (ohne Schuhe)",
+  "Story bingo": "Geschichten-Bingo",
+  "Photos": "Fotos",
+  "Extended family; Jordie, Marrissa & spouses; Lifegroup ladies; Other guests": "Erweiterte Familie; Jordie, Marrissa & Partner; Lifegroup-Frauen; Weitere Gäste",
+  "Shoe game": "Schuhspiel",
+  "No shoes": "Ohne Schuhe",
   "Parents speech": "Rede der Eltern",
   "Open dessert": "Dessert eröffnen",
   "Reveal quiz": "Quiz auflösen",
@@ -2918,10 +2925,8 @@ window.I18N_PAGE = { de: {
   "Lavinia & Daniel leave": "Lavinia & Daniel gehen",
   "Small exit :)": "Kleiner Abgang :)",
   "Info, ask people to help clean up": "Infos und Bitte um Mithilfe beim Aufräumen",
-  "Put plates and cutlery together and bring them to the kitchen; Dispose of plastic cups and napkins; Remove covers from chairs and stack chairs in carts; Everyone is welcome to take leftovers home": "Teller und Besteck zusammenstellen und in die Küche bringen; Plastikbecher und Servietten entsorgen; Stuhlhussen entfernen und Stühle in die Wagen stapeln; Alle dürfen gerne Reste mitnehmen",
+  "Collect plates and cutlery and bring them to the kitchen; Dispose of plastic cups and napkins; Remove covers from chairs and stack chairs in carts; Remove the table decor, fold the tablecloths and put the tables away; Everyone is welcome to take leftovers home": "Teller und Besteck einsammeln und in die Küche bringen; Plastikbecher und Servietten entsorgen; Stuhlhussen entfernen und Stühle in die Wagen stapeln; Tischdeko abräumen, Tischtücher falten und Tische wegstellen; Alle dürfen gerne Reste mitnehmen",
 
-  "Setup crew: Be ready at 9:00 am at Columbia Valley Community Center, Jordie and Andrew brief everyone on their tasks": "Aufbauteam: Um 9:00 Uhr im Columbia Valley Community Center bereit sein, Jordie und Andrew instruieren alle über ihre Aufgaben",
-  "Music": "Musik",
 
   "Setup & Cleanup": "Aufbau & Aufräumen",
   "Program & Activities": "Programm & Aktivitäten",
@@ -3311,44 +3316,43 @@ window.I18N_PAGE = { de: {
 
   // ---------------- DATA ----------------
   // Synced from "Wedding Planning Spreadsheet" — "Celebration Canada" tab only.
-  var SYNCED_AT = "2026-10-01T09:00:00.000000-07:00";
+  var SYNCED_AT = "2026-10-04T09:00:00.000000-07:00";
 
   var scheduleCA = [
-    ["","09:00","Start set up","","Setup crew: Be ready at 9:00 am at Columbia Valley Community Center, Jordie and Andrew brief everyone on their tasks"],
+    ["","09:00","Start setup","Jordie & Andrew","Setup crew: Be ready at 9:00 am at the Columbia Valley Community Center, Jordie & Andrew will do a briefing and inform everyone of their tasks"],
     ["","12:30","Guests arriving","",""],
     ["","13:00","Welcome everyone","Janine",""],
-    ["","13:05","Grand entry","Lavinia & Daniel","Music"],
+    ["","13:05","Grand entry","Janine","Cue Dance It All Away (reception entrance) song"],
     ["","—","Announce program & quiz","Janine",""],
     ["","—","Pray for food & open Apéro","Daniel",""],
-    ["","14:00","Bingo with story","Harvey",""],
+    ["","14:00","Story bingo","Harvey",""],
     ["","—","Open mic","Janine",""],
-    ["","15:00","Shoe game (without shoes)","Janine",""],
+    ["","—","Photos","Janine","Extended family; Jordie, Marrissa & spouses; Lifegroup ladies; Other guests"],
+    ["","15:00","Shoe game","Janine","No shoes"],
     ["","—","Open mic","Janine",""],
     ["","—","Parents speech","Constantin & Emma",""],
     ["","—","Open dessert","Lavinia & Daniel",""],
     ["","16:00","Reveal quiz","Bronwyn",""],
-    ["","16:30","Thank-you speech","Lavinia & Daniel",""],
-    ["","17:00","Lavinia & Daniel leave","","Small exit :)"],
-    ["","17:02","Info, ask people to help clean up","Janine","Put plates and cutlery together and bring them to the kitchen; Dispose of plastic cups and napkins; Remove covers from chairs and stack chairs in carts; Everyone is welcome to take leftovers home"]
+    ["","—","Thank-you speech","Lavinia & Daniel",""],
+    ["","17:00","Lavinia & Daniel leave","Janine","Small exit :)"],
+    ["","17:02","Info, ask people to help clean up","Janine","Collect plates and cutlery and bring them to the kitchen; Dispose of plastic cups and napkins; Remove covers from chairs and stack chairs in carts; Remove the table decor, fold the tablecloths and put the tables away; Everyone is welcome to take leftovers home"]
   ];
 
   // Grouped by function: Setup & Cleanup, Program & Activities, Reception.
   var team = [
     ["Setup & Cleanup", [
-      ["Setup & Clean-up Lead","Jordie and Andrew Lubben","604-703-2792"],
+      ["Setup & Clean-up Lead","Jordie & Andrew Lubben","604-703-2792"],
       ["Setup & Detail Cleaning","Claudia / Angel / Emma","604-378-4370"],
       ["Setup Support","Bonnie Robertson","604-845-6651"],
-      ["Setup & Clean-up Support","Melanie Brooker",""],
-      ["Setup & Clean-up Support","David and Marrissa Bardy",""],
-      ["Clean-up Support","Sorin Mihai",""],
-      ["Clean-up Support","Josiah Mihai",""],
-      ["Clean-up Support","Joseph Mihai",""],
-      ["Clean-up Support","Louisa and Sean",""]
+      ["Setup Support","Melanie Brooker","705-309-8743"],
+      ["Setup Support","Simon Schott","+41 79 737 76 52","WhatsApp"],
+      ["Setup & Clean-up Support","David & Marrissa Bardy","604-793-0101"],
+      ["Clean-up Support","Josiah Mihai",""]
     ]],
     ["Program & Activities", [
-      ["MC","Janine Teakema",""],
+      ["MC","Janine Teakema","604-845-4666"],
       ["Quiz Game + Prize","Bronwyn Paul",""],
-      ["Sound System Setup","Ann Ng",""],
+      ["Sound System Setup","Ann Ng","604-206-6396"],
       ["Shoe Game","Janine Teakema",""],
       ["Story Bingo","Harvey Mattson","604 626 2630"],
       ["Connect Four Game","Andria Popovici",""],
@@ -3359,12 +3363,10 @@ window.I18N_PAGE = { de: {
     ["Reception", [
       ["Photography","Ligia Tanasa",""],
       ["Flowers","Roxi Zemora",""],
-      ["Reception Food & Drinks","Andrada and Bogdan","780-882-7053"],
-      ["Reception Dessert","Claudia",""]
+      ["Reception Food & Drinks","Andrada & Bogdan","780-882-7053"],
+      ["Reception Dessert","Claudia","604-378-4370"]
     ]]
-  ];
-
-  // ---------------- HELPERS ----------------
+  ];  // ---------------- HELPERS ----------------
   function el(tag, cls, html) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -3476,11 +3478,15 @@ window.I18N_PAGE = { de: {
         card.appendChild(el("div", "team-role", t(member[0])));
         card.appendChild(el("div", "team-name", member[1]));
         if (member[2]) {
-          var telHref = "tel:+1" + member[2].replace(/\\D/g, "");
+          // A number written with its own country code is dialled as it
+          // stands; the rest are local and get Canada's.
+          var digits = member[2].replace(/\\D/g, "");
           var phone = el("a", "team-phone mono", member[2]);
-          phone.href = telHref;
+          phone.href = "tel:+" + (member[2].charAt(0) === "+" ? digits : "1" + digits);
           card.appendChild(phone);
         }
+        // An optional fourth field: how to reach them, where it is not obvious.
+        if (member[3]) card.appendChild(el("div", "team-note", t(member[3])));
         grid.appendChild(card);
       });
       wrap.appendChild(grid);
