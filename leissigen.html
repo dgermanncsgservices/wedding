@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
-<title>Parken · Lavinia &amp; Daniel</title>
+<title>Parking · Lavinia &amp; Daniel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -236,17 +236,17 @@
 </div>
 
 <header class="intro">
-  <div class="intro-title display">Feier Schweiz</div>
-  <div class="intro-meta mono">Samstag, 17. Oktober 2026 · 18:00 Uhr</div>
+  <div class="intro-title display" data-i18n="intro.title">Celebration Switzerland</div>
+  <div class="intro-meta mono" data-i18n="intro.date">Saturday, 17 October 2026 · 6:00 pm</div>
   <div class="intro-meta">Alti Sagi Leissigen · Läntiweg, Leissigen</div>
 </header>
 
 <main>
   <section id="parken">
     <div class="section-head">
-      <span class="eyebrow">Anreise · Parken</span>
-      <h2>Parkplätze in Leissigen</h2>
-      <p>Direkt bei der Alti Sagi hat es keine Parkplätze. Bitte parkiere an einem der folgenden Orte und gehe von dort zu Fuss zur Feier. Tippe auf einen Parkplatz, um den Fussweg auf der Karte zu sehen.</p>
+      <span class="eyebrow" data-i18n="park.eyebrow">Getting there · Parking</span>
+      <h2 data-i18n="park.h2">Parking in Leissigen</h2>
+      <p data-i18n="park.desc">There is no parking right at the Alti Sagi. Please park at one of the spots below and walk to the celebration from there. Tap a parking spot to see the walking route on the map.</p>
     </div>
     <div class="park-layout">
       <div>
@@ -254,19 +254,19 @@
       </div>
       <div class="park-map-col" id="park-map-col">
         <div class="map-wrap">
-          <div class="map" id="park-map" role="img" aria-label="Karte mit den Fusswegen von den Parkplätzen zur Alti Sagi"></div>
+          <div class="map" id="park-map" role="img" aria-label="Map of the walking routes from the parking spots to the Alti Sagi" data-i18n-attr="aria-label:map.label"></div>
           <div class="map-ctrl">
-            <button type="button" class="mc-in" aria-label="Karte vergrössern">+</button>
-            <button type="button" class="mc-out" aria-label="Karte verkleinern">−</button>
-            <button type="button" class="mc-reset" aria-label="Ansicht zurücksetzen" title="Ansicht zurücksetzen">⤢</button>
+            <button type="button" class="mc-in" aria-label="Zoom in" data-i18n-attr="aria-label:map.in">+</button>
+            <button type="button" class="mc-out" aria-label="Zoom out" data-i18n-attr="aria-label:map.out">−</button>
+            <button type="button" class="mc-reset" aria-label="Reset view" title="Reset view" data-i18n-attr="aria-label:map.reset,title:map.reset">⤢</button>
           </div>
-          <div class="map-attrib">Kartendaten © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende</div>
+          <div class="map-attrib" data-i18n="map.attrib">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</div>
         </div>
         <div class="map-legend">
-          <span><i class="lg-line lg-dark"></i>Gewählter Fussweg</span>
-          <span><i class="lg-line lg-light"></i>Weitere Fusswege</span>
+          <span><i class="lg-line lg-dark"></i><span data-i18n="lg.sel">Selected route</span></span>
+          <span><i class="lg-line lg-light"></i><span data-i18n="lg.other">Other routes</span></span>
           <span>♥ Alti Sagi</span>
-          <span>Zoomen: +/− oder zwei Finger · Verschieben: ziehen</span>
+          <span data-i18n="lg.help">Zoom: +/− or two fingers · Move: drag</span>
         </div>
       </div>
     </div>
@@ -276,12 +276,41 @@
 
 <footer>
   <span class="script">Lavinia &amp; Daniel</span>
-  Alle Infos auf <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a>
+  <span data-i18n="footer.all">All the details at <a href="https://withjoy.com/laviniadaniel" target="_blank" rel="noopener">withjoy.com/laviniadaniel</a></span>
 </footer>
 
 <script>
+window.I18N_PAGE = { de: {
+  "page.title": "Parken · Lavinia & Daniel",
+  "intro.title": "Feier Schweiz",
+  "intro.date": "Samstag, 17. Oktober 2026 · 18:00 Uhr",
+  "park.eyebrow": "Anreise · Parken",
+  "park.h2": "Parkplätze in Leissigen",
+  "park.desc": "Direkt bei der Alti Sagi hat es keine Parkplätze. Bitte parkiere an einem der folgenden Orte und gehe von dort zu Fuss zur Feier. Tippe auf einen Parkplatz, um den Fussweg auf der Karte zu sehen.",
+  "map.label": "Karte mit den Fusswegen von den Parkplätzen zur Alti Sagi",
+  "map.in": "Karte vergrössern",
+  "map.out": "Karte verkleinern",
+  "map.reset": "Ansicht zurücksetzen",
+  "map.attrib": "Kartendaten © <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap</a>-Mitwirkende",
+  "lg.sel": "Gewählter Fussweg",
+  "lg.other": "Weitere Fusswege",
+  "lg.help": "Zoomen: +/− oder zwei Finger · Verschieben: ziehen",
+  "footer.all": "Alle Infos auf <a href=\"https://withjoy.com/laviniadaniel\" target=\"_blank\" rel=\"noopener\">withjoy.com/laviniadaniel</a>",
+  "Sorted by walking distance to the Alti Sagi.": "Sortiert nach Gehdistanz zur Alti Sagi.",
+  "Navigate with Google Maps": "Mit Google Maps navigieren",
+  "Navigate to {name} with Google Maps": "Mit Google Maps zu {name} navigieren",
+  "approx.": "ca.",
+  "min walk": "Min. zu Fuss",
+  "min": "Min.",
+  "Celebration · 6:00 pm": "Feier · 18:00 Uhr"
+} };
+</script>
+<script src="assets/i18n.js"></script>
+<script>
 (function () {
   "use strict";
+
+  function T(k) { return window.WD_I18N ? window.WD_I18N.t(k) : k; }
 
   function el(tag, cls, html) {
     var e = document.createElement(tag);
@@ -318,10 +347,12 @@
 
   function fmtDist(m) {
     var r = Math.round(m / 10) * 10;
-    if (r >= 950) return "ca. " + (r / 1000).toFixed(1).replace(/\.0$/, "") + " km";
-    return "ca. " + r + " m";
+    if (r >= 950) return T("approx.") + " " + (r / 1000).toFixed(1).replace(/\.0$/, "") + " km";
+    return T("approx.") + " " + r + " m";
   }
-  function fmtMin(m) { return "ca. " + Math.max(1, Math.ceil(m / 80)) + " Min. zu Fuss"; }
+  function walkMin(m) { return Math.max(1, Math.ceil(m / 80)); }
+  function fmtMin(m) { return T("approx.") + " " + walkMin(m) + " " + T("min walk"); }
+  function fmtMinShort(m) { return T("approx.") + " " + walkMin(m) + " " + T("min"); }
   function navUrl(p) {
     return "https://www.google.com/maps/dir/?api=1&destination=" + p.lat + "," + p.lng + "&travelmode=driving";
   }
@@ -360,7 +391,9 @@
   var mapEl = document.getElementById("park-map");
   var mapCol = document.getElementById("park-map-col");
 
-  var hint = el("p", "park-hint", "Sortiert nach Gehdistanz zur Alti Sagi.");
+  function renderList() {
+  listRoot.innerHTML = "";
+  var hint = el("p", "park-hint", T("Sorted by walking distance to the Alti Sagi."));
   listRoot.appendChild(hint);
 
   parking.forEach(function (p) {
@@ -376,14 +409,19 @@
     sel.appendChild(info);
     sel.addEventListener("click", function () { select(selected === p.id ? null : p.id, true); });
     card.appendChild(sel);
-    var nav = el("a", "p-nav", "Mit Google Maps navigieren <span aria-hidden=\"true\">↗</span>");
+    var nav = el("a", "p-nav", T("Navigate with Google Maps") + " <span aria-hidden=\"true\">↗</span>");
     nav.href = navUrl(p);
     nav.target = "_blank";
     nav.rel = "noopener";
-    nav.setAttribute("aria-label", "Mit Google Maps zu " + p.name + " navigieren");
+    nav.setAttribute("aria-label", T("Navigate to {name} with Google Maps").replace("{name}", p.name));
     card.appendChild(nav);
+    if (p.id === selected) {
+      card.classList.add("is-selected");
+      sel.setAttribute("aria-pressed", "true");
+    }
     listRoot.appendChild(card);
   });
+  }
 
   function select(id, scrollToMap) {
     selected = id;
@@ -520,7 +558,7 @@
         // keep the label off the first leg of the walk
         var below = q[1] + 92 < H && px(p.route[1])[1] <= q[1] + 4;
         text(lx, below ? q[1] + 36 : q[1] - 34, p.short, 15, 700, anchor, true);
-        text(lx, below ? q[1] + 52 : q[1] - 18, fmtDist(p.dist) + " · " + fmtMin(p.dist).replace(" zu Fuss", ""), 11.5, 400, anchor, false, "#6B5A48");
+        text(lx, below ? q[1] + 52 : q[1] - 18, fmtDist(p.dist) + " · " + fmtMinShort(p.dist), 11.5, 400, anchor, false, "#6B5A48");
       } else if (!selected && W >= 560 && LAB[p.id]) {
         var o = LAB[p.id];
         text(q[0] + o[0], q[1] + o[1], p.short, 13.5, 700, o[2], true);
@@ -541,7 +579,7 @@
     var vAnch = v[0] < 90 ? "start" : (v[0] > W - 90 ? "end" : "middle");
     var vx = vAnch === "start" ? v[0] - 16 : (vAnch === "end" ? v[0] + 16 : v[0]);
     text(vx, vAbove ? v[1] - 30 : v[1] + 36, "Alti Sagi", 16, 700, vAnch, true);
-    text(vx, vAbove ? v[1] - 16 : v[1] + 50, "Feier · 18:00 Uhr", 11.5, 400, vAnch, false, "#6B5A48");
+    text(vx, vAbove ? v[1] - 16 : v[1] + 50, T("Celebration · 6:00 pm"), 11.5, 400, vAnch, false, "#6B5A48");
 
     // compass (top right)
     var ccx = W - 34, ccy = 44;
@@ -569,7 +607,8 @@
     svg.appendChild(sb);
   }
 
-  renderMap();
+  if (window.WD_I18N) window.WD_I18N.onChange(function () { renderList(); renderMap(); });
+  else { renderList(); renderMap(); }
   window.addEventListener("load", renderMap);
   var rzT;
   window.addEventListener("resize", function () { clearTimeout(rzT); rzT = setTimeout(function () { view = null; renderMap(); }, 150); });
