@@ -6069,8 +6069,8 @@ window.I18N_PAGE = { de: {
   var TAIL = [[7.773438,46.654398],[7.773405,46.654441],[7.773379,46.654455],[7.773348,46.654467],[7.773308,46.654473],[7.773204,46.654479],[7.772946,46.654482],[7.772921,46.654481],[7.772895,46.654478],[7.772869,46.654472],[7.772845,46.65447],[7.77282,46.654473],[7.7728,46.654478],[7.772787,46.654486],[7.772771,46.654501],[7.772692,46.65458],[7.772685,46.654588],[7.772615,46.654668],[7.772599,46.654691],[7.772523,46.654779],[7.772482,46.654777],[VENUE.lng, VENUE.lat]];
 
   var parking = [
-    { id: "dorfplatz", name: "Dorfplatz vis-à-vis Volg", short: "Dorfplatz", lat: 46.654139, lng: 7.77225, dist: 208,
-      route: [[7.77225,46.654139],[7.772243,46.654065],[7.772247,46.654034],[7.772426,46.654049],[7.77256,46.654086],[7.772649,46.654111],[7.772731,46.654137],[7.772744,46.654143],[7.772991,46.654246],[7.773057,46.654271]].concat(TAIL) },
+    { id: "dorfplatz", name: "Dorfplatz vis-à-vis Volg", short: "Dorfplatz", lat: 46.654216, lng: 7.772504, dist: 185,
+      route: [[7.772504,46.654216],[7.772578,46.654091],[7.772649,46.654111],[7.772731,46.654137],[7.772744,46.654143],[7.772991,46.654246],[7.773057,46.654271]].concat(TAIL) },
     { id: "rosengaertli", name: "Tea Room Rosengärtli", short: "Rosengärtli", lat: 46.65451, lng: 7.774213, dist: 197,
       route: [[7.774213,46.65451],[7.774213,46.654611]].concat(MID_A, MID_B, TAIL) },
     { id: "bahnhof", name: "Bahnhofareal", short: "Bahnhofareal", lat: 46.655118, lng: 7.77498, dist: 254,
@@ -6184,7 +6184,7 @@ window.I18N_PAGE = { de: {
 
   var C_BG = "#FBF7EE", C_ROAD = "#E3D8C2", C_LABEL = "#8A7A60", C_ROUTE_ON = "#8A4B12", C_ROUTE_OFF = "#D1B074", C_INK = "#3A2A1E";
   // label offsets for the overview (dx, dy, text-anchor)
-  var LAB = { dorfplatz: [-16, 27, "end"], rosengaertli: [14, 31, "start"], bahnhof: [19, 5, "start"], turnhalle: [-4, -20, "end"], bkw: [-10, -20, "start"] };
+  var LAB = { dorfplatz: [-16, 5, "end"], rosengaertli: [14, 31, "start"], bahnhof: [19, 5, "start"], turnhalle: [-4, -20, "end"], bkw: [-10, -20, "start"] };
 
   var view = null, fitZ = 13, MAXZ = 19.5;
   function minZ() { return Math.max(fitZ - 1.2, 12); }
@@ -6285,7 +6285,8 @@ window.I18N_PAGE = { de: {
       if (on) {
         var anchor = q[0] < 150 ? "start" : (q[0] > W - 150 ? "end" : "middle");
         var lx = anchor === "start" ? q[0] - 14 : (anchor === "end" ? q[0] + 14 : q[0]);
-        var below = q[1] + 92 < H;
+        // keep the label off the first leg of the walk
+        var below = q[1] + 92 < H && px(p.route[1])[1] <= q[1] + 4;
         text(lx, below ? q[1] + 36 : q[1] - 34, p.short, 15, 700, anchor, true);
         text(lx, below ? q[1] + 52 : q[1] - 18, fmtDist(p.dist) + " · " + fmtMin(p.dist).replace(" zu Fuss", ""), 11.5, 400, anchor, false, "#6B5A48");
       } else if (!selected && W >= 560 && LAB[p.id]) {
